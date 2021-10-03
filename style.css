@@ -22,3 +22,52 @@
   margin: auto;
   border-bottom: 1px solid #545454;
 }
+
+.profile {
+  padding: 40px 0 50px;
+  margin: auto;
+  max-width: 880px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.profile__image {
+  max-width: 168.75px;
+  border-radius: 50%;
+}
+
+.profile__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 415px;
+}
+
+.profile__name {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 1.14;
+}
+
+.edit-button {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #fff;
+  background-color: #000;
+}
+
+.profile__role {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.add-button {
+  width: 150px;
+  height: 50px;
+  border: 2px solid #fff;
+  background-color: #000;
+}
