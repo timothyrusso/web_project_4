@@ -28,18 +28,23 @@
   margin: auto;
   max-width: 880px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .profile__image {
-  max-width: 168.75px;
+  max-width: 120px;
   border-radius: 50%;
 }
 
 .profile__wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 415px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: auto auto;
+  grid-template-areas: "name button" "role role";
+  min-width: 415px;
+  min-height: 77px;
+  padding: 0 165px 0 30px;
 }
 
 .profile__name {
@@ -48,6 +53,8 @@
   font-weight: 500;
   font-size: 42px;
   line-height: 1.14;
+  grid-area: "name";
+  margin: 0;
 }
 
 .edit-button {
@@ -55,6 +62,8 @@
   height: 24px;
   border: 1px solid #fff;
   background-color: #000;
+  grid-area: "button";
+  align-self: center;
 }
 
 .profile__role {
@@ -63,6 +72,8 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 1;
+  grid-area: "role";
+  margin: 16px 0 0;
 }
 
 .add-button {
