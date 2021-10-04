@@ -139,6 +139,9 @@
   line-height: 1;
   color: #000;
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .card__like {
