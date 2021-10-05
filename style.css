@@ -221,12 +221,26 @@
   border: none;
   max-width: 40px;
   min-height: 40px;
-  width: 100%;
+  display: block;
+  float:right;
+  position:relative;
+  top:-50px;
+  right: -25px;
+  z-index: 1;
+  transition: opacity 0.2s linear;
+}
+
+.close-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 .popup__container {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   background-color: #fff;
-  margin: 8.5% auto;
   width: 100%;
   max-width: 430px;
   min-height: 330px;
@@ -292,6 +306,12 @@
   font-size: 18px;
   line-height: 1;
   padding: 0;
+  transition: opacity 0.2s linear;
+}
+
+.submit-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 880px) {
@@ -335,6 +355,36 @@
   .footer__copyright {
     font-size: 14px;
   }
+}
+
+@media screen and (max-width: 552px) {
+.popup__container {
+  max-width: 282px;
+  min-height: 322px;
+}
+.close-button {
+  top:-70px;
+  right: 10px;
+  max-width: 26px;
+}
+.popup__title {
+  max-width: 238px;
+  font-size: 18px;
+  padding: 25px 0 75px;
+}
+.popup__name {
+  max-width: 238px;
+  font-size: 14px;
+}
+.popup__role {
+  max-width: 238px;
+  font-size: 14px;
+  margin: 30px auto 45px;
+}
+.submit-button {
+  max-width: 238px;
+  font-size: 14px;
+}
 }
 
 @media screen and (max-width: 320px) {
