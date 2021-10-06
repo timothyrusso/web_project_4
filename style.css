@@ -124,7 +124,7 @@
   cursor: pointer;
 }
 
-.elements-grid {
+.cards-grid {
   max-width: 880px;
   margin: 0 auto;
   display: grid;
@@ -208,23 +208,15 @@
 }
 
 .popup {
-  position: fixed;
-  /* Stay in place */
-  z-index: 1;
-  /* Sit on top */
-  /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%;
-  /* Full width */
-  height: 100%;
-  /* Full height */
-  overflow: auto;
-  /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0);
-  /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.5);
-  /* Black w/ opacity */
+  position: fixed;  /* Stay in place */
+  z-index: 1;  /* Sit on top */
+  left: 0;  /* Location of the box */
+  top: 0;  /* Location of the box */
+  width: 100%;  /* Full width */
+  height: 100%;  /* Full height */
+  overflow: auto;  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.5);  /* Black w/ opacity */
   display: none;
 }
 
@@ -368,7 +360,7 @@
   .add-button {
     max-width: 282px;
   }
-  .elements-grid {
+  .cards-grid {
     padding: 0 19px 50px;
   }
   .footer {
@@ -411,7 +403,7 @@
 }
 
 @media screen and (max-width: 320px) {
-  .elements-grid {
+  .cards-grid {
     grid-template-columns: repeat( auto-fit, minmax(200px, 1fr));
   }
   .card {
