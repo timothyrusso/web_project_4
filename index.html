@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="./vendor/normalize.css">
   <link rel="stylesheet" href="style.css">
   <title>Around the US</title>
 </head>
@@ -22,14 +22,10 @@
           <img src="./images/avatar.jpg" alt="Avatar of the page profile" class="profile__image">
           <div class="profile__wrapper">
             <h1 class="profile__name">Timothy Russo</h1>
-            <button class="edit-button">
-              <img src="./images/edit-button.svg" alt="Edit botton image">
-            </button>
-            <p class="profile__role">Explorer</p>
+            <button class="edit-button"></button>
+            <p class="profile__about-me">Explorer</p>
           </div>
-          <button class="add-button">
-            <img src="./images/add.svg" alt="Add botton image">
-          </button>
+          <button class="add-button"></button>
         </section>
         <!-- INSERIRE IMMAGINI, TITOLI E ALT -->
         <section class="gallery">
@@ -38,42 +34,42 @@
               <img src="./images/test.png" alt="" class="card__image">
               <div class="card__content">
                 <h2 class="card__title">New York</h2>
-                <img src="./images/heart.svg" alt="" class="card__like">
+                <button class="card__like"></button>
               </div>
             </li>
             <li class="card">
               <img src="./images/venice.png" alt="" class="card__image">
               <div class="card__content">
                 <h2 class="card__title">Venice</h2>
-                <img src="./images/heart.svg" alt="" class="card__like">
+                <button class="card__like"></button>
               </div>
             </li>
             <li class="card">
               <img src="./images/london.png" alt="" class="card__image">
               <div class="card__content">
                 <h2 class="card__title">London</h2>
-                <img src="./images/heart.svg" alt="" class="card__like">
+                <button class="card__like"></button>
               </div>
             </li>
             <li class="card">
               <img src="./images/test.png" alt="" class="card__image">
               <div class="card__content">
                 <h2 class="card__title">Yosemite Valley</h2>
-                <img src="./images/heart.svg" alt="" class="card__like">
+                <button class="card__like"></button>
               </div>
             </li>
             <li class="card">
               <img src="./images/test.png" alt="" class="card__image">
               <div class="card__content">
                 <h2 class="card__title">Yosemite Valley</h2>
-                <img src="./images/heart.svg" alt="" class="card__like">
+                <button class="card__like"></button>
               </div>
             </li>
             <li class="card">
               <img src="./images/test.png" alt="" class="card__image">
               <div class="card__content">
                 <h2 class="card__title">Yosemite Valley</h2>
-                <img src="./images/heart.svg" alt="" class="card__like">
+                <button class="card__like"></button>
               </div>
             </li>
           </ul>
@@ -86,12 +82,11 @@
       <div class="popup">
         <div class="popup__container">
           <button class="close-button">
-            <img src="./images/close-button.svg" alt="Close button image">
           </button>
-          <form action="">
+          <form action="" class="form">
             <h2 class="popup__title">Edit profile</h2>
             <input type="text" id="name" name="name" value="Timothy Russo" class="popup__name">
-            <input type="text" id="role" name="role" value="Explorer" class="popup__role">
+            <input type="text" id="aboutMe" name="aboutMe" value="Explorer" class="popup__about-me">
             <button type="submit" class="submit-button">Save</button>
           </form>
         </div>
@@ -99,6 +94,8 @@
 
     </div>
   </div>
+
+  <script src="script.js"></script>
 
 </body>
 
