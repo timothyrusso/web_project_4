@@ -1,0 +1,22 @@
+.popup__about-me {
+  display: block;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+  max-width: 358px;
+  width: 100%;
+  margin: 29.74px auto 48px;
+  padding: 0;
+}
+
+@media screen and (max-width: 552px) {
+  .popup__about-me {
+    max-width: 238px;
+    font-size: 14px;
+    margin: 30px auto 45px;
+  }
+}

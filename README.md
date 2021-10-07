@@ -1,12 +1,8 @@
 # Project 4: Around The U.S.
 
-**Intro**
+**Overview**
 
 This is a project that showcases an interactive page where users can add, remove, or like photos.
-
-### Overview
-
-WEB_PROJECT_4 is a simple page with responsive layout and some javascript functionalities.
 
 ## Functionality
 
