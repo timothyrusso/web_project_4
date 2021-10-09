@@ -5,9 +5,7 @@
   margin: auto;
   background-color: rgba(0, 0, 0, 0);
   border: none;
-  display: block;
-  float: right;
-  position: relative;
+  position: absolute;
   top: -40px;
   right: -40px;
   z-index: 1;
@@ -25,9 +23,9 @@
 
 @media screen and (max-width: 552px) {
   .close-button {
-    top: -50px;
-    right: 5px;
     max-width: 26px;
     min-height: 26px;
+    top: -50px;
+    right: 5px;
   }
 }
