@@ -1,4 +1,4 @@
-.popup__about-me {
+.popup__input {
   display: block;
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
@@ -10,14 +10,13 @@
   max-width: 358px;
   min-height: 27px;
   width: 100%;
-  margin: 29.74px auto 48px;
+  margin: 0 auto;
   padding: 0;
 }
 
 @media screen and (max-width: 552px) {
-  .popup__about-me {
+  .popup__input {
     max-width: 238px;
     font-size: 14px;
-    margin: 30px auto 45px;
   }
 }

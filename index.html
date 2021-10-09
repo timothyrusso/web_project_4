@@ -9,8 +9,7 @@
   <title>Around the US</title>
 </head>
 
-<body>
-  <div class="page">
+<body class="page">
     <div class="content">
       <header class="header">
         <img src="./images/logo.svg" alt="Logo representing the Around the US project" class="logo">
@@ -91,17 +90,16 @@
       <div class="popup">
         <div class="popup__container">
           <button aria-label="Close" type="button" class="close-button"></button>
-          <form action="#" class="form">
+          <form action="#" class="popup__form" name="myForm">
             <h2 class="popup__title">Edit profile</h2>
-            <input type="text" id="name" name="name" value="Timothy Russo" class="popup__name">
-            <input type="text" id="aboutMe" name="aboutMe" value="Explorer" class="popup__about-me">
+            <input type="text" id="name" name="name" value="Timothy Russo" class="popup__input popup__input_field_name">
+            <input type="text" id="aboutMe" name="aboutMe" value="Explorer" class="popup__input popup__input_field_about-me">
             <button type="submit" class="submit-button">Save</button>
           </form>
         </div>
       </div>
 
     </div>
-  </div>
 
   <script src="script.js"></script>
 
