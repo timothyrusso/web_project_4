@@ -6,7 +6,7 @@
   border: none;
   background-color: #000;
   color: #fff;
-  margin: 0 auto 35.51px;
+  margin: 48px auto 35.51px;
   border-radius: 2px;
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
@@ -26,6 +26,6 @@
   .submit-button {
     max-width: 238px;
     font-size: 14px;
-    margin-bottom: 25px;
+    margin: 45px auto 25px;
   }
 }
