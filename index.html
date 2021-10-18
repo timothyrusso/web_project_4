@@ -10,96 +10,60 @@
 </head>
 
 <body class="page">
-    <div class="content">
-      <header class="header">
-        <img src="./images/logo.svg" alt="Logo representing the Around the US project" class="logo">
-      </header>
+  <div class="content">
+    <header class="header">
+      <img src="./images/logo.svg" alt="Logo representing the Around the US project" class="logo">
+    </header>
 
-      <main class="main">
-        <section class="profile">
-          <img src="./images/avatar.jpg" alt="Avatar of the page profile" class="profile__image">
-          <div class="profile__wrapper">
-            <h1 class="profile__name">Timothy Russo</h1>
-            <button aria-label="Edit" type="button" class="edit-button"></button>
-            <p class="profile__about-me">Explorer</p>
-          </div>
-          <button aria-label="Add" type="button" class="add-button"></button>
-        </section>
-
-        <section class="gallery">
-          <ul class="cards-grid">
-            <li class="card">
-              <img src="./images/palouse-falls.png"
-                alt="Incredible view of the Palouse Falls waterfall on the Palouse River" class="card__image">
-              <div class="card__content">
-                <h2 class="card__title">Palouse Falls</h2>
-                <button aria-label="Like" type="button" class="card__like"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/ghost-town-of-bodie.png" alt="Desolate view of the Bodie State Historic Park California's gold-mining ghost
-              town" class="card__image">
-              <div class="card__content">
-                <h2 class="card__title">Ghost town of Bodie</h2>
-                <button aria-label="Like" type="button" class="card__like"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/car-forest.png" alt="Some cars from the jungle of scrap in the Nevada desert"
-                class="card__image">
-              <div class="card__content">
-                <h2 class="card__title">Car Forest</h2>
-                <button aria-label="Like" type="button" class="card__like"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/byodo-in-temple.png"
-                alt="Beautiful view of the The Byodo-In Buddhist temple on the island of Oʻahu" class="card__image">
-              <div class="card__content">
-                <h2 class="card__title">Byodo-In Temple</h2>
-                <button aria-label="Like" type="button" class="card__like"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/fort-jefferson.png" alt="Fort Jefferson unfinished coastal fortress and a seashell"
-                class="card__image">
-              <div class="card__content">
-                <h2 class="card__title">Fort Jefferson</h2>
-                <button aria-label="Like" type="button" class="card__like"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/garden-of-the-gods.png" alt="Garden of the Gods public park in Colorado Springs"
-                class="card__image">
-              <div class="card__content">
-                <h2 class="card__title">Garden of the Gods</h2>
-                <button aria-label="Like" type="button" class="card__like"></button>
-              </div>
-            </li>
-          </ul>
-        </section>
-      </main>
-
-      <footer class="footer">
-        <p class="footer__copyright">© 2021 Around The U.S.</p>
-      </footer>
-
-
-      <!-- This is the modal block -->
-
-      <div class="popup">
-        <div class="popup__container">
-          <form action="#" class="popup__form" name="myForm">
-            <button aria-label="Close" type="button" class="close-button"></button>
-            <h2 class="popup__title">Edit profile</h2>
-            <input type="text" id="name" name="name" value="Timothy Russo" class="popup__input popup__input_field_name">
-            <input type="text" id="aboutMe" name="aboutMe" value="Explorer" class="popup__input popup__input_field_about-me">
-            <button type="submit" class="submit-button">Save</button>
-          </form>
+    <main class="main">
+      <section class="profile">
+        <img src="./images/avatar.jpg" alt="Avatar of the page profile" class="profile__image">
+        <div class="profile__wrapper">
+          <h1 class="profile__name">Timothy Russo</h1>
+          <button aria-label="Edit" type="button" class="edit-button"></button>
+          <p class="profile__about-me">Explorer</p>
         </div>
-      </div>
+        <button aria-label="Add" type="button" class="add-button"></button>
+      </section>
 
+      <section class="gallery">
+        <ul class="cards-grid"></ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__copyright">© 2021 Around The U.S.</p>
+    </footer>
+
+
+    <!-- This is the modal block -->
+
+    <div class="popup">
+      <div class="popup__container">
+        <form action="#" class="popup__form" name="myForm">
+          <button aria-label="Close" type="button" class="close-button"></button>
+          <h2 class="popup__title">Edit profile</h2>
+          <input type="text" id="name" name="name" value="Timothy Russo" class="popup__input popup__input_field_name">
+          <input type="text" id="aboutMe" name="aboutMe" value="Explorer"
+            class="popup__input popup__input_field_about-me">
+          <button type="submit" class="submit-button">Save</button>
+        </form>
+      </div>
     </div>
+
+  </div>
+
+  <!-- This is the template of the places cards -->
+
+  <template id="card-template">
+    <li class="card">
+      <img class="card__image" src="#">
+      <div class="card__content">
+        <h2 class="card__title">Garden of the Gods</h2>
+        <button aria-label="Like" type="button" class="card__like"></button>
+      </div>
+    </li>
+  </template>
 
   <script src="script.js"></script>
 
