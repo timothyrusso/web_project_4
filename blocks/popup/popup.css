@@ -7,7 +7,10 @@
   height: 100%;  /* Full height */
   background-color: rgb(0, 0, 0);  /* Fallback color */
   background-color: rgba(0, 0, 0, 0.5);  /* Black w/ opacity */
-  display: none;
   justify-content: center;
   align-items: center;
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s linear;
 }
