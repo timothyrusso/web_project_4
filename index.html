@@ -51,7 +51,6 @@
       </div>
     </div>
 
-
     <!-- This is the add cards popup -->
 
     <div class="popup js-add-popup">
@@ -66,13 +65,13 @@
       </div>
     </div>
 
-
     <!-- This is the image popup -->
 
     <div class="popup js-preview-popup">
       <div class="popup__container popup__container_type_preview">
         <button aria-label="Close" type="button" class="close-button"></button>
         <img class="popup__preview-image" src="#" alt="">
+        <figcaption class="popup__caption"></figcaption>
       </div>
     </div>
 
@@ -82,9 +81,10 @@
 
   <template id="card-template">
     <li class="card">
+      <button aria-label="Delete" type="button" class="card__delete"></button>
       <img class="card__image" src="#">
       <div class="card__content">
-        <h2 class="card__title">Garden of the Gods</h2>
+        <h2 class="card__title"></h2>
         <button aria-label="Like" type="button" class="card__like"></button>
       </div>
     </li>

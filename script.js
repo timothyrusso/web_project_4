@@ -35,6 +35,7 @@ const addModalWindow = document.querySelector('.js-add-popup'); // Let's find th
 const previewImageModalWindow = document.querySelector('.js-preview-popup');
 const placesList = document.querySelector('.cards-grid'); // Let's find the places list in the DOM
 const previewImageElement = document.querySelector('.popup__preview-image');
+const captionImageElement = document.querySelector('.popup__caption');
 
 
 /***********
@@ -69,23 +70,10 @@ const cardTemplate = document.querySelector('#card-template').content.querySelec
  * FUNCTIONS *
  *************/
 
-// Function that open the form
-function handleFormOpen() {
-  modalElement.classList.add('popup_opened');
-  nameInput.value = name.textContent; //Data adding from profile section to inputs
-  jobInput.value = aboutMe.textContent;
-}
-
-// Function that close the form
-function handleFormClose() {
-  modalElement.classList.remove('popup_opened');
-}
-
 // Function that toggle the form
 function toggleModalWindow(modal) {
   modal.classList.toggle('popup_opened');
 }
-
 
 // Next is the form submit handler, though it won't submit anywhere just yet
 function handleFormSubmit(evt) {
@@ -101,21 +89,37 @@ function handleFormSubmit(evt) {
 
 function generateCard(card) {
   const cardElement = cardTemplate.cloneNode(true); // Clone template card
+  // const cardLikeButton = cardElement.querySelector('.card__like');
+  // cardLikeButton.addEventListener('click', () => toggleLikeButton());
+  const cardDeleteButton = cardElement.querySelector('.card__delete'); // Query delete button
+  cardDeleteButton.addEventListener('click', () => onDeleteClick(cardElement));
   cardElement.querySelector('.card__title').textContent = card.name; // Query title element
+  const captionEl = cardElement.querySelector('.card__title');
+  captionEl.textContent = card.name;
   const imageEl = cardElement.querySelector('.card__image'); // Query image link element
   imageEl.src = card.link;
-  imageEl.addEventListener('click', function() { //Add event listeners
+  imageEl.addEventListener('click', function () { //Add event listeners
+    captionImageElement.textContent = card.name;
     previewImageElement.src = card.link;
     toggleModalWindow(previewImageModalWindow);
   })
-
-
   return cardElement;
 }
 
 function renderCard(card, container) {
   placesList.append(card); // Append it to the list
 }
+
+const onDeleteClick = card => {
+  placesList.removeChild(card); // Remove cards element function
+}
+
+// function onAddNewCard() {
+//   initialCards.push({
+
+//   });
+//   placesList.append()
+// }
 
 
 /*******************
@@ -134,7 +138,7 @@ imageModalCloseBtn.addEventListener('click', () => toggleModalWindow(previewImag
  * CARDS CREATION *
  *****************/
 
-initialCards.forEach(function(card) {
+initialCards.forEach(function (card) {
   const newCard = generateCard(card);
   renderCard(newCard, placesList);
 })
