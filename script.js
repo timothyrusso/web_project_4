@@ -49,6 +49,7 @@ const jobInput = document.querySelector('#aboutMe');
 const addModalBtn = document.querySelector('.add-button'); // Let's find the add button in the DOM
 const addModalCloseBtn = addModalWindow.querySelector('.close-button');
 const imageModalCloseBtn = previewImageModalWindow.querySelector('.close-button');
+const submitNewCard = addModalWindow.querySelector('.submit-button');
 
 
 /**********
@@ -70,16 +71,19 @@ const cardTemplate = document.querySelector('#card-template').content.querySelec
  * FUNCTIONS *
  *************/
 
-// Function that toggle the form
-function toggleModalWindow(modal) {
+function handleFormOpen(editModalWindow) { // Function that open the edit form
+  nameInput.value = name.textContent; //Data adding from profile section to inputs
+  jobInput.value = aboutMe.textContent;
+  toggleModalWindow(editModalWindow);
+}
+
+function toggleModalWindow(modal) { // Function that toggle the form
   modal.classList.toggle('popup_opened');
 }
 
-// Next is the form submit handler, though it won't submit anywhere just yet
-function handleFormSubmit(evt) {
-  // This line stops the browser from submitting the form in the default way.
-  // Having done so, we can define our own way of submitting the form.
-  evt.preventDefault();
+
+function handleFormSubmit(evt) { // Next is the form submit handler, though it won't submit anywhere just yet
+  evt.preventDefault(); // This line stops the browser from submitting the form in the default way. Having done so, we can define our own way of submitting the form.
   nameInputValue = nameInput.value; // Get the values of each field from the corresponding value property
   jobInputValue = jobInput.value;
   name.textContent = nameInputValue; // Insert new values using the textContent property of the querySelector() method
@@ -89,8 +93,6 @@ function handleFormSubmit(evt) {
 
 function generateCard(card) {
   const cardElement = cardTemplate.cloneNode(true); // Clone template card
-  // const cardLikeButton = cardElement.querySelector('.card__like');
-  // cardLikeButton.addEventListener('click', () => toggleLikeButton());
   const cardDeleteButton = cardElement.querySelector('.card__delete'); // Query delete button
   cardDeleteButton.addEventListener('click', () => onDeleteClick(cardElement));
   cardElement.querySelector('.card__title').textContent = card.name; // Query title element
@@ -103,9 +105,12 @@ function generateCard(card) {
     previewImageElement.src = card.link;
     toggleModalWindow(previewImageModalWindow);
   })
+  const likeButton = cardElement.querySelector('.card__like');
+  likeButton.addEventListener('click', function (evt) {
+    evt.target.classList.toggle('card__like_active');
+  });
   return cardElement;
 }
-
 function renderCard(card, container) {
   placesList.append(card); // Append it to the list
 }
@@ -114,24 +119,30 @@ const onDeleteClick = card => {
   placesList.removeChild(card); // Remove cards element function
 }
 
-// function onAddNewCard() {
-//   initialCards.push({
-
-//   });
-//   placesList.append()
-// }
+function addNewCard(title, link) {
+  initialCards.push({
+    name: 'ciao',
+    link: './images/garden-of-the-gods.png'
+  });
+  placesList.append(cardElement);
+}
 
 
 /*******************
  * EVENT LISTENERS *
  *******************/
 
-editButton.addEventListener('click', () => toggleModalWindow(editModalWindow)); // Connect the handler to the editButton:
+editButton.addEventListener('click', () => handleFormOpen(editModalWindow)); // Connect the handler to the editButton:
 editModalCloseBtn.addEventListener('click', () => toggleModalWindow(editModalWindow)); // Connect the handler to the closeButton:
 formElement.addEventListener('submit', handleFormSubmit); // Connect the handler to the form: it will watch the submit event
 addModalBtn.addEventListener('click', () => toggleModalWindow(addModalWindow));
 addModalCloseBtn.addEventListener('click', () => toggleModalWindow(addModalWindow));
 imageModalCloseBtn.addEventListener('click', () => toggleModalWindow(previewImageModalWindow));
+submitNewCard.addEventListener('submit', function () {
+  const title = addModalWindow.querySelector('.popup__input_field_title');
+  const link = addModalWindow.querySelector('.popup__input_field_link');
+  addNewCard(title.value, link.value);
+})
 
 
 /*****************
