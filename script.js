@@ -82,7 +82,6 @@ function toggleModalWindow(modal) { //---TOGGLE THE FORMS
   modal.classList.toggle('popup_opened');
 }
 
-
 function handleFormSubmit(evt) { //---EDIT FORM SUBMIT HANDLER
   evt.preventDefault(); // This line stops the browser from submitting the form in the default way. Having done so, we can define our own way of submitting the form.
   nameInputValue = nameInput.value; // Get the values of each field from the corresponding value property
