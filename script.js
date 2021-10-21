@@ -99,10 +99,10 @@ function generateCard(card) { //---GENERATE CARDS
   const likeButton = cardElement.querySelector('.card__like'); // Query the like button
   cardElement.querySelector('.card__title').textContent = card.name; // Query title element
   captionEl.textContent = card.name;
-  imageEl.src = card.link;
+  imageEl.style.backgroundImage = `url('${card.link}')`;
   imageEl.addEventListener('click', function () { // Add event listeners
     captionImageElement.textContent = card.name;
-    previewImageElement.src = card.link;
+    previewImageElement.style.backgroundImage = `url('${card.link}')`;
     toggleModalWindow(previewImageModalWindow);
   })
   likeButton.addEventListener('click', function (evt) {
