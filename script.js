@@ -99,10 +99,12 @@ function generateCard(card) { //---GENERATE CARDS
   const likeButton = cardElement.querySelector('.card__like'); // Query the like button
   cardElement.querySelector('.card__title').textContent = card.name; // Query title element
   captionEl.textContent = card.name;
+  imageEl.title = `Beautiful picture of ${card.name}`; // Add the title attribute to the images
   imageEl.style.backgroundImage = `url('${card.link}')`;
   imageEl.addEventListener('click', function () { // Add event listeners
     captionImageElement.textContent = card.name;
-    previewImageElement.style.backgroundImage = `url('${card.link}')`;
+    previewImageElement.src = card.link;
+    previewImageElement.alt = `Preview of ${card.name}`; // Add the alt attribute to the images
     toggleModalWindow(previewImageModalWindow);
   })
   likeButton.addEventListener('click', function (evt) {
