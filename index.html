@@ -35,10 +35,9 @@
       <p class="footer__copyright">© 2021 Around The U.S.</p>
     </footer>
 
-
     <!-- This is the edit profile popup -->
 
-    <div class="popup js-edit-popup">
+    <div class="popup popup_type_edit">
       <div class="popup__container">
         <form action="#" class="popup__form" name="myForm">
           <button aria-label="Close" type="button" class="close-button"></button>
@@ -53,21 +52,22 @@
 
     <!-- This is the add cards popup -->
 
-    <div class="popup js-add-popup">
+    <div class="popup popup_type_add">
       <div class="popup__container">
         <form action="#" class="popup__form" name="myForm">
           <button aria-label="Close" type="button" class="close-button"></button>
           <h2 class="popup__title">New place</h2>
-          <input type="text" id="title" name="title" value="Title" class="popup__input popup__input_field_title">
-          <input type="text" id="link" name="link" value="Image link" class="popup__input popup__input_field_link">
+          <input type="text" id="title" name="title" class="popup__input popup__input_field_title" placeholder="Title">
+          <input type="text" id="link" name="link" class="popup__input popup__input_field_link"
+            placeholder="Image link">
           <button type="submit" class="submit-button">Create</button>
         </form>
       </div>
     </div>
 
-    <!-- This is the image popup -->
+    <!-- This is the image preview popup -->
 
-    <div class="popup js-preview-popup">
+    <div class="popup popup_type_preview">
       <div class="popup__container popup__container_type_preview">
         <button aria-label="Close" type="button" class="close-button"></button>
         <img class="popup__preview-image" src="#" alt="">
