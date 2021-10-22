@@ -2,34 +2,7 @@
  * ELEMENTS *
  ************/
 
-const initialCards = [
-  {
-    name: "Palouse Falls",
-    link: "./images/palouse-falls.png"
-  },
-  {
-    name: "Ghost town of Bodie",
-    link: "./images/ghost-town-of-bodie.png"
-  },
-  {
-    name: "Car Forest",
-    link: "./images/car-forest.png"
-  },
-  {
-    name: "Byodo-In Temple",
-    link: "./images/byodo-in-temple.png"
-  },
-  {
-    name: "Fort Jefferson",
-    link: "./images/fort-jefferson.png"
-  },
-  {
-    name: "Garden of the Gods",
-    link: "./images/garden-of-the-gods.png"
-  }
-];
-
-const formElement = document.querySelector('.popup__form'); // Let's find the form in the DOM
+const editFormElement = document.querySelector('.popup__form'); // Let's find the form in the DOM
 const editModalWindow = document.querySelector('.popup_type_edit'); // Let's find the edit modal in the DOM
 const addModalWindow = document.querySelector('.popup_type_add'); // Let's find the add modal in the DOM
 const previewImageModalWindow = document.querySelector('.popup_type_preview'); // Let's find the preview modal in the DOM
@@ -72,23 +45,31 @@ const cardTemplate = document.querySelector('#card-template').content.querySelec
  * FUNCTIONS *
  *************/
 
-function handleFormOpen(editModalWindow) { //---OPEN THE EDIT FORM
+function handleEditFormOpen(editModalWindow) { //---OPEN THE EDIT FORM
   nameInput.value = name.textContent; // Data adding from profile section to inputs
   jobInput.value = aboutMe.textContent;
-  toggleModalWindow(editModalWindow); // Toggle the form
+  openModalWindow(editModalWindow); // Open the form
 }
 
 function toggleModalWindow(modal) { //---TOGGLE THE FORMS
   modal.classList.toggle('popup_opened');
 }
 
-function handleFormSubmit(evt) { //---EDIT FORM SUBMIT HANDLER
+function openModalWindow(modal) { //---OPEN THE FORMS
+  modal.classList.add('popup_opened');
+}
+
+function closeModalWindow(modal) { //---CLOSE THE FORMS
+  modal.classList.remove('popup_opened');
+}
+
+function handleEditFormSubmit(evt) { //---EDIT FORM SUBMIT HANDLER
   evt.preventDefault(); // This line stops the browser from submitting the form in the default way. Having done so, we can define our own way of submitting the form.
-  nameInputValue = nameInput.value; // Get the values of each field from the corresponding value property
-  jobInputValue = jobInput.value;
+  const nameInputValue = nameInput.value; // Get the values of each field from the corresponding value property
+  const jobInputValue = jobInput.value;
   name.textContent = nameInputValue; // Insert new values using the textContent property of the querySelector() method
   aboutMe.textContent = jobInputValue;
-  toggleModalWindow(editModalWindow); // Toggle the popup_opened class
+  closeModalWindow(editModalWindow); // Close the popup_opened class
 }
 
 function generateCard(card) { //---GENERATE CARDS
@@ -99,7 +80,7 @@ function generateCard(card) { //---GENERATE CARDS
   const likeButton = cardElement.querySelector('.card__like'); // Query the like button
   cardElement.querySelector('.card__title').textContent = card.name; // Query title element
   captionEl.textContent = card.name;
-  imageEl.title = `Beautiful picture of ${card.name}`; // Add the title attribute to the images
+  imageEl.alt = `Beautiful picture of ${card.name}`; // Add the alt attribute to the images
   imageEl.style.backgroundImage = `url('${card.link}')`;
   imageEl.addEventListener('click', function () { // Add event listeners
     captionImageElement.textContent = card.name;
@@ -139,12 +120,12 @@ function addNewCard(evt) { //---ADD NEW CARD
  * EVENT LISTENERS *
  *******************/
 
-editButton.addEventListener('click', () => handleFormOpen(editModalWindow)); // Connect the handler to the editButton:
-editModalCloseBtn.addEventListener('click', () => toggleModalWindow(editModalWindow)); // Connect the handler to the closeButton:
-formElement.addEventListener('submit', handleFormSubmit); // Connect the handler to the form: it will watch the submit event
-addModalBtn.addEventListener('click', () => toggleModalWindow(addModalWindow));
-addModalCloseBtn.addEventListener('click', () => toggleModalWindow(addModalWindow));
-imageModalCloseBtn.addEventListener('click', () => toggleModalWindow(previewImageModalWindow));
+editButton.addEventListener('click', () => handleEditFormOpen(editModalWindow)); // Connect the handler to the editButton:
+editModalCloseBtn.addEventListener('click', () => closeModalWindow(editModalWindow)); // Connect the handler to the closeButton:
+editFormElement.addEventListener('submit', handleEditFormSubmit); // Connect the handler to the form: it will watch the submit event
+addModalBtn.addEventListener('click', () => openModalWindow(addModalWindow));
+addModalCloseBtn.addEventListener('click', () => closeModalWindow(addModalWindow));
+imageModalCloseBtn.addEventListener('click', () => closeModalWindow(previewImageModalWindow));
 addModalWindow.addEventListener('submit', addNewCard);
 
 

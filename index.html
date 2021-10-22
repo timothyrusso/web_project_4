@@ -42,9 +42,9 @@
         <form action="#" class="popup__form" name="myForm">
           <button aria-label="Close" type="button" class="close-button"></button>
           <h2 class="popup__title">Edit profile</h2>
-          <input type="text" id="name" name="name" value="Timothy Russo" class="popup__input popup__input_field_name">
+          <input type="text" id="name" name="name" value="Timothy Russo" class="popup__input popup__input_field_name" required>
           <input type="text" id="aboutMe" name="aboutMe" value="Explorer"
-            class="popup__input popup__input_field_about-me">
+            class="popup__input popup__input_field_about-me" required>
           <button type="submit" class="submit-button">Save</button>
         </form>
       </div>
@@ -57,9 +57,9 @@
         <form action="#" class="popup__form" name="myForm">
           <button aria-label="Close" type="button" class="close-button"></button>
           <h2 class="popup__title">New place</h2>
-          <input type="text" id="title" name="title" class="popup__input popup__input_field_title" placeholder="Title">
+          <input type="text" id="title" name="title" class="popup__input popup__input_field_title" placeholder="Title" required>
           <input type="url" id="link" name="link" class="popup__input popup__input_field_link"
-            placeholder="Image link">
+            placeholder="Image link" required>
           <button type="submit" class="submit-button">Create</button>
         </form>
       </div>
@@ -90,7 +90,8 @@
     </li>
   </template>
 
-  <script src="script.js"></script>
+  <script src="./scripts/cards.js"></script>
+  <script src="./scripts/script.js"></script>
 
 </body>
 
