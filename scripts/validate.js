@@ -1,14 +1,16 @@
-const showInputError = (input, formEl, { errorClass }) => { // Object destructuring, instead of 'settings'
+const showInputError = (input, formEl, { errorClass, inputErrorClass }) => { // Object destructuring, instead of 'settings'
   const errorSpan = formEl.querySelector('#' + input.id + '-error');
   // Add error message and class
   errorSpan.textContent = input.validationMessage;
+  errorSpan.classList.add(inputErrorClass);
   input.classList.add(errorClass); // with the object desctructuring we can put this instead of 'settings.errorClass'
 };
 
-const hideInputError = (input, formEl, { errorClass }) => { // Object destructuring, instead of 'settings'
+const hideInputError = (input, formEl, { errorClass, inputErrorClass }) => { // Object destructuring, instead of 'settings'
   const errorSpan = formEl.querySelector('#' + input.id + '-error');
   // Add error message and class
   errorSpan.textContent = "";
+  errorSpan.classList.add(inputErrorClass);
   input.classList.remove(errorClass); // with the object desctructuring we can put this instead of 'settings.errorClass'
 };
 
@@ -66,7 +68,7 @@ enableValidation({
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
+  inactiveButtonClass: "submit-button_disabled",
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible"
 });
