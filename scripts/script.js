@@ -19,8 +19,8 @@ const addCardLink = addModalWindow.querySelector('.popup__input_field_link');
 
 const editButton = document.querySelector('.edit-button'); // Let's find the edit button in the DOM
 const editModalCloseBtn = editModalWindow.querySelector('.close-button'); // Let's find the exit button in the DOM
-const nameInput = document.querySelector('#name'); // Let's find the form fields in the DOM
-const jobInput = document.querySelector('#aboutMe');
+const nameInput = document.querySelector('.popup__input_field_name'); // Let's find the form fields in the DOM
+const jobInput = document.querySelector('.popup__input_field_about-me');
 const addModalBtn = document.querySelector('.add-button'); // Let's find the add button in the DOM
 const addModalCloseBtn = addModalWindow.querySelector('.close-button');
 const imageModalCloseBtn = previewImageModalWindow.querySelector('.close-button');
@@ -106,8 +106,8 @@ const onDeleteClick = card => { //---REMOVE CARD ELEMENTS
 function addNewCard(evt) { //---ADD NEW CARD
   evt.preventDefault(); // This line stops the browser from submitting the form in the default way. Having done so, we can define our own way of submitting the form.
   const newCard = {
-      name: addCardName.value,
-      link: addCardLink.value
+    name: addCardName.value,
+    link: addCardLink.value
   };
   placesList.prepend(generateCard(newCard)); // Create the card with the new values
   addCardName.value = "";
