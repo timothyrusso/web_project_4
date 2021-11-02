@@ -1,5 +1,5 @@
 const showInputError = (input, formEl, { errorClass, inputErrorClass }) => { // Object destructuring, instead of 'settings'
-  const errorSpan = formEl.querySelector('#' + input.id + '-error');
+  const errorSpan = formEl.querySelector(`#${input.id}-error`);
   // Add error message and class
   errorSpan.textContent = input.validationMessage;
   errorSpan.classList.add(inputErrorClass);
@@ -7,7 +7,7 @@ const showInputError = (input, formEl, { errorClass, inputErrorClass }) => { // 
 };
 
 const hideInputError = (input, formEl, { errorClass, inputErrorClass }) => { // Object destructuring, instead of 'settings'
-  const errorSpan = formEl.querySelector('#' + input.id + '-error');
+  const errorSpan = formEl.querySelector(`#${input.id}-error`);
   // Add error message and class
   errorSpan.textContent = "";
   errorSpan.classList.add(inputErrorClass);
@@ -26,15 +26,16 @@ const hasValidInput = (inputList) => {
   return inputList.every((input) => input.validity.valid === true);
 };
 
-const toggleButton = (inputList, button, settings) => {
+const toggleButton = (inputList, submitButton, settings) => {
   if(hasValidInput(inputList)) {
     // make the button enabled
-    button.disabled = true;
+    submitButton.disabled = false;
+    submitButton.classList.remove(settings.inactiveButtonClass);
   } else {
     // make the button disabled
-    button.disabled = false;
+    submitButton.disabled = true;
     // add the disabled class for the button
-    button.classList.add(settings.inactiveButtonClass);
+    submitButton.classList.add(settings.inactiveButtonClass);
   }
 }
 
@@ -42,12 +43,13 @@ const setEventListeners = (formEl, settings) => {
   const submitButton = formEl.querySelector(settings.submitButtonSelector);
   // grab each one of the inputs
   const inputList = [...formEl.querySelectorAll(settings.inputSelector)];
+  // Toggle the button before we start listening to the input even, otherwise the button will be active when we load the page even if the input fields are invalid
+  toggleButton(inputList, submitButton, settings);
   inputList.forEach((input) => {
     input.addEventListener('input', (evt) => {
       // Check validity of the input
       checkInputValidity(formEl, input, settings);
-      // Toggle the button
-      toggleButton(inputList, submitButton, settings)
+      toggleButton(inputList, submitButton, settings);
     });
   });
 };

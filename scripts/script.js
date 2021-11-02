@@ -115,6 +115,13 @@ function addNewCard(evt) { //---ADD NEW CARD
   toggleModalWindow(addModalWindow); // Toggle the popup
 }
 
+function closeEscButton(evt) {
+  if(evt.keyCode == 27){
+    console.log('ciao');
+  } else {
+    console.log('ok');
+  }
+}
 
 /*******************
  * EVENT LISTENERS *
@@ -127,7 +134,7 @@ addModalBtn.addEventListener('click', () => openModalWindow(addModalWindow));
 addModalCloseBtn.addEventListener('click', () => closeModalWindow(addModalWindow));
 imageModalCloseBtn.addEventListener('click', () => closeModalWindow(previewImageModalWindow));
 addModalWindow.addEventListener('submit', addNewCard);
-
+window.addEventListener('keydown', () => closeEscButton);
 
 /*****************
  * CARDS CREATION *
