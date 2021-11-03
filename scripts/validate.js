@@ -10,7 +10,7 @@ const hideInputError = (input, formEl, { errorClass, inputErrorClass }) => { // 
   const errorSpan = formEl.querySelector(`#${input.id}-error`);
   // Add error message and class
   errorSpan.textContent = "";
-  errorSpan.classList.add(inputErrorClass);
+  errorSpan.classList.remove(inputErrorClass);
   input.classList.remove(errorClass); // with the object desctructuring we can put this instead of 'settings.errorClass'
 };
 
@@ -22,7 +22,7 @@ const checkInputValidity = (formEl, input, settings) => {
   }
 };
 
-const hasValidInput = (inputList) => {
+const hasValidInput = (inputList) => { //---CHECK THE VALIDITY OF EACH INPUT
   return inputList.every((input) => input.validity.valid === true);
 };
 
@@ -30,6 +30,7 @@ const toggleButton = (inputList, submitButton, settings) => {
   if(hasValidInput(inputList)) {
     // make the button enabled
     submitButton.disabled = false;
+    // remove the disabled class for the button
     submitButton.classList.remove(settings.inactiveButtonClass);
   } else {
     // make the button disabled

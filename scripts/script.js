@@ -115,7 +115,7 @@ function addNewCard(evt) { //---ADD NEW CARD
   toggleModalWindow(addModalWindow); // Toggle the popup
 }
 
-function closeEscButton(evt) {
+function closeEscButton(evt) { //---CLOSE THE POPUP WITH THE ESCAPE
   if (evt.keyCode == 27) {
     closeModalWindow(editModalWindow);
     closeModalWindow(addModalWindow);
@@ -123,7 +123,7 @@ function closeEscButton(evt) {
   }
 }
 
-function closePopupOverlay(evt) {
+function closePopupOverlay(evt) { //---CLOSE THE POPUP CLICKING ON THE OVERLAY
   if (addModalWindow.classList.contains('popup_opened') && !evt.target.classList.contains('add-button')) {
     const popupContainer = addModalWindow.querySelector('.popup__container');
     const isClickInside = popupContainer.contains(evt.target);
