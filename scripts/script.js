@@ -51,16 +51,16 @@ function handleEditFormOpen(editModalWindow) { //---OPEN THE EDIT FORM
   openModalWindow(editModalWindow); // Open the form
 }
 
-function toggleModalWindow(modal) { //---TOGGLE THE FORMS
-  modal.classList.toggle('popup_opened');
-}
-
 function openModalWindow(modal) { //---OPEN THE FORMS
   modal.classList.add('popup_opened');
+  addEscapeListener();
+  addCloseListener();
 }
 
 function closeModalWindow(modal) { //---CLOSE THE FORMS
   modal.classList.remove('popup_opened');
+  removeEscapeListener();
+  removeCloseListener();
 }
 
 function handleEditFormSubmit(evt) { //---EDIT FORM SUBMIT HANDLER
@@ -86,7 +86,7 @@ function generateCard(card) { //---GENERATE CARDS
     captionImageElement.textContent = card.name;
     previewImageElement.src = card.link;
     previewImageElement.alt = `Preview of ${card.name}`; // Add the alt attribute to the images
-    toggleModalWindow(previewImageModalWindow);
+    openModalWindow(previewImageModalWindow);
   })
   likeButton.addEventListener('click', function (evt) {
     evt.target.classList.toggle('card__like_active');
@@ -112,40 +112,67 @@ function addNewCard(evt) { //---ADD NEW CARD
   placesList.prepend(generateCard(newCard)); // Create the card with the new values
   addCardName.value = "";
   addCardLink.value = "";
-  toggleModalWindow(addModalWindow); // Toggle the popup
+  closeModalWindow(addModalWindow); // Toggle the popup
+}
+
+function addEscapeListener() {
+  document.addEventListener('keydown', closeEscButton);
+}
+
+function removeEscapeListener() {
+  document.removeEventListener('keydown', closeEscButton);
 }
 
 function closeEscButton(evt) { //---CLOSE THE POPUP WITH THE ESCAPE
-  if (evt.keyCode == 27) {
-    closeModalWindow(editModalWindow);
-    closeModalWindow(addModalWindow);
-    closeModalWindow(previewImageModalWindow);
+  const openedPopup = document.querySelector('.popup_opened');
+  if (evt.key == 'Escape' && openedPopup) {
+    closeModalWindow(openedPopup);
   }
 }
 
-function closePopupOverlay(evt) { //---CLOSE THE POPUP CLICKING ON THE OVERLAY
-  if (addModalWindow.classList.contains('popup_opened') && !evt.target.classList.contains('add-button')) {
-    const popupContainer = addModalWindow.querySelector('.popup__container');
+function addCloseListener() {
+  editFormElement.addEventListener('click', closePopupOverlay);
+}
+
+function removeCloseListener() {
+  editFormElement.removeEventListener('click', closePopupOverlay);
+}
+
+// function closePopupOverlay(evt) { //---CLOSE THE POPUP CLICKING ON THE OVERLAY
+//   if (addModalWindow.classList.contains('popup_opened') && !evt.target.classList.contains('add-button')) {
+//     const popupContainer = addModalWindow.querySelector('.popup__container');
+//     const isClickInside = popupContainer.contains(evt.target);
+//     if (!isClickInside) {
+//       closeModalWindow(addModalWindow);
+//     }
+//   }
+//   if (editModalWindow.classList.contains('popup_opened') && !evt.target.classList.contains('edit-button')) {
+//     const popupContainer = editModalWindow.querySelector('.popup__container');
+//     const isClickInside = popupContainer.contains(evt.target);
+//     if (!isClickInside) {
+//       closeModalWindow(editModalWindow);
+//     }
+//   }
+//   if (previewImageModalWindow.classList.contains('popup_opened') && !evt.target.classList.contains('card__image')) {
+//     const popupContainer = previewImageModalWindow.querySelector('.popup__container');
+//     const isClickInside = popupContainer.contains(evt.target);
+//     if (!isClickInside) {
+//       closeModalWindow(previewImageModalWindow);
+//     }
+//   }
+// }
+
+function closePopupOverlay(evt) {
+  const openedPopup = document.querySelector('.popup_opened');
+  if (openedPopup) {
+    const popupContainer = openedPopup.querySelector('.popup__container');
     const isClickInside = popupContainer.contains(evt.target);
     if (!isClickInside) {
-      closeModalWindow(addModalWindow);
-    }
-  }
-  if (editModalWindow.classList.contains('popup_opened') && !evt.target.classList.contains('edit-button')) {
-    const popupContainer = editModalWindow.querySelector('.popup__container');
-    const isClickInside = popupContainer.contains(evt.target);
-    if (!isClickInside) {
-      closeModalWindow(editModalWindow);
-    }
-  }
-  if (previewImageModalWindow.classList.contains('popup_opened') && !evt.target.classList.contains('card__image')) {
-    const popupContainer = previewImageModalWindow.querySelector('.popup__container');
-    const isClickInside = popupContainer.contains(evt.target);
-    if (!isClickInside) {
-      closeModalWindow(previewImageModalWindow);
+      closeModalWindow(popupContainer);
     }
   }
 }
+
 
 
 /*******************
@@ -159,8 +186,6 @@ addModalBtn.addEventListener('click', () => openModalWindow(addModalWindow));
 addModalCloseBtn.addEventListener('click', () => closeModalWindow(addModalWindow));
 imageModalCloseBtn.addEventListener('click', () => closeModalWindow(previewImageModalWindow));
 addModalWindow.addEventListener('submit', addNewCard);
-document.addEventListener('keydown', closeEscButton);
-document.addEventListener('click', closePopupOverlay);
 
 /*****************
  * CARDS CREATION *
