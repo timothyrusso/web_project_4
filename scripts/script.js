@@ -51,11 +51,11 @@ function handleEditFormOpen(editModalWindow) { //---OPEN THE EDIT FORM
   openModalWindow(editModalWindow); // Open the form
 }
 
-function disableModalButton(modal) {
-  if (modal.classList.contains("popup_type_add")) {
-    const submitButton = modal.querySelector(".submit-button")
+function disableModalButton(modal) { //---TOGGLE THE DISABLED BUTTON
+  if (modal.classList.contains('popup_type_add')) {
+    const submitButton = modal.querySelector('.submit-button')
     submitButton.disabled = true;
-    submitButton.classList.add("submit-button_disabled")
+    submitButton.classList.add('submit-button_disabled')
   }
 }
 
