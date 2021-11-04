@@ -11,7 +11,7 @@ const previewImageElement = document.querySelector('.popup__preview-image');
 const captionImageElement = document.querySelector('.popup__caption');
 const addCardName = addModalWindow.querySelector('.popup__input_field_title');
 const addCardLink = addModalWindow.querySelector('.popup__input_field_link');
-const popupElement = document.querySelector('.popup');
+const popupElement = document.querySelectorAll('.popup');
 
 
 /***********
@@ -128,41 +128,20 @@ function closeEscButton(evt) { //---CLOSE THE POPUP WITH THE ESCAPE
   }
 }
 
-// function closePopupOverlay(evt) { //---CLOSE THE POPUP CLICKING ON THE OVERLAY
-//   if (addModalWindow.classList.contains('popup_opened') && !evt.target.classList.contains('add-button')) {
-//     const popupContainer = addModalWindow.querySelector('.popup__container');
-//     const isClickInside = popupContainer.contains(evt.target);
-//     if (!isClickInside) {
-//       closeModalWindow(addModalWindow);
-//     }
-//   }
-//   if (editModalWindow.classList.contains('popup_opened') && !evt.target.classList.contains('edit-button')) {
-//     const popupContainer = editModalWindow.querySelector('.popup__container');
-//     const isClickInside = popupContainer.contains(evt.target);
-//     if (!isClickInside) {
-//       closeModalWindow(editModalWindow);
-//     }
-//   }
-//   if (previewImageModalWindow.classList.contains('popup_opened') && !evt.target.classList.contains('card__image')) {
-//     const popupContainer = previewImageModalWindow.querySelector('.popup__container');
-//     const isClickInside = popupContainer.contains(evt.target);
-//     if (!isClickInside) {
-//       closeModalWindow(previewImageModalWindow);
-//     }
-//   }
-// }
-
 function closePopupOverlay(evt) {
   const openedPopup = document.querySelector('.popup_opened');
   if (openedPopup) {
     const popupContainer = openedPopup.querySelector('.popup__container');
     const isClickInside = popupContainer.contains(evt.target);
-    if (!isClickInside && !evt.target.openedPopup.type == 'button') {
+    if (!isClickInside) {
       closeModalWindow(openedPopup);
     }
   }
 }
 
+popupElement.forEach(popup => {
+    popup.addEventListener('click', closePopupOverlay);
+});
 
 
 /*******************
@@ -176,7 +155,7 @@ addModalBtn.addEventListener('click', () => openModalWindow(addModalWindow));
 addModalCloseBtn.addEventListener('click', () => closeModalWindow(addModalWindow));
 imageModalCloseBtn.addEventListener('click', () => closeModalWindow(previewImageModalWindow));
 addModalWindow.addEventListener('submit', addNewCard);
-document.addEventListener('click', closePopupOverlay);
+
 
 /*****************
  * CARDS CREATION *
