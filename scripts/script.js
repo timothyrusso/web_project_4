@@ -11,6 +11,7 @@ const previewImageElement = document.querySelector('.popup__preview-image');
 const captionImageElement = document.querySelector('.popup__caption');
 const addCardName = addModalWindow.querySelector('.popup__input_field_title');
 const addCardLink = addModalWindow.querySelector('.popup__input_field_link');
+const popupElement = document.querySelector('.popup');
 
 
 /***********
@@ -54,13 +55,11 @@ function handleEditFormOpen(editModalWindow) { //---OPEN THE EDIT FORM
 function openModalWindow(modal) { //---OPEN THE FORMS
   modal.classList.add('popup_opened');
   addEscapeListener();
-  addCloseListener();
 }
 
 function closeModalWindow(modal) { //---CLOSE THE FORMS
   modal.classList.remove('popup_opened');
   removeEscapeListener();
-  removeCloseListener();
 }
 
 function handleEditFormSubmit(evt) { //---EDIT FORM SUBMIT HANDLER
@@ -110,8 +109,7 @@ function addNewCard(evt) { //---ADD NEW CARD
     link: addCardLink.value
   };
   placesList.prepend(generateCard(newCard)); // Create the card with the new values
-  addCardName.value = "";
-  addCardLink.value = "";
+  document.forms.myFormAdd.reset();
   closeModalWindow(addModalWindow); // Toggle the popup
 }
 
@@ -128,14 +126,6 @@ function closeEscButton(evt) { //---CLOSE THE POPUP WITH THE ESCAPE
   if (evt.key == 'Escape' && openedPopup) {
     closeModalWindow(openedPopup);
   }
-}
-
-function addCloseListener() {
-  editFormElement.addEventListener('click', closePopupOverlay);
-}
-
-function removeCloseListener() {
-  editFormElement.removeEventListener('click', closePopupOverlay);
 }
 
 // function closePopupOverlay(evt) { //---CLOSE THE POPUP CLICKING ON THE OVERLAY
@@ -167,8 +157,8 @@ function closePopupOverlay(evt) {
   if (openedPopup) {
     const popupContainer = openedPopup.querySelector('.popup__container');
     const isClickInside = popupContainer.contains(evt.target);
-    if (!isClickInside) {
-      closeModalWindow(popupContainer);
+    if (!isClickInside && !evt.target.type.button) {
+      closeModalWindow(openedPopup);
     }
   }
 }
@@ -186,6 +176,7 @@ addModalBtn.addEventListener('click', () => openModalWindow(addModalWindow));
 addModalCloseBtn.addEventListener('click', () => closeModalWindow(addModalWindow));
 imageModalCloseBtn.addEventListener('click', () => closeModalWindow(previewImageModalWindow));
 addModalWindow.addEventListener('submit', addNewCard);
+document.addEventListener('click', closePopupOverlay);
 
 /*****************
  * CARDS CREATION *
