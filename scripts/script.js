@@ -2,7 +2,6 @@
  * ELEMENTS *
  ************/
 
-const editFormElement = document.querySelector('.popup__form'); // Let's find the form in the DOM
 const editModalWindow = document.querySelector('.popup_type_edit'); // Let's find the edit modal in the DOM
 const addModalWindow = document.querySelector('.popup_type_add'); // Let's find the add modal in the DOM
 const previewImageModalWindow = document.querySelector('.popup_type_preview'); // Let's find the preview modal in the DOM
@@ -113,11 +112,11 @@ function addNewCard(evt) { //---ADD NEW CARD
   closeModalWindow(addModalWindow); // Toggle the popup
 }
 
-function addEscapeListener() {
+function addEscapeListener() { //---ADD THE LISTENER FOR THE CLOSEESCBUTTON
   document.addEventListener('keydown', closeEscButton);
 }
 
-function removeEscapeListener() {
+function removeEscapeListener() { //REMOVE THE LISTENER FOR THE CLOSEESCBUTTON
   document.removeEventListener('keydown', closeEscButton);
 }
 
@@ -128,7 +127,7 @@ function closeEscButton(evt) { //---CLOSE THE POPUP WITH THE ESCAPE
   }
 }
 
-function closePopupOverlay(evt) {
+function closePopupOverlay(evt) { //---CLOSE THE POPUP CLICKING ON THE OVERLAY
   const openedPopup = document.querySelector('.popup_opened');
   if (openedPopup) {
     const popupContainer = openedPopup.querySelector('.popup__container');
@@ -139,7 +138,7 @@ function closePopupOverlay(evt) {
   }
 }
 
-popupElement.forEach(popup => {
+popupElement.forEach(popup => { // Listener for the close popup overlay event
     popup.addEventListener('click', closePopupOverlay);
 });
 
@@ -150,7 +149,7 @@ popupElement.forEach(popup => {
 
 editButton.addEventListener('click', () => handleEditFormOpen(editModalWindow)); // Connect the handler to the editButton:
 editModalCloseBtn.addEventListener('click', () => closeModalWindow(editModalWindow)); // Connect the handler to the closeButton:
-editFormElement.addEventListener('submit', handleEditFormSubmit); // Connect the handler to the form: it will watch the submit event
+editModalWindow.addEventListener('submit', handleEditFormSubmit); // Connect the handler to the form: it will watch the submit event
 addModalBtn.addEventListener('click', () => openModalWindow(addModalWindow));
 addModalCloseBtn.addEventListener('click', () => closeModalWindow(addModalWindow));
 imageModalCloseBtn.addEventListener('click', () => closeModalWindow(previewImageModalWindow));
