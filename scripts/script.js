@@ -157,7 +157,7 @@ function closePopupOverlay(evt) {
   if (openedPopup) {
     const popupContainer = openedPopup.querySelector('.popup__container');
     const isClickInside = popupContainer.contains(evt.target);
-    if (!isClickInside && !evt.target.type.button) {
+    if (!isClickInside && !evt.target.openedPopup.type == 'button') {
       closeModalWindow(openedPopup);
     }
   }
