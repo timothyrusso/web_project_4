@@ -13,6 +13,7 @@ const captionImageElement = document.querySelector('.popup__caption');
 const addCardName = addModalWindow.querySelector('.popup__input_field_title');
 const addCardLink = addModalWindow.querySelector('.popup__input_field_link');
 const popupElement = document.querySelectorAll('.popup');
+const cardSelector = '#card-template';
 
 
 /***********
@@ -124,9 +125,7 @@ function generateCard(card) { //---GENERATE CARDS
     previewImageElement.alt = `Preview of ${card.name}`; // Add the alt attribute to the images
     openModalWindow(previewImageModalWindow);
   })
-  likeButton.addEventListener('click', function (evt) {
-    evt.target.classList.toggle('card__like_active');
-  });
+  likeButton.addEventListener('click', () => onLikeClick(evt));
   cardDeleteButton.addEventListener('click', () => onDeleteClick(cardElement));
   return cardElement;
 }
@@ -135,7 +134,11 @@ function renderCard(card, container) { //---APPEND THE CARD TO THE DOM
   placesList.append(card);
 }
 
-const onDeleteClick = card => { //---REMOVE CARD ELEMENTS
+const onLikeClick = (evt) => {
+  evt.target.classList.toggle('card__like_active');
+}
+
+const onDeleteClick = (card) => { //---REMOVE CARD ELEMENTS
   placesList.removeChild(card);
 }
 
@@ -145,7 +148,8 @@ function addNewCard(evt) { //---ADD NEW CARD
     name: addCardName.value,
     link: addCardLink.value
   };
-  placesList.prepend(generateCard(newCard)); // Create the card with the new values
+  const card = new Card(data, cardSelector);
+  placesList.prepend(card.getView()); // Create the card with the new values
   document.forms.myFormAdd.reset();
   closeModalWindow(addModalWindow); // Toggle the popup
 }
