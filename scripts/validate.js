@@ -38,19 +38,19 @@ const toggleButton = (inputList, submitButton, settings) => {
     // add the disabled class for the button
     submitButton.classList.add(settings.inactiveButtonClass);
   }
-}
+};
 
-const setEventListeners = (formEl, settings) => {
-  const submitButton = formEl.querySelector(settings.submitButtonSelector);
+const setEventListeners = (formEl, { submitButtonSelector, inputSelector, ...rest }) => {
+  const submitButton = formEl.querySelector(submitButtonSelector);
   // grab each one of the inputs
-  const inputList = [...formEl.querySelectorAll(settings.inputSelector)];
+  const inputList = [...formEl.querySelectorAll(inputSelector)];
   // Toggle the button before we start listening to the input even, otherwise the button will be active when we load the page even if the input fields are invalid
-  toggleButton(inputList, submitButton, settings);
+  toggleButton(inputList, submitButton, rest);
   inputList.forEach((input) => {
     input.addEventListener('input', (evt) => {
       // Check validity of the input
-      checkInputValidity(formEl, input, settings);
-      toggleButton(inputList, submitButton, settings);
+      checkInputValidity(formEl, input, rest);
+      toggleButton(inputList, submitButton, rest);
     });
   });
 };

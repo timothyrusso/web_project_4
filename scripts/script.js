@@ -1,3 +1,5 @@
+import FormValidator from "./FormValidator.js";
+
 /************
  * ELEMENTS *
  ************/
@@ -78,6 +80,30 @@ function handleEditFormSubmit(evt) { //---EDIT FORM SUBMIT HANDLER
   aboutMe.textContent = jobInputValue;
   closeModalWindow(editModalWindow); // Close the popup_opened class
 }
+
+
+/**************
+ * VALIDATION *
+ **************/
+
+const validationSettings = {
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "submit-button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible"
+}
+
+const editFormElement = editModalWindow.querySelector('.popup__form');
+const addFormElement = addModalWindow.querySelector('.popup__form');
+
+const editFormValidator = new FormValidator(validationSettings, editFormElement);
+const addFormValidator = new FormValidator(validationSettings, addFormElement);
+
+
+/******************
+ * CARD FUNCTIONS *
+ ******************/
 
 function generateCard(card) { //---GENERATE CARDS
   const cardElement = cardTemplate.cloneNode(true); // Clone template card

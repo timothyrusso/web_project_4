@@ -9,17 +9,37 @@ class FormValidator {
     this._form = formElement;
   }
 
+  _showInputError(input) { // Object destructuring, instead of 'settings'
+    const errorSpan = this._form.querySelector(`#${input.id}-error`);
+    // Add error message and class
+    errorSpan.textContent = input.validationMessage;
+    errorSpan.classList.add(this._inputErrorClass);
+    input.classList.add(this._errorClass); // with the object desctructuring we can put this instead of 'settings.errorClass'
+  };
+
+  _toggleButton() {
+    // DA SISTEMARE
+  };
+
+  _hasInvalidInput() {
+
+  };
+
+  _checkInputValidity() {
+
+  }
+
   _setEventListeners() {
-    const submitButton = formEl.querySelector(settings.submitButtonSelector);
+    this._submitButton = this._form.querySelector(this._submitButtonSelector);
     // grab each one of the inputs
-    const inputList = [...formEl.querySelectorAll(settings.inputSelector)];
+    this._inputList = [...this._form.querySelectorAll(this._inputSelector)];
     // Toggle the button before we start listening to the input even, otherwise the button will be active when we load the page even if the input fields are invalid
-    toggleButton(inputList, submitButton, settings);
+    toggleButton(inputList, submitButton, rest);
     inputList.forEach((input) => {
       input.addEventListener('input', (evt) => {
         // Check validity of the input
-        checkInputValidity(formEl, input, settings);
-        toggleButton(inputList, submitButton, settings);
+        checkInputValidity(this.form, input, rest);
+        toggleButton(inputList, submitButton, rest);
       });
     });
   }
@@ -27,8 +47,10 @@ class FormValidator {
   enableValidation() {
     this._form.addEventListener('submit', (evt) => evt.preventDefault());  // Prevent the default behavior of the form when we are submitting something, then we can loop our input elements
     setEventListeners(formEl, settings);
-    };
+  };
 }
 
-const editFormValidator = new FormValidator();
-editFormValidator.enableValidation();
+// const editFormValidator = new FormValidator();
+// editFormValidator.enableValidation();
+
+export default FormValidator;

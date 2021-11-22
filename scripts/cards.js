@@ -9,7 +9,7 @@ const initialCards = [
   },
   {
     name: "Car Forest",
-    link: "./images/car-forest.png"
+    link: "./images/car-forest.jpeg"
   },
   {
     name: "Byodo-In Temple",
