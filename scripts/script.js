@@ -100,6 +100,9 @@ const addFormElement = addModalWindow.querySelector('.popup__form');
 const editFormValidator = new FormValidator(validationSettings, editFormElement);
 const addFormValidator = new FormValidator(validationSettings, addFormElement);
 
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
+
 
 /******************
  * CARD FUNCTIONS *
