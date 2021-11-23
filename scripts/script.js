@@ -115,18 +115,13 @@ function generateCard(card) { //---GENERATE CARDS
   const captionEl = cardElement.querySelector('.card__title'); // Query image caption element
   const imageEl = cardElement.querySelector('.card__image'); // Query image link element
   const likeButton = cardElement.querySelector('.card__like'); // Query the like button
-  cardElement.querySelector('.card__title').textContent = card.name; // Query title element
+  cardElement.querySelector('.card__title').textContent = card.name; // Query title element DA VERIFICARE
   captionEl.textContent = card.name;
   imageEl.alt = `Beautiful picture of ${card.name}`; // Add the alt attribute to the images
   imageEl.style.backgroundImage = `url('${card.link}')`;
-  imageEl.addEventListener('click', function () { // Add event listeners
-    captionImageElement.textContent = card.name;
-    previewImageElement.src = card.link;
-    previewImageElement.alt = `Preview of ${card.name}`; // Add the alt attribute to the images
-    openModalWindow(previewImageModalWindow);
-  })
-  likeButton.addEventListener('click', () => onLikeClick(evt));
-  cardDeleteButton.addEventListener('click', () => onDeleteClick(cardElement));
+  imageEl.addEventListener('click', () => handlePreviewPicture(card))
+  likeButton.addEventListener('click', (evt) => handleLikeIcon(evt));
+  cardDeleteButton.addEventListener('click', () => handleDeleteCard(cardElement));
   return cardElement;
 }
 
@@ -134,11 +129,18 @@ function renderCard(card, container) { //---APPEND THE CARD TO THE DOM
   placesList.append(card);
 }
 
-const onLikeClick = (evt) => {
+const handlePreviewPicture = (card) => {
+  captionImageElement.textContent = card.name;
+  previewImageElement.src = card.link;
+  previewImageElement.alt = `Preview of ${card.name}`; // Add the alt attribute to the images
+  openModalWindow(previewImageModalWindow);
+}
+
+const handleLikeIcon = (evt) => {
   evt.target.classList.toggle('card__like_active');
 }
 
-const onDeleteClick = (card) => { //---REMOVE CARD ELEMENTS
+const handleDeleteCard = (card) => { //---REMOVE CARD ELEMENTS
   placesList.removeChild(card);
 }
 

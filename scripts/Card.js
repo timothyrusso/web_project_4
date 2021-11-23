@@ -7,9 +7,23 @@ class Card {
     this._cardSelector = cardSelector;
   }
 
-  // _setEventListeners() {
+  _setEventListeners() {
+    imageEl.addEventListener('click', () => handlePreviewPicture(card))
+    likeButton.addEventListener('click', (evt) => handleLikeIcon(evt));
+    cardDeleteButton.addEventListener('click', () => handleDeleteCard(cardElement));
+  }
 
-  // }
+  _handlePreviewPicture() {
+
+  }
+
+  _handleLikeIcon() {
+
+  }
+
+  _handleDeleteCard() {
+
+  }
 
   _getTemplate() {
     return document.querySelector(this._cardSelector).content.querySelector('.card').cloneNode(true);

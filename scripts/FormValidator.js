@@ -9,12 +9,13 @@ class FormValidator {
     this._form = formElement;
   }
 
-  _showInputError(input) { // Object destructuring, instead of 'settings'
-    const errorSpan = this._form.querySelector(`#${input.id}-error`);
+  // Private method to show an error
+  _showInputError(inputElement, errorMessage) {
+    const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     // Add error message and class
-    errorSpan.textContent = input.validationMessage;
-    errorSpan.classList.add(this._inputErrorClass);
-    input.classList.add(this._errorClass); // with the object desctructuring we can put this instead of 'settings.errorClass'
+    inputElement.classList.add(this._inputErrorClass);
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add(this._errorClass);
   };
 
   _toggleButton() {
@@ -49,8 +50,5 @@ class FormValidator {
     setEventListeners(formEl, settings);
   };
 }
-
-// const editFormValidator = new FormValidator();
-// editFormValidator.enableValidation();
 
 export default FormValidator;
