@@ -98,6 +98,7 @@ const validationSettings = {
 const editFormElement = editModalWindow.querySelector('.popup__form');
 const addFormElement = addModalWindow.querySelector('.popup__form');
 
+// Creation of two instances of FormValidator
 const editFormValidator = new FormValidator(validationSettings, editFormElement);
 const addFormValidator = new FormValidator(validationSettings, addFormElement);
 

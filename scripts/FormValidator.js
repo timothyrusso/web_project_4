@@ -18,6 +18,15 @@ class FormValidator {
     errorElement.classList.add(this._errorClass);
   };
 
+  // Private method to hide an error
+  _hideInputError(inputElement) {
+    const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
+    inputElement.classList.remove(this._inputErrorClass);
+    errorElement.textContent = "";
+    errorElement.classList.remove(this._errorClass);
+  }
+
+
   _toggleButton() {
     // DA SISTEMARE
   };
@@ -47,7 +56,7 @@ class FormValidator {
 
   enableValidation() {
     this._form.addEventListener('submit', (evt) => evt.preventDefault());  // Prevent the default behavior of the form when we are submitting something, then we can loop our input elements
-    setEventListeners(formEl, settings);
+    this._setEventListeners();  // Implementation of the listener
   };
 }
 
