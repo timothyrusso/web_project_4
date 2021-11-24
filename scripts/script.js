@@ -146,16 +146,20 @@ const handleDeleteCard = (card) => { //---REMOVE CARD ELEMENTS
   placesList.removeChild(card);
 }
 
-function addNewCard(evt) { //---ADD NEW CARD
+function cardFormSubmitHandler(evt) { //---ADD NEW CARD
   evt.preventDefault(); // This line stops the browser from submitting the form in the default way. Having done so, we can define our own way of submitting the form.
-  const newCard = {
+  createCard({
     name: addCardName.value,
     link: addCardLink.value
-  };
-  // const card = new Card(data, cardSelector);
-  placesList.prepend(generateCard(newCard)); // Create the card with the new values || WHEN WE WILL USE CARD CLASS WE HAVE TU PUT card.generateCard()
-  document.forms.myFormAdd.reset();
+  }, placesList);
+
   closeModalWindow(addModalWindow); // Toggle the popup
+}
+
+const createCard = (data, placesList) => {
+  const card = new Card(data, cardSelector);
+  placesList.prepend(card.generateCard()); // Create the card with the new values || WHEN WE WILL USE CARD CLASS WE HAVE TU PUT card.generateCard()
+  document.forms.myFormAdd.reset();
 }
 
 function addEscapeListener() { //---ADD THE LISTENER FOR THE CLOSEESCBUTTON
@@ -199,7 +203,7 @@ editModalWindow.addEventListener('submit', handleEditFormSubmit); // Connect the
 addModalBtn.addEventListener('click', () => openModalWindow(addModalWindow));
 addModalCloseBtn.addEventListener('click', () => closeModalWindow(addModalWindow));
 imageModalCloseBtn.addEventListener('click', () => closeModalWindow(previewImageModalWindow));
-addModalWindow.addEventListener('submit', addNewCard);
+addModalWindow.addEventListener('submit', cardFormSubmitHandler);
 
 
 /*****************
