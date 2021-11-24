@@ -44,15 +44,18 @@ class Card {
   }
 
   _handlePreviewPicture() {
-
+    captionImageElement.textContent = this._name;
+    previewImageElement.src = this._link;
+    previewImageElement.alt = `Preview of ${this._name}`; // Add the alt attribute to the images
+    openModalWindow(previewImageModalWindow);
   }
 
-  _handleLikeIcon() {
-
+  _handleLikeIcon(evt) {
+    evt.target.classList.toggle('card__like_active');
   }
 
   _handleDeleteCard() {
-
+    placesList.removeChild(this._cardSelector);
   }
 
   _getTemplate() {

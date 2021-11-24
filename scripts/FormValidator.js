@@ -28,15 +28,29 @@ class FormValidator {
 
 
   _toggleButton() {
-    // DA SISTEMARE
+    if (hasValidInput(this._inputList)) {
+      // make the button enabled
+      this._submitButton.disabled = false;
+      // remove the disabled class for the button
+      this._submitButton.classList.remove(this._inactiveButtonClass);
+    } else {
+      // make the button disabled
+      this._submitButton.disabled = true;
+      // add the disabled class for the button
+      this._submitButton.classList.add(this._inactiveButtonClass);
+    }
   };
 
   _hasInvalidInput() {
-
+    return this._inputList.every((input) => input.validity.valid === true);
   };
 
   _checkInputValidity() {
-
+    if (input.validity.valid) {  // If the condition is true, hide the error, if it is false, show the error
+      _hideInputError(input);
+    } else {
+      _showInputError(input);
+    }
   }
 
   _setEventListeners() {
@@ -44,12 +58,11 @@ class FormValidator {
     // grab each one of the inputs
     this._inputList = [...this._form.querySelectorAll(this._inputSelector)];
     // Toggle the button before we start listening to the input even, otherwise the button will be active when we load the page even if the input fields are invalid
-    toggleButton(inputList, submitButton, rest);
-    inputList.forEach((input) => {
-      input.addEventListener('input', (evt) => {
+    this._inputList.forEach((input) => {
+      input.addEventListener('input', () => {
         // Check validity of the input
-        checkInputValidity(this.form, input, rest);
-        toggleButton(inputList, submitButton, rest);
+        _checkInputValidity(this._form, input);
+        _toggleButton(this._inputList, this._submitButton);
       });
     });
   }

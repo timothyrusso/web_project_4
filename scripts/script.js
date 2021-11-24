@@ -1,4 +1,5 @@
 import FormValidator from "./FormValidator.js";
+import Card from "./Card.js"
 
 /************
  * ELEMENTS *
@@ -87,23 +88,23 @@ function handleEditFormSubmit(evt) { //---EDIT FORM SUBMIT HANDLER
  * VALIDATION *
  **************/
 
-const validationSettings = {
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "submit-button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible"
-}
+// const validationSettings = {
+//   inputSelector: ".popup__input",
+//   submitButtonSelector: ".popup__button",
+//   inactiveButtonClass: "submit-button_disabled",
+//   inputErrorClass: "popup__input_type_error",
+//   errorClass: "popup__error_visible"
+// }
 
-const editFormElement = editModalWindow.querySelector('.popup__form');
-const addFormElement = addModalWindow.querySelector('.popup__form');
+// const editFormElement = editModalWindow.querySelector('.popup__form');
+// const addFormElement = addModalWindow.querySelector('.popup__form');
 
-// Creation of two instances of FormValidator
-const editFormValidator = new FormValidator(validationSettings, editFormElement);
-const addFormValidator = new FormValidator(validationSettings, addFormElement);
+// // Creation of two instances of FormValidator
+// const editFormValidator = new FormValidator(validationSettings, editFormElement);
+// const addFormValidator = new FormValidator(validationSettings, addFormElement);
 
-editFormValidator.enableValidation();
-addFormValidator.enableValidation();
+// editFormValidator.enableValidation();
+// addFormValidator.enableValidation();
 
 
 /******************
@@ -151,8 +152,8 @@ function addNewCard(evt) { //---ADD NEW CARD
     name: addCardName.value,
     link: addCardLink.value
   };
-  const card = new Card(data, cardSelector);
-  placesList.prepend(card.getView()); // Create the card with the new values
+  // const card = new Card(data, cardSelector);
+  placesList.prepend(generateCard(newCard)); // Create the card with the new values || WHEN WE WILL USE CARD CLASS WE HAVE TU PUT card.generateCard()
   document.forms.myFormAdd.reset();
   closeModalWindow(addModalWindow); // Toggle the popup
 }
