@@ -28,7 +28,7 @@ class FormValidator {
 
 
   _toggleButton() {
-    if (hasValidInput(this._inputList)) {
+    if (this._hasValidInput()) {
       // make the button enabled
       this._submitButton.disabled = false;
       // remove the disabled class for the button
@@ -41,15 +41,15 @@ class FormValidator {
     }
   };
 
-  _hasInvalidInput() {
-    return this._inputList.every((input) => input.validity.valid === true);
+  _hasValidInput() {
+    return this._inputList.every((input) => input.validity.valid);
   };
 
-  _checkInputValidity() {
+  _checkInputValidity(input) {
     if (input.validity.valid) {  // If the condition is true, hide the error, if it is false, show the error
-      _hideInputError(input);
+      this._hideInputError(input);
     } else {
-      _showInputError(input);
+      this._showInputError(input);
     }
   }
 
@@ -61,8 +61,8 @@ class FormValidator {
     this._inputList.forEach((input) => {
       input.addEventListener('input', () => {
         // Check validity of the input
-        _checkInputValidity(this._form, input);
-        _toggleButton(this._inputList, this._submitButton);
+        this._checkInputValidity(input);
+        this._toggleButton();
       });
     });
   }

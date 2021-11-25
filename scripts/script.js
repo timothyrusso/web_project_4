@@ -1,5 +1,5 @@
 import FormValidator from "./FormValidator.js";
-import Card from "./Card.js"
+import Card from "./Card.js";
 
 /************
  * ELEMENTS *
@@ -88,23 +88,23 @@ function handleEditFormSubmit(evt) { //---EDIT FORM SUBMIT HANDLER
  * VALIDATION *
  **************/
 
-// const validationSettings = {
-//   inputSelector: ".popup__input",
-//   submitButtonSelector: ".popup__button",
-//   inactiveButtonClass: "submit-button_disabled",
-//   inputErrorClass: "popup__input_type_error",
-//   errorClass: "popup__error_visible"
-// }
+const validationSettings = {
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "submit-button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible"
+}
 
-// const editFormElement = editModalWindow.querySelector('.popup__form');
-// const addFormElement = addModalWindow.querySelector('.popup__form');
+const editFormElement = editModalWindow.querySelector('.popup__form');
+const addFormElement = addModalWindow.querySelector('.popup__form');
 
-// // Creation of two instances of FormValidator
-// const editFormValidator = new FormValidator(validationSettings, editFormElement);
-// const addFormValidator = new FormValidator(validationSettings, addFormElement);
+// Creation of two instances of FormValidator
+const editFormValidator = new FormValidator(validationSettings, editFormElement);
+const addFormValidator = new FormValidator(validationSettings, addFormElement);
 
-// editFormValidator.enableValidation();
-// addFormValidator.enableValidation();
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
 
 
 /******************
@@ -211,5 +211,5 @@ addModalWindow.addEventListener('submit', cardFormSubmitHandler);
  *****************/
 
 initialCards.forEach((data) => {
-  renderCard(data, placesList);
+  createCard(data, placesList);
 })
