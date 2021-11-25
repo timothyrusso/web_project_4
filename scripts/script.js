@@ -127,8 +127,8 @@ function generateCard(card) { //---GENERATE CARDS
   return cardElement;
 }
 
-function renderCard(card, container) { //---APPEND THE CARD TO THE DOM
-  placesList.append(card);
+const renderCard = (data, placesList) => {
+  placesList.prepend(generateCard(data));
 }
 
 const handlePreviewPicture = (card) => {
@@ -210,7 +210,6 @@ addModalWindow.addEventListener('submit', cardFormSubmitHandler);
  * CARDS CREATION *
  *****************/
 
-initialCards.forEach(function (card) {
-  const newCard = generateCard(card);
-  renderCard(newCard, placesList);
+initialCards.forEach((data) => {
+  renderCard(data, placesList);
 })
