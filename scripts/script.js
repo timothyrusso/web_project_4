@@ -3,38 +3,6 @@ import Card from "./Card.js";
 import { openModalWindow, closeModalWindow } from "./utils.js";
 
 
-/*****************
- * INITIAL CARDS *
- *****************/
-
-const initialCards = [
-  {
-    name: "Palouse Falls",
-    link: "./images/palouse-falls.png"
-  },
-  {
-    name: "Ghost town of Bodie",
-    link: "./images/ghost-town-of-bodie.png"
-  },
-  {
-    name: "Car Forest",
-    link: "./images/car-forest.jpeg"
-  },
-  {
-    name: "Byodo-In Temple",
-    link: "./images/byodo-in-temple.png"
-  },
-  {
-    name: "Fort Jefferson",
-    link: "./images/fort-jefferson.png"
-  },
-  {
-    name: "Garden of the Gods",
-    link: "./images/garden-of-the-gods.png"
-  }
-];
-
-
 /************
  * ELEMENTS *
  ************/
@@ -144,7 +112,13 @@ function handleEditFormSubmit(evt) { //---EDIT FORM SUBMIT HANDLER
 editButton.addEventListener('click', () => handleEditFormOpen(editModalWindow)); // Connect the handler to the editButton:
 editModalCloseBtn.addEventListener('click', () => closeModalWindow(editModalWindow)); // Connect the handler to the closeButton:
 editModalWindow.addEventListener('submit', handleEditFormSubmit); // Connect the handler to the form: it will watch the submit event
-addModalBtn.addEventListener('click', () => openModalWindow(addModalWindow));
+addModalBtn.addEventListener('click', () => {
+  openModalWindow(addModalWindow);
+  const submitButton = addModalWindow.querySelector('.submit-button');
+  submitButton.disabled = true;
+  submitButton.classList.add('submit-button_disabled');
+}
+);
 addModalCloseBtn.addEventListener('click', () => closeModalWindow(addModalWindow));
 imageModalCloseBtn.addEventListener('click', () => closeModalWindow(previewImageModalWindow));
 addModalWindow.addEventListener('submit', cardFormSubmitHandler);

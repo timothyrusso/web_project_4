@@ -9,16 +9,7 @@ function closeEscButton(evt) { //---CLOSE THE POPUP WITH THE ESCAPE
   }
 }
 
-function disableModalButton(modal) { //---TOGGLE THE DISABLED BUTTON
-  if (modal.classList.contains('popup_type_add')) {
-    const submitButton = modal.querySelector('.submit-button')
-    submitButton.disabled = true;
-    submitButton.classList.add('submit-button_disabled')
-  }
-}
-
 function openModalWindow(modal) { //---OPEN THE FORMS
-  disableModalButton(modal);
   modal.classList.add('popup_opened');
   addEscapeListener();
 }

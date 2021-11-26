@@ -31,8 +31,8 @@ class Card {
   }
 
   _handleDeleteCard() {
-    const placesList = document.querySelector('.cards-grid');
-    placesList.removeChild(this._element);
+    this._element.remove();
+    this._element = null;
   }
 
   _getTemplate() {
