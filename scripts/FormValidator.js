@@ -10,20 +10,20 @@ class FormValidator {
   }
 
   // Private method to show an error
-  _showInputError(inputElement) {
-    const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
+  _showInputError(input) {
+    const errorElement = this._form.querySelector(`#${input.id}-error`);
     // Add error message and class
-    inputElement.classList.add(this._inputErrorClass);
-    errorElement.textContent = inputElement.validationMessage;
-    errorElement.classList.add(this._errorClass);
+    input.classList.add(this._inputErrorClass);
+    errorElement.textContent = input.validationMessage;
+    errorElement.classList.add(this._inputErrorClass);
   };
 
   // Private method to hide an error
-  _hideInputError(inputElement) {
-    const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.remove(this._inputErrorClass);
+  _hideInputError(input) {
+    const errorElement = this._form.querySelector(`#${input.id}-error`);
+    input.classList.remove(this._inputErrorClass);
     errorElement.textContent = '';
-    errorElement.classList.remove(this._errorClass);
+    errorElement.classList.remove(this._inputErrorClass);
   }
 
 
@@ -42,7 +42,7 @@ class FormValidator {
   };
 
   _hasValidInput() {
-    return this._inputList.every((input) => input.validity.valid);
+    return this._inputList.every((input) => input.validity.valid === true);
   };
 
   _checkInputValidity(input) {

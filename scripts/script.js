@@ -1,5 +1,39 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
+import { openModalWindow, closeModalWindow } from "./utils.js";
+
+
+/*****************
+ * INITIAL CARDS *
+ *****************/
+
+const initialCards = [
+  {
+    name: "Palouse Falls",
+    link: "./images/palouse-falls.png"
+  },
+  {
+    name: "Ghost town of Bodie",
+    link: "./images/ghost-town-of-bodie.png"
+  },
+  {
+    name: "Car Forest",
+    link: "./images/car-forest.jpeg"
+  },
+  {
+    name: "Byodo-In Temple",
+    link: "./images/byodo-in-temple.png"
+  },
+  {
+    name: "Fort Jefferson",
+    link: "./images/fort-jefferson.png"
+  },
+  {
+    name: "Garden of the Gods",
+    link: "./images/garden-of-the-gods.png"
+  }
+];
+
 
 /************
  * ELEMENTS *
@@ -9,11 +43,8 @@ const editModalWindow = document.querySelector('.popup_type_edit'); // Let's fin
 const addModalWindow = document.querySelector('.popup_type_add'); // Let's find the add modal in the DOM
 const previewImageModalWindow = document.querySelector('.popup_type_preview'); // Let's find the preview modal in the DOM
 const placesList = document.querySelector('.cards-grid'); // Let's find the places list in the DOM
-const previewImageElement = document.querySelector('.popup__preview-image');
-const captionImageElement = document.querySelector('.popup__caption');
 const addCardName = addModalWindow.querySelector('.popup__input_field_title');
 const addCardLink = addModalWindow.querySelector('.popup__input_field_link');
-const popupElement = document.querySelectorAll('.popup');
 const cardSelector = '#card-template';
 
 
@@ -36,52 +67,6 @@ const imageModalCloseBtn = previewImageModalWindow.querySelector('.close-button'
 
 const name = document.querySelector('.profile__name'); // Select elements where the field values will be entered in the edit form
 const aboutMe = document.querySelector('.profile__about-me');
-
-
-/*************
- * TEMPLATES *
- *************/
-
-const cardTemplate = document.querySelector('#card-template').content.querySelector('.card'); // Select the card template with his content
-
-
-/*************
- * FUNCTIONS *
- *************/
-
-function handleEditFormOpen(editModalWindow) { //---OPEN THE EDIT FORM
-  nameInput.value = name.textContent; // Data adding from profile section to inputs
-  jobInput.value = aboutMe.textContent;
-  openModalWindow(editModalWindow); // Open the form
-}
-
-function disableModalButton(modal) { //---TOGGLE THE DISABLED BUTTON
-  if (modal.classList.contains('popup_type_add')) {
-    const submitButton = modal.querySelector('.submit-button')
-    submitButton.disabled = true;
-    submitButton.classList.add('submit-button_disabled')
-  }
-}
-
-function openModalWindow(modal) { //---OPEN THE FORMS
-  disableModalButton(modal);
-  modal.classList.add('popup_opened');
-  addEscapeListener();
-}
-
-function closeModalWindow(modal) { //---CLOSE THE FORMS
-  modal.classList.remove('popup_opened');
-  removeEscapeListener();
-}
-
-function handleEditFormSubmit(evt) { //---EDIT FORM SUBMIT HANDLER
-  evt.preventDefault(); // This line stops the browser from submitting the form in the default way. Having done so, we can define our own way of submitting the form.
-  const nameInputValue = nameInput.value; // Get the values of each field from the corresponding value property
-  const jobInputValue = jobInput.value;
-  name.textContent = nameInputValue; // Insert new values using the textContent property of the querySelector() method
-  aboutMe.textContent = jobInputValue;
-  closeModalWindow(editModalWindow); // Close the popup_opened class
-}
 
 
 /**************
@@ -107,44 +92,9 @@ editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
 
-/******************
- * CARD FUNCTIONS *
- ******************/
-
-function generateCard(card) { //---GENERATE CARDS
-  const cardElement = cardTemplate.cloneNode(true); // Clone template card
-  const cardDeleteButton = cardElement.querySelector('.card__delete'); // Query delete button
-  const captionEl = cardElement.querySelector('.card__title'); // Query image caption element
-  const imageEl = cardElement.querySelector('.card__image'); // Query image link element
-  const likeButton = cardElement.querySelector('.card__like'); // Query the like button
-  cardElement.querySelector('.card__title').textContent = card.name; // Query title element DA VERIFICARE
-  captionEl.textContent = card.name;
-  imageEl.alt = `Beautiful picture of ${card.name}`; // Add the alt attribute to the images
-  imageEl.style.backgroundImage = `url('${card.link}')`;
-  imageEl.addEventListener('click', () => handlePreviewPicture(card))
-  likeButton.addEventListener('click', (evt) => handleLikeIcon(evt));
-  cardDeleteButton.addEventListener('click', () => handleDeleteCard(cardElement));
-  return cardElement;
-}
-
-const renderCard = (data, placesList) => {
-  placesList.prepend(generateCard(data));
-}
-
-const handlePreviewPicture = (card) => {
-  captionImageElement.textContent = card.name;
-  previewImageElement.src = card.link;
-  previewImageElement.alt = `Preview of ${card.name}`; // Add the alt attribute to the images
-  openModalWindow(previewImageModalWindow);
-}
-
-const handleLikeIcon = (evt) => {
-  evt.target.classList.toggle('card__like_active');
-}
-
-const handleDeleteCard = (card) => { //---REMOVE CARD ELEMENTS
-  placesList.removeChild(card);
-}
+/*****************
+ * CARD CREATION *
+ *****************/
 
 function cardFormSubmitHandler(evt) { //---ADD NEW CARD
   evt.preventDefault(); // This line stops the browser from submitting the form in the default way. Having done so, we can define our own way of submitting the form.
@@ -162,35 +112,29 @@ const createCard = (data, placesList) => {
   document.forms.myFormAdd.reset();
 }
 
-function addEscapeListener() { //---ADD THE LISTENER FOR THE CLOSEESCBUTTON
-  document.addEventListener('keydown', closeEscButton);
+initialCards.forEach((data) => {
+  createCard(data, placesList);
+})
+
+
+/************************
+ * FORM SUBMIT HANDLERS *
+ ************************/
+
+function handleEditFormOpen(editModalWindow) { //---OPEN THE EDIT FORM
+  nameInput.value = name.textContent; // Data adding from profile section to inputs
+  jobInput.value = aboutMe.textContent;
+  openModalWindow(editModalWindow); // Open the form
 }
 
-function removeEscapeListener() { //REMOVE THE LISTENER FOR THE CLOSEESCBUTTON
-  document.removeEventListener('keydown', closeEscButton);
+function handleEditFormSubmit(evt) { //---EDIT FORM SUBMIT HANDLER
+  evt.preventDefault(); // This line stops the browser from submitting the form in the default way. Having done so, we can define our own way of submitting the form.
+  const nameInputValue = nameInput.value; // Get the values of each field from the corresponding value property
+  const jobInputValue = jobInput.value;
+  name.textContent = nameInputValue; // Insert new values using the textContent property of the querySelector() method
+  aboutMe.textContent = jobInputValue;
+  closeModalWindow(editModalWindow); // Close the popup_opened class
 }
-
-function closeEscButton(evt) { //---CLOSE THE POPUP WITH THE ESCAPE
-  const openedPopup = document.querySelector('.popup_opened');
-  if (evt.key == 'Escape' && openedPopup) {
-    closeModalWindow(openedPopup);
-  }
-}
-
-function closePopupOverlay(evt) { //---CLOSE THE POPUP CLICKING ON THE OVERLAY
-  const openedPopup = document.querySelector('.popup_opened');
-  if (openedPopup) {
-    const popupContainer = openedPopup.querySelector('.popup__container');
-    const isClickInside = popupContainer.contains(evt.target);
-    if (!isClickInside) {
-      closeModalWindow(openedPopup);
-    }
-  }
-}
-
-popupElement.forEach(popup => { // Listener for the close popup overlay event
-    popup.addEventListener('click', closePopupOverlay);
-});
 
 
 /*******************
@@ -204,12 +148,3 @@ addModalBtn.addEventListener('click', () => openModalWindow(addModalWindow));
 addModalCloseBtn.addEventListener('click', () => closeModalWindow(addModalWindow));
 imageModalCloseBtn.addEventListener('click', () => closeModalWindow(previewImageModalWindow));
 addModalWindow.addEventListener('submit', cardFormSubmitHandler);
-
-
-/*****************
- * CARDS CREATION *
- *****************/
-
-initialCards.forEach((data) => {
-  createCard(data, placesList);
-})
