@@ -2,32 +2,32 @@
  * OPEN-CLOSE MODAL WINDOWS *
  ****************************/
 
-function closeEscButton(evt) { //---CLOSE THE POPUP WITH THE ESCAPE
+const closeEscButton = (evt) => { //---CLOSE THE POPUP WITH THE ESCAPE
   const openedPopup = document.querySelector('.popup_opened');
   if (evt.key == 'Escape' && openedPopup) {
     closeModalWindow(openedPopup);
   }
 }
 
-function openModalWindow(modal) { //---OPEN THE FORMS
+const openModalWindow = (modal) => { //---OPEN THE FORMS
   modal.classList.add('popup_opened');
   addEscapeListener();
 }
 
-function closeModalWindow(modal) { //---CLOSE THE FORMS
+const closeModalWindow = (modal) => { //---CLOSE THE FORMS
   modal.classList.remove('popup_opened');
   removeEscapeListener();
 }
 
-function addEscapeListener() { //---ADD THE LISTENER FOR THE CLOSEESCBUTTON
+const addEscapeListener = () => { //---ADD THE LISTENER FOR THE CLOSEESCBUTTON
   document.addEventListener('keydown', closeEscButton);
 }
 
-function removeEscapeListener() { //REMOVE THE LISTENER FOR THE CLOSEESCBUTTON
+const removeEscapeListener = () => { //REMOVE THE LISTENER FOR THE CLOSEESCBUTTON
   document.removeEventListener('keydown', closeEscButton);
 }
 
-function closePopupOverlay(evt) { //---CLOSE THE POPUP CLICKING ON THE OVERLAY
+const closePopupOverlay = (evt) => { //---CLOSE THE POPUP CLICKING ON THE OVERLAY
   const openedPopup = document.querySelector('.popup_opened');
   if (openedPopup) {
     const popupContainer = openedPopup.querySelector('.popup__container');

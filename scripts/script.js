@@ -64,7 +64,7 @@ addFormValidator.enableValidation();
  * CARD CREATION *
  *****************/
 
-function cardFormSubmitHandler(evt) { //---ADD NEW CARD
+const cardFormSubmitHandler = (evt) => { //---ADD NEW CARD
   evt.preventDefault(); // This line stops the browser from submitting the form in the default way. Having done so, we can define our own way of submitting the form.
   createCard({
     name: addCardName.value,
@@ -89,13 +89,13 @@ initialCards.forEach((data) => {
  * FORM SUBMIT HANDLERS *
  ************************/
 
-function handleEditFormOpen(editModalWindow) { //---OPEN THE EDIT FORM
+const handleEditFormOpen = (editModalWindow) => { //---OPEN THE EDIT FORM
   nameInput.value = name.textContent; // Data adding from profile section to inputs
   jobInput.value = aboutMe.textContent;
   openModalWindow(editModalWindow); // Open the form
 }
 
-function handleEditFormSubmit(evt) { //---EDIT FORM SUBMIT HANDLER
+const handleEditFormSubmit = (evt) => { //---EDIT FORM SUBMIT HANDLER
   evt.preventDefault(); // This line stops the browser from submitting the form in the default way. Having done so, we can define our own way of submitting the form.
   const nameInputValue = nameInput.value; // Get the values of each field from the corresponding value property
   const jobInputValue = jobInput.value;

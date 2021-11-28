@@ -1,4 +1,4 @@
-import {openModalWindow} from './utils.js';
+import { openModalWindow } from './utils.js';
 
 const previewImageModalWindow = document.querySelector('.popup_type_preview'); // Let's find the preview modal in the DOM
 const previewImageElement = document.querySelector('.popup__preview-image');
