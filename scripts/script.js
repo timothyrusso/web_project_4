@@ -114,9 +114,6 @@ editModalCloseBtn.addEventListener('click', () => closeModalWindow(editModalWind
 editModalWindow.addEventListener('submit', handleEditFormSubmit); // Connect the handler to the form: it will watch the submit event
 addModalBtn.addEventListener('click', () => {
   openModalWindow(addModalWindow);
-  // const submitButton = addModalWindow.querySelector('.submit-button');
-  // submitButton.disabled = true;
-  // submitButton.classList.add('submit-button_disabled');
   addFormValidator.toggleButton();
 }
 );
