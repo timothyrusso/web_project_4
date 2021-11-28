@@ -27,7 +27,7 @@ class FormValidator {
   }
 
 
-  _toggleButton() {
+  toggleButton() {
     if (this._hasValidInput()) {
       // make the button enabled
       this._submitButton.disabled = false;
@@ -62,7 +62,7 @@ class FormValidator {
       input.addEventListener('input', () => {
         // Check validity of the input
         this._checkInputValidity(input);
-        this._toggleButton();
+        this.toggleButton();
       });
     });
   }
