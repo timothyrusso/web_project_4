@@ -133,11 +133,13 @@ const handleEditFormSubmit = (evt) => {
 editButton.addEventListener('click', () => handleEditFormOpen(editModalWindow)); // Connect the handler to the editButton:
 editModalCloseBtn.addEventListener('click', () => closeModalWindow(editModalWindow)); // Connect the handler to the closeButton:
 editModalWindow.addEventListener('submit', handleEditFormSubmit); // Connect the handler to the form: it will watch the submit event
+
 addModalBtn.addEventListener('click', () => {
   openModalWindow(addModalWindow);
   addFormValidator.toggleButton();
 }
 );
+
 addModalCloseBtn.addEventListener('click', () => closeModalWindow(addModalWindow));
 imageModalCloseBtn.addEventListener('click', () => closeModalWindow(previewImageModalWindow));
 addModalWindow.addEventListener('submit', cardFormSubmitHandler);
