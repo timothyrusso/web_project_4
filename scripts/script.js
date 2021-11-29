@@ -64,24 +64,35 @@ addFormValidator.enableValidation();
  * CARD CREATION *
  *****************/
 
-const cardFormSubmitHandler = (evt) => { //---ADD NEW CARD
-  evt.preventDefault(); // This line stops the browser from submitting the form in the default way. Having done so, we can define our own way of submitting the form.
+/**
+ * Handle the creation of the card with the submit event listener.
+ * @constructor
+ * @param  {} evt
+ */
+const cardFormSubmitHandler = (evt) => {
+  evt.preventDefault() // This line stops the browser from submitting the form in the default way. Having done so, we can define our own way of submitting the form.
   createCard({
     name: addCardName.value,
     link: addCardLink.value
-  }, placesList);
+  }, placesList)
 
-  closeModalWindow(addModalWindow); // Toggle the popup
+  closeModalWindow(addModalWindow)
 }
 
+/**
+ * Create the new card.
+ * @constructor
+ * @param  {} data - Input fields for the name and link value.
+ * @param  {} placesList - The places list in the DOM.
+ */
 const createCard = (data, placesList) => {
-  const card = new Card(data, cardSelector);
-  placesList.prepend(card.generateCard()); // Create the card with the new values || WHEN WE WILL USE CARD CLASS WE HAVE TU PUT card.generateCard()
-  document.forms.myFormAdd.reset();
+  const card = new Card(data, cardSelector)
+  placesList.prepend(card.generateCard())
+  document.forms.myFormAdd.reset()
 }
 
 initialCards.forEach((data) => {
-  createCard(data, placesList);
+  createCard(data, placesList)
 })
 
 
@@ -89,19 +100,29 @@ initialCards.forEach((data) => {
  * FORM SUBMIT HANDLERS *
  ************************/
 
-const handleEditFormOpen = (editModalWindow) => { //---OPEN THE EDIT FORM
-  nameInput.value = name.textContent; // Data adding from profile section to inputs
-  jobInput.value = aboutMe.textContent;
-  openModalWindow(editModalWindow); // Open the form
+/**
+ * Open the edit form and grab all the inputs.
+ * @constructor
+ * @param  {} editModalWindow - The edit form object.
+ */
+const handleEditFormOpen = (editModalWindow) => {
+  nameInput.value = name.textContent
+  jobInput.value = aboutMe.textContent
+  openModalWindow(editModalWindow)
 }
 
-const handleEditFormSubmit = (evt) => { //---EDIT FORM SUBMIT HANDLER
-  evt.preventDefault(); // This line stops the browser from submitting the form in the default way. Having done so, we can define our own way of submitting the form.
-  const nameInputValue = nameInput.value; // Get the values of each field from the corresponding value property
-  const jobInputValue = jobInput.value;
-  name.textContent = nameInputValue; // Insert new values using the textContent property of the querySelector() method
-  aboutMe.textContent = jobInputValue;
-  closeModalWindow(editModalWindow); // Close the popup_opened class
+/**
+ * Edit form submit handler.
+ * @constructor
+ * @param  {} evt
+ */
+const handleEditFormSubmit = (evt) => {
+  evt.preventDefault()
+  const nameInputValue = nameInput.value // Get the values of each field from the corresponding value property
+  const jobInputValue = jobInput.value
+  name.textContent = nameInputValue // Insert new values using the textContent property of the querySelector() method
+  aboutMe.textContent = jobInputValue
+  closeModalWindow(editModalWindow)
 }
 
 
