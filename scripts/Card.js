@@ -6,7 +6,6 @@ const captionImageElement = document.querySelector('.popup__caption');
 
 /**
  * Handle the creation of the card element.
- * @constructor
  * @param  {} data - Card name and card link.
  * @param  {} cardSelector - Card id template.
  */
@@ -38,7 +37,6 @@ class Card {
 
   /**
    * Handle the like button.
-   * @constructor
    * @param  {} evt
    */
   _handleLikeIcon(evt) {

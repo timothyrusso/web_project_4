@@ -66,7 +66,6 @@ addFormValidator.enableValidation();
 
 /**
  * Handle the creation of the card with the submit event listener.
- * @constructor
  * @param  {} evt
  */
 const cardFormSubmitHandler = (evt) => {
@@ -81,7 +80,6 @@ const cardFormSubmitHandler = (evt) => {
 
 /**
  * Create the new card.
- * @constructor
  * @param  {} data - Input fields for the name and link value.
  * @param  {} placesList - The places list in the DOM.
  */
@@ -102,7 +100,6 @@ initialCards.forEach((data) => {
 
 /**
  * Open the edit form and grab all the inputs.
- * @constructor
  * @param  {} editModalWindow - The edit form object.
  */
 const handleEditFormOpen = (editModalWindow) => {
@@ -113,7 +110,6 @@ const handleEditFormOpen = (editModalWindow) => {
 
 /**
  * Edit form submit handler.
- * @constructor
  * @param  {} evt
  */
 const handleEditFormSubmit = (evt) => {

@@ -4,7 +4,6 @@
 
 /**
  * Close the popup with the escape button event.
- * @constructor
  * @param  {} evt
  */
 const closeEscButton = (evt) => {
@@ -16,7 +15,6 @@ const closeEscButton = (evt) => {
 
 /**
  * Open the forms.
- * @constructor
  * @param  {} modal - The modal DOM object.
  */
 const openModalWindow = (modal) => {
@@ -26,7 +24,6 @@ const openModalWindow = (modal) => {
 
 /**
  * Close the forms.
- * @constructor
  * @param  {} modal - The modal DOM object.
  */
 const closeModalWindow = (modal) => {
@@ -50,7 +47,6 @@ const removeEscapeListener = () => {
 
 /**
  * Close the popup clicking on the external overlay.
- * @constructor
  * @param  {} evt
  */
 const closePopupOverlay = (evt) => {

@@ -1,6 +1,5 @@
 /**
  * Validation for all the popups.
- * @constructor
  * @param  {} settings - validationSettings object for the inputs validation.
  * @param  {} formElement - addForm or editForm popup.
  */
@@ -16,7 +15,6 @@ class FormValidator {
 
   /**
    * Private method to show an error
-   * @constructor
    * @param  {} input - Input passed through the forms.
    */
   _showInputError(input) {
@@ -29,7 +27,6 @@ class FormValidator {
 
   /**
    * Private method to hide an error.
-   * @constructor
    * @param  {} input - Input passed through the forms.
    */
   _hideInputError(input) {
@@ -65,7 +62,6 @@ class FormValidator {
 
   /**
    * If the condition is true, hide the error, if it is false, show the error.
-   * @constructor
    * @param  {} input - Input passed through the forms.
    */
   _checkInputValidity(input) {
