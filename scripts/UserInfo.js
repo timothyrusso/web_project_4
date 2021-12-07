@@ -1,7 +1,7 @@
 class UserInfo {
-  constructor({ userName, userJob }) {
-    this._nameSelector.textContent = userName;
-    this._jobSelector.textContent = userJob;
+  constructor({ nameSelector, jobSelector }) {
+    this._nameSelector = nameSelector;
+    this._jobSelector = jobSelector;
   }
 
   getUserInfo() {
