@@ -10,7 +10,7 @@ class PopupWithForm extends Popup {
   _getInputValues() {
     this._inputList = this._element.querySelectorAll('.popup__input');
     this._formValues = {};
-    this._inputList.forEach(input => this._formValues[input.data] = input.value);
+    this._inputList.forEach(input => this._formValues[input.data] = input.value);  // DA RIVEDERE, I LINK?
     return this._formValues;
   }
 
@@ -25,3 +25,5 @@ class PopupWithForm extends Popup {
     super.close();
   }
 }
+
+export default PopupWithForm;

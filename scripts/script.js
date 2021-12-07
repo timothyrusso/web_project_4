@@ -1,5 +1,9 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
+import Section from "./Section.js";
+import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
+import UserInfo from "./UserInfo.js";
 import { openModalWindow, closeModalWindow } from "./utils.js";
 
 
@@ -63,6 +67,53 @@ addFormValidator.enableValidation();
 /*****************
  * CARD CREATION *
  *****************/
+
+const userInfo = new UserInfo({
+  userNameSelector: profileConfig.profile.Title,
+  userDescriptionSelector: profileConfig.profileDescription
+})
+
+const cardList = new Section({
+  renderer: (data) => {
+    const card = new Card({
+      data,
+      handleCardClick: () => {
+        imagePopup.open(data);
+      }
+    }, cardsConfig.cardSelector);
+
+    cardList.addItem(card.getView());
+  }
+}, cardsConfig.placesList);
+
+const imagePopup = new PopupWithImage(popupConfig.previewImageModalWindow);
+
+const userInfoPopup = new PopupWithForm({
+  popupSelector: popupConfig.editFormModalWindow,
+  handleFormSubmit: (data) => {
+    userInfo.setUserInfo(data)
+  }
+});
+
+const newCardPopup = new PopupWithForm({
+  popupSelector: popupConfig.cardFormModalWindow,
+  handleFormSubmit: (data) => {
+    const card = new Card({
+      data,
+      handleCardClick: () => {
+        imagePopup.open(data);
+      }
+    }, cardsConfig.cardSelector);
+    cardList.addItem(card.getView())
+  }
+});
+
+
+imagePopup._setEventListeners();
+userInfoPopup._setEventListeners();
+newCardPopup._setEventListeners();
+cardList.renderItems(initialCards);
+
 
 /**
  * Handle the creation of the card with the submit event listener.
