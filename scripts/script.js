@@ -84,7 +84,7 @@ const cardList = new Section({ // ---OK
       }
     }, cardSelector);
 
-    cardList.addItem(card._getTemplate());
+    cardList.addItem(card.generateCard());
   }
 }, cardListSection);
 
@@ -106,7 +106,7 @@ const newCardPopup = new PopupWithForm({  // ---OK
         imagePopup.open(data);
       }
     }, cardSelector);
-    cardList.addItem(card.getView())
+    cardList.addItem(card.generateCard())
   }
 });
 
