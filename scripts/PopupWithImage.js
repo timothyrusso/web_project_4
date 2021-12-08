@@ -1,6 +1,10 @@
 import Popup from './Popup.js';
 
 class PopupWithImage extends Popup {
+  constructor(popupSelector) {
+    super(popupSelector);
+  }
+
   open({ link, name }) {
     // puts 'name' from args to the '.popup__caption' selector
     // find image by the 'popup__image' selector, set 'src' and 'alt' for it
