@@ -3,7 +3,7 @@ class Section {
     this._renderedItems = items;
     this._renderer = renderer;
 
-    this._container = document.querySelector(`.${cardElements}`);
+    this._container = document.querySelector(cardElements);
   }
 
   renderItems() {
@@ -11,7 +11,7 @@ class Section {
   }
 
   addItem(element) {
-    this._container.append(element);
+    this._container.prepend(element);
   }
 }
 

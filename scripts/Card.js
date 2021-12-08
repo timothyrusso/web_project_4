@@ -10,11 +10,11 @@ const captionImageElement = document.querySelector('.popup__caption');
  * @param  {} cardSelector - Card id template.
  */
 class Card {
-  // constructor(data, cardSelector) {
-  constructor({ data, handleCardClick }, cardSelector) {
+  constructor(data, cardSelector) {
+  // constructor(data, handleCardClick, cardSelector) {
     this._name = data.name
     this._link = data.link
-    this._handleCardClick = handleCardClick;
+    // this._handleCardClick = handleCardClick;
     this._cardSelector = cardSelector  // Template of our card
   }
 
@@ -34,8 +34,8 @@ class Card {
     captionImageElement.textContent = this._name
     previewImageElement.src = this._link
     previewImageElement.alt = `Preview of ${this._name}` // Add the alt attribute to the images
-    // openModalWindow(previewImageModalWindow)
-    handleCardClick();
+    openModalWindow(previewImageModalWindow)
+    // handleCardClick();
   }
 
   /**

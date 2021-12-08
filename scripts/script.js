@@ -18,6 +18,7 @@ const placesList = document.querySelector('.cards-grid'); // Let's find the plac
 const addCardName = addModalWindow.querySelector('.popup__input_field_title');
 const addCardLink = addModalWindow.querySelector('.popup__input_field_link');
 const cardSelector = '#card-template';
+const cardListSection = '.cards-grid';
 
 
 /***********
@@ -68,42 +69,43 @@ addFormValidator.enableValidation();
  * CARD CREATION *
  *****************/
 
-const userInfo = new UserInfo({
-  userNameSelector: profileConfig.profile.Title,
-  userDescriptionSelector: profileConfig.profileDescription
+const userInfo = new UserInfo({  // ---OK
+  userNameSelector: '.profile__name',
+  userDescriptionSelector: '.profile__about-me'
 })
 
-const cardList = new Section({
+const cardList = new Section({ // ---OK
+  items: initialCards,
   renderer: (data) => {
     const card = new Card({
       data,
       handleCardClick: () => {
         imagePopup.open(data);
       }
-    }, cardsConfig.cardSelector);
+    }, cardSelector);
 
-    cardList.addItem(card.getView());
+    cardList.addItem(card._getTemplate());
   }
-}, cardsConfig.placesList);
+}, cardListSection);
 
-const imagePopup = new PopupWithImage(popupConfig.previewImageModalWindow);
+const imagePopup = new PopupWithImage('popup_type_preview');  // ---OK
 
-const userInfoPopup = new PopupWithForm({
-  popupSelector: popupConfig.editFormModalWindow,
+const userInfoPopup = new PopupWithForm({  // ---OK
+  popupSelector: 'popup_type_edit',
   handleFormSubmit: (data) => {
     userInfo.setUserInfo(data)
   }
 });
 
-const newCardPopup = new PopupWithForm({
-  popupSelector: popupConfig.cardFormModalWindow,
+const newCardPopup = new PopupWithForm({  // ---OK
+  popupSelector: 'popup_type_add',
   handleFormSubmit: (data) => {
     const card = new Card({
       data,
       handleCardClick: () => {
         imagePopup.open(data);
       }
-    }, cardsConfig.cardSelector);
+    }, cardSelector);
     cardList.addItem(card.getView())
   }
 });
