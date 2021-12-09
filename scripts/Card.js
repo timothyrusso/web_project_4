@@ -10,11 +10,10 @@ const captionImageElement = document.querySelector('.popup__caption');
  * @param  {} cardSelector - Card id template.
  */
 class Card {
-  constructor(data, cardSelector) {
-  // constructor(data, handleCardClick, cardSelector) {
+  constructor({data, handleCardClick}, cardSelector) {
     this._name = data.name
     this._link = data.link
-    // this._handleCardClick = handleCardClick;
+    this._handleCardClick = handleCardClick;
     this._cardSelector = cardSelector  // Template of our card
   }
 

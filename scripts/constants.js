@@ -27,5 +27,6 @@ export const initialCards = [
 
 export const selectors = {
   cardList: '.cards-grid',
-  cardTemplate: '#card-template'
+  cardTemplate: '#card-template',
+  previewPopup: 'popup_type_preview'
 };
