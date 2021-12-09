@@ -1,9 +1,10 @@
 class Section {
-  constructor({ items, renderer }, cardElements) {
+  constructor({ items, renderer }, selector) {
+
     this._renderedItems = items;
     this._renderer = renderer;
 
-    this._container = document.querySelector(cardElements);
+    this._container = document.querySelector(selector);
   }
 
   renderItems() {

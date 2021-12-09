@@ -1,4 +1,4 @@
-const initialCards = [
+export const initialCards = [
   {
     name: "Palouse Falls",
     link: "./images/palouse-falls.png"
@@ -24,3 +24,8 @@ const initialCards = [
     link: "./images/garden-of-the-gods.png"
   }
 ];
+
+export const selectors = {
+  cardList: '.cards-grid',
+  cardTemplate: '#card-template'
+};
