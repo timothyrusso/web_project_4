@@ -5,14 +5,14 @@ class PopupWithImage extends Popup {
     super(popupSelector);
   }
 
-  open({ link, name }) {
+  open(data) {
     // puts 'name' from args to the '.popup__caption' selector
     // find image by the 'popup__image' selector, set 'src' and 'alt' for it
     // call super.open(), it will call the orginal method from the original Popup class
-    this._popupElement.querySelector('.popup__caption').textContent = name;
+    this._popupElement.querySelector('.popup__caption').textContent = data.name;
     const image = this._popupElement.querySelector('.popup__preview-image');
-    image.src = link;
-    image.alt = `Preview of ${name}`;
+    image.src = data.link;
+    image.alt = `Preview of ${data.name}`;
     super.open();
   }
 }

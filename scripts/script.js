@@ -9,9 +9,9 @@ import { initialCards, selectors } from "./constants.js"
 
 const cardSection = new Section({
   items: initialCards,
-  renderer: (item) => {
+  renderer: (data) => {
     const cardElement = new Card({
-      item, handleCardClick: (imageData) => {
+      data, handleCardClick: (imageData) => {
         imagePreviewPopup.open(imageData);
       }
     }, selectors.cardTemplate);

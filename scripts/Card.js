@@ -10,7 +10,7 @@ const captionImageElement = document.querySelector('.popup__caption');
  * @param  {} cardSelector - Card id template.
  */
 class Card {
-  constructor({data, handleCardClick}, cardSelector) {
+  constructor({ data, handleCardClick }, cardSelector) {
     this._name = data.name
     this._link = data.link
     this._handleCardClick = handleCardClick;
@@ -21,7 +21,7 @@ class Card {
    * Event listeners handler.
    */
   _setEventListeners() {
-    this._element.querySelector('.card__image').addEventListener('click', () => this._handlePreviewPicture())
+    this._element.querySelector('.card__image').addEventListener('click', () => this._handleCardClick({ link: this._link, name: this._name }))
     this._element.querySelector('.card__like').addEventListener('click', (evt) => this._handleLikeIcon(evt))
     this._element.querySelector('.card__delete').addEventListener('click', () => this._handleDeleteCard())
   }
@@ -29,13 +29,13 @@ class Card {
   /**
    * Handler for the image preview popup.
    */
-  _handlePreviewPicture() {
-    captionImageElement.textContent = this._name
-    previewImageElement.src = this._link
-    previewImageElement.alt = `Preview of ${this._name}` // Add the alt attribute to the images
-    openModalWindow(previewImageModalWindow)
-    handleCardClick();
-  }
+  // _handlePreviewPicture() {
+  //   captionImageElement.textContent = this._name
+  //   previewImageElement.src = this._link
+  //   previewImageElement.alt = `Preview of ${this._name}` // Add the alt attribute to the images
+  //   openModalWindow(previewImageModalWindow)
+  //   handleCardClick();
+  // }
 
   /**
    * Handle the like button.
