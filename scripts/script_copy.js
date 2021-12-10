@@ -69,54 +69,6 @@ addFormValidator.enableValidation();
  * CARD CREATION *
  *****************/
 
-const userInfo = new UserInfo({  // ---OK
-  userNameSelector: '.profile__name',
-  userDescriptionSelector: '.profile__about-me'
-})
-
-const cardList = new Section({ // ---OK
-  items: initialCards,
-  renderer: (data) => {
-    const card = new Card({
-      data,
-      handleCardClick: () => {
-        imagePopup.open(data);
-      }
-    }, cardSelector);
-
-    cardList.addItem(card.generateCard());
-  }
-}, cardListSection);
-
-const imagePopup = new PopupWithImage('popup_type_preview');  // ---OK
-
-const userInfoPopup = new PopupWithForm({  // ---OK
-  popupSelector: 'popup_type_edit',
-  handleFormSubmit: (data) => {
-    userInfo.setUserInfo(data)
-  }
-});
-
-const newCardPopup = new PopupWithForm({  // ---OK
-  popupSelector: 'popup_type_add',
-  handleFormSubmit: (data) => {
-    const card = new Card({
-      data,
-      handleCardClick: () => {
-        imagePopup.open(data);
-      }
-    }, cardSelector);
-    cardList.addItem(card.generateCard())
-  }
-});
-
-
-imagePopup._setEventListeners();
-userInfoPopup._setEventListeners();
-newCardPopup._setEventListeners();
-cardList.renderItems(initialCards);
-
-
 /**
  * Handle the creation of the card with the submit event listener.
  * @param  {} evt
