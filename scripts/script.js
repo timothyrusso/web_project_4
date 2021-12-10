@@ -24,7 +24,7 @@ cardSection.renderItems();
 
 const imagePreviewPopup = new PopupWithImage(selectors.previewPopup);
 
-imagePreviewPopup._setEventListeners();
+imagePreviewPopup.setEventListeners();
 
 
 const userInfo = new UserInfo({
@@ -34,30 +34,32 @@ const userInfo = new UserInfo({
 
 const userInfoPopup = new PopupWithForm({
   popupSelector: selectors.profilePopup,
-  handleFormSubmit: (event, data) => {
-    event.preventDefault();
-    userInfo.setUserInfo(data)
-    userInfoPopup.close()
+  handleFormSubmit: (data) => {
+    userInfo.setUserInfo(data);
   }
 });
 
-userInfoPopup._setEventListeners();
+userInfoPopup.setEventListeners();
 
 
 const newCardPopup = new PopupWithForm({
   popupSelector: selectors.cardPopup,
-  handleFormSubmit: (data) => {
+  handleFormSubmit: (rawData) => {
+    const data = {
+      name: rawData.title,
+      link: rawData.link
+    }
     const card = new Card({
       data,
-      handleCardClick: () => {
-        imagePopup.open(data);
+      handleCardClick: (imageData) => {
+        imagePreviewPopup.open(imageData);
       }
-    }, cardSelector);
-    cardList.addItem(card.generateCard())
+    }, selectors.cardTemplate);
+    cardSection.addItem(card.generateCard())
   }
 });
 
-newCardPopup._setEventListeners();
+newCardPopup.setEventListeners();
 
 
 

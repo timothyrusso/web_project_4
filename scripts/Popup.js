@@ -6,13 +6,12 @@ class Popup {
 
   _handleEscUp(evt) {
     // Prevent default and if event was on ESC button -> call "close" method
-    evt.preventDefault();
     if (evt.key == 'Escape') {
       this.close()
     }
   }
 
-  _setEventListeners() {
+  setEventListeners() {
     // Create an event listener for click on the CLOSE button or pupup half-trasparent background
     this._popupElement.addEventListener('click', (evt) => {
       if (evt.target.classList.contains('popup') || evt.target.classList.contains('close-button')) {
