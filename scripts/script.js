@@ -25,3 +25,25 @@ cardSection.renderItems();
 const imagePreviewPopup = new PopupWithImage(selectors.previewPopup);
 
 imagePreviewPopup._setEventListeners();
+
+
+const userInfo = new UserInfo({
+  nameSelector: 'profile__name',
+  jobSelector: 'profile__about-me'
+})
+
+const userInfoPopup = new PopupWithForm({
+  popupSelector: 'popup_type_edit',
+  handleFormSubmit: (data) => {
+    userInfo.setUserInfo(data)
+  }
+});
+
+userInfoPopup._setEventListeners();
+
+
+
+// Il resto delle cose, dovrebbero essere solamente gli eventListeners per aprire i due popup
+
+const editButton = document.querySelector('.edit-button');
+editButton.addEventListener('click', () => userInfoPopup.open());
