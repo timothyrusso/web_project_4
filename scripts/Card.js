@@ -1,9 +1,3 @@
-import { openModalWindow } from './utils.js';
-
-const previewImageModalWindow = document.querySelector('.popup_type_preview');
-const previewImageElement = document.querySelector('.popup__preview-image');
-const captionImageElement = document.querySelector('.popup__caption');
-
 /**
  * Handle the creation of the card element.
  * @param  {} data - Card name and card link.
@@ -25,17 +19,6 @@ class Card {
     this._element.querySelector('.card__like').addEventListener('click', (evt) => this._handleLikeIcon(evt))
     this._element.querySelector('.card__delete').addEventListener('click', () => this._handleDeleteCard())
   }
-
-  /**
-   * Handler for the image preview popup.
-   */
-  // _handlePreviewPicture() {
-  //   captionImageElement.textContent = this._name
-  //   previewImageElement.src = this._link
-  //   previewImageElement.alt = `Preview of ${this._name}` // Add the alt attribute to the images
-  //   openModalWindow(previewImageModalWindow)
-  //   handleCardClick();
-  // }
 
   /**
    * Handle the like button.
