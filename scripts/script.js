@@ -4,7 +4,7 @@ import Section from "./Section.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 import UserInfo from "./UserInfo.js";
-import { initialCards, selectors } from "./constants.js";
+import { initialCards, selectors, elements, validationSettings } from "./constants.js";
 
 
 const cardSection = new Section({
@@ -28,13 +28,14 @@ imagePreviewPopup._setEventListeners();
 
 
 const userInfo = new UserInfo({
-  nameSelector: 'profile__name',
-  jobSelector: 'profile__about-me'
+  nameSelector: selectors.name,
+  jobSelector: selectors.job
 })
 
 const userInfoPopup = new PopupWithForm({
-  popupSelector: 'popup_type_edit',
-  handleFormSubmit: (data) => {
+  popupSelector: selectors.profilePopup,
+  handleFormSubmit: (event, data) => {
+    event.preventDefault();
     userInfo.setUserInfo(data)
     userInfoPopup.close()
   }
@@ -44,7 +45,7 @@ userInfoPopup._setEventListeners();
 
 
 const newCardPopup = new PopupWithForm({
-  popupSelector: 'popup_type_add',
+  popupSelector: selectors.cardPopup,
   handleFormSubmit: (data) => {
     const card = new Card({
       data,
@@ -61,45 +62,29 @@ newCardPopup._setEventListeners();
 
 
 
-// Il resto delle cose, dovrebbero essere solamente gli eventListeners per aprire i due popup
+/************************
+ * OPEN BUTTON HANDLERS *
+ ************************/
 
-const editButton = document.querySelector('.edit-button');
+const editButton = document.querySelector(selectors.editButton);
 editButton.addEventListener('click', () => {
-  userInfo.getUserInfo()
-  userInfoPopup.open()
+  userInfo.getUserInfo();
+  userInfoPopup.open();
 })
 
-
-const addModalBtn = document.querySelector('.add-button');
+const addModalBtn = document.querySelector(selectors.addButton);
 addModalBtn.addEventListener('click', () => {
   newCardPopup.open();
   addFormValidator.toggleButton();
-}
-);
-
+})
 
 
 /**************
  * VALIDATION *
  **************/
 
-const validationSettings = {
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "submit-button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible"
-}
-
-const editModalWindow = document.querySelector('.popup_type_edit');
-const addModalWindow = document.querySelector('.popup_type_add');
-const editFormElement = editModalWindow.querySelector('.popup__form');
-const addFormElement = addModalWindow.querySelector('.popup__form');
-
-// Creation of two instances of FormValidator
-const editFormValidator = new FormValidator(validationSettings, editFormElement);
-const addFormValidator = new FormValidator(validationSettings, addFormElement);
+const editFormValidator = new FormValidator(validationSettings, elements.editFormElement);
+const addFormValidator = new FormValidator(validationSettings, elements.addFormElement);
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
-
