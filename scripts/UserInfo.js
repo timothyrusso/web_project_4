@@ -14,7 +14,7 @@ class UserInfo {
     };
   }
 
-  setUserInfo({userName, userJob}) {
+  setUserInfo({ userName, userJob }) {
     // Takes new user data and adds it on the page.
     this._nameElement.textContent = userName;
     this._jobElement.textContent = userJob;

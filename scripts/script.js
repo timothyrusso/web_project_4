@@ -4,7 +4,7 @@ import Section from "./Section.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 import UserInfo from "./UserInfo.js";
-import { initialCards, selectors } from "./constants.js"
+import { initialCards, selectors } from "./constants.js";
 
 
 const cardSection = new Section({
@@ -36,6 +36,7 @@ const userInfoPopup = new PopupWithForm({
   popupSelector: 'popup_type_edit',
   handleFormSubmit: (data) => {
     userInfo.setUserInfo(data)
+    userInfoPopup.close()
   }
 });
 
@@ -63,7 +64,11 @@ newCardPopup._setEventListeners();
 // Il resto delle cose, dovrebbero essere solamente gli eventListeners per aprire i due popup
 
 const editButton = document.querySelector('.edit-button');
-editButton.addEventListener('click', () => userInfoPopup.open());
+editButton.addEventListener('click', () => {
+  userInfo.getUserInfo()
+  userInfoPopup.open()
+})
+
 
 const addModalBtn = document.querySelector('.add-button');
 addModalBtn.addEventListener('click', () => {
@@ -78,7 +83,7 @@ addModalBtn.addEventListener('click', () => {
  * VALIDATION *
  **************/
 
- const validationSettings = {
+const validationSettings = {
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button",
   inactiveButtonClass: "submit-button_disabled",
