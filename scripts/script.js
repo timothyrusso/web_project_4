@@ -70,7 +70,9 @@ newCardPopup.setEventListeners();
 
 const editButton = document.querySelector(selectors.editButton);
 editButton.addEventListener('click', () => {
-  userInfo.getUserInfo();
+  const { name, job } = userInfo.getUserInfo();
+  elements.profileNameElement.value = name;
+  elements.profileJobElement.value = job;
   userInfoPopup.open();
 })
 

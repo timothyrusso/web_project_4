@@ -39,7 +39,9 @@ export const selectors = {
 
 export const elements = {
   editFormElement: document.querySelector('.popup_type_edit').querySelector('.popup__form'),
-  addFormElement: document.querySelector('.popup_type_add').querySelector('.popup__form')
+  addFormElement: document.querySelector('.popup_type_add').querySelector('.popup__form'),
+  profileNameElement: document.querySelector('.popup__input_field_name'),
+  profileJobElement: document.querySelector('.popup__input_field_about-me')
 };
 
 export const validationSettings = {
