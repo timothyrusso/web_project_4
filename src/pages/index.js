@@ -5,7 +5,7 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import { initialCards, selectors, elements, validationSettings } from "../components/constants.js";
+import { initialCards, selectors, elements, validationSettings } from "../utils/constants.js";
 
 
 /**********************
@@ -15,12 +15,7 @@ import { initialCards, selectors, elements, validationSettings } from "../compon
 const cardSection = new Section({
   items: initialCards,
   renderer: (data) => {
-    const cardElement = new Card({
-      data, handleCardClick: (imageData) => {
-        imagePreviewPopup.open(imageData);
-      }
-    }, selectors.cardTemplate);
-    cardSection.addItem(cardElement.generateCard());
+    createCard(data)
   }
 }, selectors.cardList)
 
@@ -44,14 +39,8 @@ const newCardPopup = new PopupWithForm({
     const data = {
       name: rawData.title,
       link: rawData.link
-    }
-    const card = new Card({
-      data,
-      handleCardClick: (imageData) => {
-        imagePreviewPopup.open(imageData);
-      }
-    }, selectors.cardTemplate);
-    cardSection.addItem(card.generateCard())
+    };
+    createCard(data);
   }
 });
 
@@ -60,16 +49,31 @@ const editFormValidator = new FormValidator(validationSettings, elements.editFor
 const addFormValidator = new FormValidator(validationSettings, elements.addFormElement);
 
 
+/************************
+ * CREATE CARD FUNCTION *
+ ************************/
+
+const createCard = (data) => {
+  const cardElement = new Card({
+    data, handleCardClick: (imageData) => {
+      imagePreviewPopup.open(imageData);
+    }
+  }, selectors.cardTemplate)
+  cardSection.addItem(cardElement.generateCard())
+  return cardElement
+};
+
+
 /****************************
  * INSTANCES INIZIALIZATION *
  ****************************/
 
- editFormValidator.enableValidation();
- addFormValidator.enableValidation();
- cardSection.renderItems();
- imagePreviewPopup.setEventListeners();
- userInfoPopup.setEventListeners();
- newCardPopup.setEventListeners();
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
+cardSection.renderItems();
+imagePreviewPopup.setEventListeners();
+userInfoPopup.setEventListeners();
+newCardPopup.setEventListeners();
 
 
 /************************
