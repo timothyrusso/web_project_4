@@ -7,6 +7,10 @@ import UserInfo from "./UserInfo.js";
 import { initialCards, selectors, elements, validationSettings } from "./constants.js";
 
 
+/**********************
+ * INSTANCES CREATION *
+ **********************/
+
 const cardSection = new Section({
   items: initialCards,
   renderer: (data) => {
@@ -19,13 +23,7 @@ const cardSection = new Section({
   }
 }, selectors.cardList)
 
-cardSection.renderItems();
-
-
 const imagePreviewPopup = new PopupWithImage(selectors.previewPopup);
-
-imagePreviewPopup.setEventListeners();
-
 
 const userInfo = new UserInfo({
   nameSelector: selectors.name,
@@ -38,9 +36,6 @@ const userInfoPopup = new PopupWithForm({
     userInfo.setUserInfo(data);
   }
 });
-
-userInfoPopup.setEventListeners();
-
 
 const newCardPopup = new PopupWithForm({
   popupSelector: selectors.cardPopup,
@@ -59,9 +54,21 @@ const newCardPopup = new PopupWithForm({
   }
 });
 
-newCardPopup.setEventListeners();
+const editFormValidator = new FormValidator(validationSettings, elements.editFormElement);
+
+const addFormValidator = new FormValidator(validationSettings, elements.addFormElement);
 
 
+/****************************
+ * INSTANCES INIZIALIZATION *
+ ****************************/
+
+ editFormValidator.enableValidation();
+ addFormValidator.enableValidation();
+ cardSection.renderItems();
+ imagePreviewPopup.setEventListeners();
+ userInfoPopup.setEventListeners();
+ newCardPopup.setEventListeners();
 
 
 /************************
@@ -81,14 +88,3 @@ addModalBtn.addEventListener('click', () => {
   newCardPopup.open();
   addFormValidator.toggleButton();
 })
-
-
-/**************
- * VALIDATION *
- **************/
-
-const editFormValidator = new FormValidator(validationSettings, elements.editFormElement);
-const addFormValidator = new FormValidator(validationSettings, elements.addFormElement);
-
-editFormValidator.enableValidation();
-addFormValidator.enableValidation();
