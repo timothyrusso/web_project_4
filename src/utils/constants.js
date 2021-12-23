@@ -38,17 +38,23 @@ export const selectors = {
   previewPopup: 'popup_type_preview',
   profilePopup: 'popup_type_edit',
   cardPopup: 'popup_type_add',
+  editImagePopup: 'popup_type_profile-image',
+  deleteCardPopup: 'popup_type_delete-card',
   name: 'profile__name',
   job: 'profile__about-me',
   editButton: '.edit-button',
-  addButton: '.add-button'
+  addButton: '.add-button',
+  profileImageButton: '.profile__image-wrapper',
+  deleteCardButton: '.card__delete'
 };
 
 export const elements = {
   editFormElement: document.querySelector('.popup_type_edit').querySelector('.popup__form'),
   addFormElement: document.querySelector('.popup_type_add').querySelector('.popup__form'),
+  editImageProfileFormElement: document.querySelector('.popup_type_profile-image').querySelector('.popup__form'),
   profileNameElement: document.querySelector('.popup__input_field_name'),
-  profileJobElement: document.querySelector('.popup__input_field_about-me')
+  profileJobElement: document.querySelector('.popup__input_field_about-me'),
+  profileImageElement: document.querySelector('.profile__image')
 };
 
 export const validationSettings = {
@@ -58,3 +64,11 @@ export const validationSettings = {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible"
 };
+
+export const userConfig = {
+  url: 'https://around.nomoreparties.co/v1/group-12/users/me',
+  headers: {
+    authorization: "d32f6df6-a478-44c7-98e2-39f20efb7fb4",
+    "Content-Type": "application/json"
+  }
+}

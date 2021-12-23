@@ -5,7 +5,8 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import { initialCards, selectors, elements, validationSettings } from "../utils/constants.js";
+import { initialCards, selectors, elements, validationSettings, userConfig } from "../utils/constants.js";
+import Api from "../components/Api.js"
 
 
 /**********************
@@ -44,9 +45,25 @@ const newCardPopup = new PopupWithForm({
   }
 });
 
+const editProfileImagePopup = new PopupWithForm({
+  popupSelector: selectors.editImagePopup,
+  handleFormSubmit: (data) => {
+    elements.profileImageElement.src = data.link;
+  }
+});
+
+const deleteCardPopup = new PopupWithForm({
+  popupSelector: selectors.deleteCardPopup,
+  handleFormSubmit: () => {
+    handleDeleteCard();
+  }
+});
+
 const editFormValidator = new FormValidator(validationSettings, elements.editFormElement);
 
 const addFormValidator = new FormValidator(validationSettings, elements.addFormElement);
+
+const editImageProfileFormValidator = new FormValidator(validationSettings, elements.editImageProfileFormElement);
 
 
 /************************
@@ -57,6 +74,8 @@ const createCard = (data) => {
   const cardElement = new Card({
     data, handleCardClick: (imageData) => {
       imagePreviewPopup.open(imageData);
+    }, handleDeleteClick: () => {
+      deleteCardPopup.open();
     }
   }, selectors.cardTemplate)
   cardSection.addItem(cardElement.generateCard())
@@ -70,10 +89,13 @@ const createCard = (data) => {
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
+editImageProfileFormValidator.enableValidation();
 cardSection.renderItems();
 imagePreviewPopup.setEventListeners();
 userInfoPopup.setEventListeners();
 newCardPopup.setEventListeners();
+editProfileImagePopup.setEventListeners();
+deleteCardPopup.setEventListeners();
 
 
 /************************
@@ -93,3 +115,24 @@ addModalBtn.addEventListener('click', () => {
   newCardPopup.open();
   addFormValidator.toggleButton();
 })
+
+const profileImageButton = document.querySelector(selectors.profileImageButton);
+profileImageButton.addEventListener('click', () => {
+  editProfileImagePopup.open();
+  editImageProfileFormValidator.toggleButton();
+})
+
+
+// ELIMINARE LE COSTANTI INUTILI
+
+// const deleteCardButton = document.querySelector(selectors.deleteCardButton);
+// deleteCardButton.addEventListener('click', () => {
+//   deleteCardPopup.open();
+// })
+
+
+/*******
+ * API *
+ *******/
+
+

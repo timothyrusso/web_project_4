@@ -16,7 +16,10 @@
 
     <main class="main">
       <section class="profile">
-        <img src="<%=require('./images/avatar.jpg')%>" alt="Avatar of the page profile" class="profile__image">
+        <div class="profile__image-wrapper">
+          <img src="<%=require('./images/avatar.jpg')%>" alt="Avatar of the page profile" class="profile__image">
+          <button aria-label="Edit" type="button" class="profile-image-button"></button>
+        </div>
         <div class="profile__wrapper">
           <h1 class="profile__name">Timothy Russo</h1>
           <button aria-label="Edit" type="button" class="edit-button"></button>
@@ -77,6 +80,33 @@
         <button aria-label="Close" type="button" class="close-button"></button>
         <img class="popup__preview-image" src="#" alt="#">
         <figcaption class="popup__caption"></figcaption>
+      </div>
+    </div>
+
+    <!-- This is the profile edit image popup -->
+
+    <div class="popup popup_type_profile-image">
+      <div class="popup__container">
+        <form action="#" class="popup__form" name="myFormImage">
+          <button aria-label="Close" type="button" class="close-button"></button>
+          <h2 class="popup__title">Change profile picture</h2>
+          <input type="url" id="link-input" name="link" class="popup__input popup__input_field_link"
+            placeholder="Image link" required>
+          <span id="link-input-error"></span>
+          <button type="submit" class="submit-button popup__button">Create</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- This is the profile edit image popup -->
+
+    <div class="popup popup_type_delete-card">
+      <div class="popup__container">
+        <form action="#" class="popup__form" name="myFormDelete">
+          <button aria-label="Close" type="button" class="close-button"></button>
+          <h2 class="popup__title popup__title_type_delete-card">Are you sure?</h2>
+          <button type="submit" class="submit-button submit-button_type_delete-card popup__button">Yes</button>
+        </form>
       </div>
     </div>
 
