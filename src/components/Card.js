@@ -31,7 +31,7 @@ class Card {
   /**
    * Handle the delete button.
    */
-  handleDeleteCard() {
+  _handleDeleteCard() {
     this._element.remove()
     this._element = null
   }
