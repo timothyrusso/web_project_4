@@ -10,10 +10,11 @@ class Api {
     })
       .then(res => {
         if (res.ok) {
+          console.log(`Data load correctly, code status: ${res.status}`);
           return res.json();
+        } else {
+          return Promise.reject(`Error: ${res.status}`);
         }
-
-        return Promise.reject(`Error: ${res.status}`);
       })
       .catch((err) => {
         console.log(err);
@@ -31,10 +32,14 @@ class Api {
     })
       .then(res => {
         if (res.ok) {
-          console.log('Data saved correctly.')
+          console.log(
+            `Code status: ${res.status},
+data saved correctly.`
+          );
+          return res.json();
+        } else {
+          return Promise.reject(`Error: ${res.status}`);
         }
-
-        return Promise.reject(`Error: ${res.status}`);
       })
       .catch((err) => {
         console.log(err);
@@ -51,10 +56,14 @@ class Api {
     })
       .then(res => {
         if (res.ok) {
-          console.log('Image saved correctly.')
+          console.log(
+            `Code status: ${res.status},
+image saved correctly.`
+          );
+          return res.json();
+        } else {
+          return Promise.reject(`Error: ${res.status}`);
         }
-
-        return Promise.reject(`Error: ${res.status}`);
       })
       .catch((err) => {
         console.log(err);

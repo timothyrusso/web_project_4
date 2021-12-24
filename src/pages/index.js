@@ -35,14 +35,9 @@ const userInfoPopup = new PopupWithForm({
   popupSelector: selectors.profilePopup,
   handleFormSubmit: (data) => {
     api.saveProfileInfo({ name: data.name, about: data.aboutMe }).then((res) => {
-      console.log(res)
+      elements.profileNameElement.textContent = res.name;
+      elements.profileJobElement.textContent = res.about;
     })
-      .catch((err) => {
-        console.log(err);
-      })
-    updateProfileInfo();
-    // elements.profileNameElement.textContent = data.name;
-    // elements.profileJobElement.textContent = data.aboutMe;
   }
 });
 
@@ -61,13 +56,8 @@ const editProfileImagePopup = new PopupWithForm({
   popupSelector: selectors.editImagePopup,
   handleFormSubmit: (data) => {
     api.saveProfileImage({ avatar: data.link }).then((res) => {
-      console.log(res)
+      elements.profileImageElement.src = res.avatar;
     })
-      .catch((err) => {
-        console.log(err);
-      })
-    // updateProfileInfo();
-    elements.profileImageElement.src = data.link;
   }
 });
 
@@ -161,14 +151,11 @@ profileImageButton.addEventListener('click', () => {
 //   console.log(err);
 // })
 
-const updateProfileInfo = () => {
-  api.getProfileInfo().then((data) => {
-    const { name, about, avatar } = data;
-    userInfo.setUserInfo({ name, aboutMe: about, link: avatar })
-  }).catch((err) => {
-    console.log(err);
-  })
-}
+api.getProfileInfo().then((data) => {
+  const { name, about, avatar } = data;
+  userInfo.setUserInfo({ name, aboutMe: about, link: avatar })
+}).catch((err) => {
+  console.log(err);
+})
 
-updateProfileInfo();
 
