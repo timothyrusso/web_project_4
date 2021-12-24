@@ -17,13 +17,13 @@
     <main class="main">
       <section class="profile">
         <div class="profile__image-wrapper">
-          <img src="<%=require('./images/avatar.jpg')%>" alt="Avatar of the page profile" class="profile__image">
+          <img src="#" alt="Avatar of the page profile" class="profile__image">
           <button aria-label="Edit" type="button" class="profile-image-button"></button>
         </div>
         <div class="profile__wrapper">
-          <h1 class="profile__name">Timothy Russo</h1>
+          <h1 class="profile__name"></h1>
           <button aria-label="Edit" type="button" class="edit-button"></button>
-          <p class="profile__about-me">Explorer</p>
+          <p class="profile__about-me"></p>
         </div>
         <button aria-label="Add" type="button" class="add-button"></button>
       </section>
@@ -90,7 +90,7 @@
         <form action="#" class="popup__form" name="myFormImage">
           <button aria-label="Close" type="button" class="close-button"></button>
           <h2 class="popup__title">Change profile picture</h2>
-          <input type="url" id="link-input" name="link" class="popup__input popup__input_field_link"
+          <input type="url" id="link-input" name="link" class="popup__input popup__input_image_link"
             placeholder="Image link" required>
           <span id="link-input-error"></span>
           <button type="submit" class="submit-button popup__button">Create</button>

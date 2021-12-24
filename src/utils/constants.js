@@ -42,6 +42,7 @@ export const selectors = {
   deleteCardPopup: 'popup_type_delete-card',
   name: 'profile__name',
   job: 'profile__about-me',
+  image: 'profile__image',
   editButton: '.edit-button',
   addButton: '.add-button',
   profileImageButton: '.profile__image-wrapper',
@@ -52,9 +53,12 @@ export const elements = {
   editFormElement: document.querySelector('.popup_type_edit').querySelector('.popup__form'),
   addFormElement: document.querySelector('.popup_type_add').querySelector('.popup__form'),
   editImageProfileFormElement: document.querySelector('.popup_type_profile-image').querySelector('.popup__form'),
-  profileNameElement: document.querySelector('.popup__input_field_name'),
-  profileJobElement: document.querySelector('.popup__input_field_about-me'),
-  profileImageElement: document.querySelector('.profile__image')
+  profileNameElement: document.querySelector('.profile__name'),
+  profileJobElement: document.querySelector('.profile__about-me'),
+  profileImageElement: document.querySelector('.profile__image'),
+  profileImagePopupElement: document.querySelector('.popup__input_image_link'),
+  profileNamePopupElement: document.querySelector('.popup__input_field_name'),
+  profileJobPopupElement: document.querySelector('.popup__input_field_about-me')
 };
 
 export const validationSettings = {
@@ -66,7 +70,7 @@ export const validationSettings = {
 };
 
 export const userConfig = {
-  url: 'https://around.nomoreparties.co/v1/group-12/users/me',
+  baseUrl: 'https://around.nomoreparties.co/v1/group-12',
   headers: {
     authorization: "d32f6df6-a478-44c7-98e2-39f20efb7fb4",
     "Content-Type": "application/json"

@@ -4,11 +4,10 @@
  * @param  {} cardSelector - Card id template.
  */
 class Card {
-  constructor({ data, handleCardClick, handleDeleteClick }, cardSelector) {
+  constructor({ data, handleCardClick }, cardSelector) {
     this._name = data.name
     this._link = data.link
     this._handleCardClick = handleCardClick;
-    this._handleDeleteClick = handleDeleteClick;
     this._cardSelector = cardSelector  // Template of our card
   }
 
@@ -18,8 +17,7 @@ class Card {
   _setEventListeners() {
     this._element.querySelector('.card__image').addEventListener('click', () => this._handleCardClick({ link: this._link, name: this._name }))
     this._element.querySelector('.card__like').addEventListener('click', (evt) => this._handleLikeIcon(evt))
-    // this._element.querySelector('.card__delete').addEventListener('click', () => this._handleDeleteCard())
-    this._element.querySelector('.card__delete').addEventListener('click', () => this._handleDeleteClick())
+    this._element.querySelector('.card__delete').addEventListener('click', () => this._handleDeleteCard())
   }
 
   /**

@@ -1,7 +1,8 @@
 class UserInfo {
-  constructor({ nameSelector, jobSelector }) {
+  constructor({ nameSelector, jobSelector, imageSelector }) {
     this._nameElement = document.querySelector(`.${nameSelector}`);
     this._jobElement = document.querySelector(`.${jobSelector}`);
+    this._imageElement = document.querySelector(`.${imageSelector}`);
   }
 
   getUserInfo() {
@@ -10,14 +11,16 @@ class UserInfo {
     // data in the open form.
     return {
       name: this._nameElement.textContent,
-      job: this._jobElement.textContent
+      job: this._jobElement.textContent,
+      image: this._imageElement.src
     };
   }
 
-  setUserInfo({ name, aboutMe }) {
+  setUserInfo({ name, aboutMe, link }) {
     // Takes new user data and adds it on the page.
     this._nameElement.textContent = name;
     this._jobElement.textContent = aboutMe;
+    this._imageElement.src = link;
   }
 }
 

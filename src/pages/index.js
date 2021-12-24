@@ -9,6 +9,9 @@ import { initialCards, selectors, elements, validationSettings, userConfig } fro
 import Api from "../components/Api.js"
 
 
+
+const api = new Api(userConfig);
+
 /**********************
  * INSTANCES CREATION *
  **********************/
@@ -24,13 +27,22 @@ const imagePreviewPopup = new PopupWithImage(selectors.previewPopup);
 
 const userInfo = new UserInfo({
   nameSelector: selectors.name,
-  jobSelector: selectors.job
+  jobSelector: selectors.job,
+  imageSelector: selectors.image
 })
 
 const userInfoPopup = new PopupWithForm({
   popupSelector: selectors.profilePopup,
   handleFormSubmit: (data) => {
-    userInfo.setUserInfo(data);
+    api.saveProfileInfo({ name: data.name, about: data.aboutMe }).then((res) => {
+      console.log(res)
+    })
+      .catch((err) => {
+        console.log(err);
+      })
+    updateProfileInfo();
+    // elements.profileNameElement.textContent = data.name;
+    // elements.profileJobElement.textContent = data.aboutMe;
   }
 });
 
@@ -48,6 +60,13 @@ const newCardPopup = new PopupWithForm({
 const editProfileImagePopup = new PopupWithForm({
   popupSelector: selectors.editImagePopup,
   handleFormSubmit: (data) => {
+    api.saveProfileImage({ avatar: data.link }).then((res) => {
+      console.log(res)
+    })
+      .catch((err) => {
+        console.log(err);
+      })
+    // updateProfileInfo();
     elements.profileImageElement.src = data.link;
   }
 });
@@ -74,8 +93,6 @@ const createCard = (data) => {
   const cardElement = new Card({
     data, handleCardClick: (imageData) => {
       imagePreviewPopup.open(imageData);
-    }, handleDeleteClick: () => {
-      deleteCardPopup.open();
     }
   }, selectors.cardTemplate)
   cardSection.addItem(cardElement.generateCard())
@@ -105,8 +122,8 @@ deleteCardPopup.setEventListeners();
 const editButton = document.querySelector(selectors.editButton);
 editButton.addEventListener('click', () => {
   const { name, job } = userInfo.getUserInfo();
-  elements.profileNameElement.value = name;
-  elements.profileJobElement.value = job;
+  elements.profileNamePopupElement.value = name;
+  elements.profileJobPopupElement.value = job;
   userInfoPopup.open();
 })
 
@@ -118,6 +135,8 @@ addModalBtn.addEventListener('click', () => {
 
 const profileImageButton = document.querySelector(selectors.profileImageButton);
 profileImageButton.addEventListener('click', () => {
+  const { image } = userInfo.getUserInfo();
+  elements.profileImagePopupElement.value = image;
   editProfileImagePopup.open();
   editImageProfileFormValidator.toggleButton();
 })
@@ -135,4 +154,21 @@ profileImageButton.addEventListener('click', () => {
  * API *
  *******/
 
+// api.getProfileInfo().then((data) => {
+//   const { name, about, avatar } = data;
+//   userInfo.setUserInfo({ name, aboutMe: about, link: avatar })
+// }).catch((err) => {
+//   console.log(err);
+// })
+
+const updateProfileInfo = () => {
+  api.getProfileInfo().then((data) => {
+    const { name, about, avatar } = data;
+    userInfo.setUserInfo({ name, aboutMe: about, link: avatar })
+  }).catch((err) => {
+    console.log(err);
+  })
+}
+
+updateProfileInfo();
 
