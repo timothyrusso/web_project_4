@@ -16,12 +16,21 @@ const api = new Api(userConfig);
  * INSTANCES CREATION *
  **********************/
 
+// const cardSection = new Section({
+//   items: initialCards,
+//   renderer: (data) => {
+//     createCard(data)
+//   }
+// }, selectors.cardList)
+
+
 const cardSection = new Section({
   items: initialCards,
   renderer: (data) => {
     createCard(data)
   }
 }, selectors.cardList)
+
 
 const imagePreviewPopup = new PopupWithImage(selectors.previewPopup);
 
@@ -48,7 +57,9 @@ const newCardPopup = new PopupWithForm({
       name: rawData.title,
       link: rawData.link
     };
-    createCard(data);
+    api.saveCards({ name: data.name, link: data.link }).then((res) => {
+      createCard(res);
+    })
   }
 });
 
@@ -144,18 +155,10 @@ profileImageButton.addEventListener('click', () => {
  * API *
  *******/
 
-// api.getProfileInfo().then((data) => {
-//   const { name, about, avatar } = data;
-//   userInfo.setUserInfo({ name, aboutMe: about, link: avatar })
-// }).catch((err) => {
-//   console.log(err);
-// })
-
 api.getProfileInfo().then((data) => {
   const { name, about, avatar } = data;
   userInfo.setUserInfo({ name, aboutMe: about, link: avatar })
 }).catch((err) => {
   console.log(err);
 })
-
 
