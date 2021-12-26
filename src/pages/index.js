@@ -24,7 +24,8 @@ api.getProfileInfo().then((data) => {
 })
 
 api.getCards().then((data) => {
-  cardSection.renderItems(data);
+  cardSection.items = data;
+  cardSection.renderItems();
 })
 
 
