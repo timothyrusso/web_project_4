@@ -15,18 +15,17 @@ import Api from "../components/Api.js"
 
 const api = new Api(userConfig);
 
-api.getProfileInfo().then((data) => {
-  const { name, about, avatar } = data;
-  userInfo.setUserInfo({ name, aboutMe: about })
-  userInfo.setUserAvatar({ link: avatar })
-}).catch((err) => {
-  console.log(err);
-})
-
-api.getCards().then((data) => {
-  cardSection.items = data;
-  cardSection.renderItems();
-})
+Promise.all([api.getCards(), api.getProfileInfo()])
+  .then(([cards, info]) => {
+    cardSection.items = cards;
+    cardSection.renderItems();
+    const { name, about, avatar } = info;
+    userInfo.setUserInfo({ name, aboutMe: about })
+    userInfo.setUserAvatar({ link: avatar })
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 
 
 /**********************
