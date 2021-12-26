@@ -13,17 +13,18 @@ import Api from "../components/Api.js"
  * API *
  *******/
 
- const api = new Api(userConfig);
+const api = new Api(userConfig);
 
- api.getProfileInfo().then((data) => {
+api.getProfileInfo().then((data) => {
   const { name, about, avatar } = data;
-  userInfo.setUserInfo({ name, aboutMe: about, link: avatar })
+  userInfo.setUserInfo({ name, aboutMe: about })
+  userInfo.setUserAvatar({ link: avatar })
 }).catch((err) => {
   console.log(err);
 })
 
-api.getCards().then((items) => {
-  cardSection.renderItems(items);
+api.getCards().then((data) => {
+  cardSection.renderItems(data);
 })
 
 
@@ -49,8 +50,7 @@ const userInfoPopup = new PopupWithForm({
   popupSelector: selectors.profilePopup,
   handleFormSubmit: (data) => {
     api.saveProfileInfo({ name: data.name, about: data.aboutMe }).then((res) => {
-      elements.profileNameElement.textContent = res.name;  // DA SISTEMARE
-      elements.profileJobElement.textContent = res.about;  // DA SISTEMARE
+      userInfo.setUserInfo({ name: res.name, aboutMe: res.about })
     })
   }
 });
@@ -72,7 +72,7 @@ const editProfileImagePopup = new PopupWithForm({
   popupSelector: selectors.editImagePopup,
   handleFormSubmit: (data) => {
     api.saveProfileImage({ avatar: data.link }).then((res) => {
-      elements.profileImageElement.src = res.avatar;  // DA SISTEMARE
+      userInfo.setUserAvatar({ link: res.avatar })
     })
   }
 });

@@ -16,10 +16,14 @@ class UserInfo {
     };
   }
 
-  setUserInfo({ name, aboutMe, link }) {
+  setUserInfo({ name, aboutMe }) {
     // Takes new user data and adds it on the page.
     this._nameElement.textContent = name;
     this._jobElement.textContent = aboutMe;
+  }
+
+  setUserAvatar({ link }) {
+    // Takes new user avatar and adds it on the page.
     this._imageElement.src = link;
   }
 }
