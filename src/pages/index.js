@@ -5,32 +5,37 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import { initialCards, selectors, elements, validationSettings, userConfig } from "../utils/constants.js";
+import { selectors, elements, validationSettings, userConfig, initialCards } from "../utils/constants.js";
 import Api from "../components/Api.js"
 
 
+/*******
+ * API *
+ *******/
 
-const api = new Api(userConfig);
+ const api = new Api(userConfig);
+
+ api.getProfileInfo().then((data) => {
+  const { name, about, avatar } = data;
+  userInfo.setUserInfo({ name, aboutMe: about, link: avatar })
+}).catch((err) => {
+  console.log(err);
+})
+
+api.getCards().then((items) => {
+  cardSection.renderItems(items);
+})
+
 
 /**********************
  * INSTANCES CREATION *
  **********************/
 
-// const cardSection = new Section({
-//   items: initialCards,
-//   renderer: (data) => {
-//     createCard(data)
-//   }
-// }, selectors.cardList)
-
-
 const cardSection = new Section({
-  items: initialCards,
   renderer: (data) => {
     createCard(data)
   }
 }, selectors.cardList)
-
 
 const imagePreviewPopup = new PopupWithImage(selectors.previewPopup);
 
@@ -44,8 +49,8 @@ const userInfoPopup = new PopupWithForm({
   popupSelector: selectors.profilePopup,
   handleFormSubmit: (data) => {
     api.saveProfileInfo({ name: data.name, about: data.aboutMe }).then((res) => {
-      elements.profileNameElement.textContent = res.name;
-      elements.profileJobElement.textContent = res.about;
+      elements.profileNameElement.textContent = res.name;  // DA SISTEMARE
+      elements.profileJobElement.textContent = res.about;  // DA SISTEMARE
     })
   }
 });
@@ -67,7 +72,7 @@ const editProfileImagePopup = new PopupWithForm({
   popupSelector: selectors.editImagePopup,
   handleFormSubmit: (data) => {
     api.saveProfileImage({ avatar: data.link }).then((res) => {
-      elements.profileImageElement.src = res.avatar;
+      elements.profileImageElement.src = res.avatar;  // DA SISTEMARE
     })
   }
 });
@@ -108,7 +113,6 @@ const createCard = (data) => {
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 editImageProfileFormValidator.enableValidation();
-cardSection.renderItems();
 imagePreviewPopup.setEventListeners();
 userInfoPopup.setEventListeners();
 newCardPopup.setEventListeners();
@@ -151,14 +155,8 @@ profileImageButton.addEventListener('click', () => {
 // })
 
 
-/*******
- * API *
- *******/
 
-api.getProfileInfo().then((data) => {
-  const { name, about, avatar } = data;
-  userInfo.setUserInfo({ name, aboutMe: about, link: avatar })
-}).catch((err) => {
-  console.log(err);
-})
+
+
+
 
