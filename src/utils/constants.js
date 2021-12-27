@@ -74,3 +74,5 @@ export const apiConfig = {
   token: 'd32f6df6-a478-44c7-98e2-39f20efb7fb4',
   groupId: 'group-12'
 }
+
+export const ownerId = 'cbc21d4eeb636c558502f8d0';

@@ -4,11 +4,14 @@
  * @param  {} cardSelector - Card id template.
  */
 class Card {
-  constructor({ data, handleCardClick }, cardSelector) {
-    this._name = data.name
-    this._link = data.link
+  constructor({ data, handleCardClick }, cardSelector, ownerId) {
+    this._name = data.name;
+    this._link = data.link;
+    this._userId = data.owner._id;
+    this._cardId = data._id;
+    this._ownerId = ownerId;
     this._handleCardClick = handleCardClick;
-    this._cardSelector = cardSelector  // Template of our card
+    this._cardSelector = cardSelector;
   }
 
   /**
@@ -18,6 +21,7 @@ class Card {
     this._element.querySelector('.card__image').addEventListener('click', () => this._handleCardClick({ link: this._link, name: this._name }))
     this._element.querySelector('.card__like').addEventListener('click', (evt) => this._handleLikeIcon(evt))
     this._element.querySelector('.card__delete').addEventListener('click', () => this._handleDeleteCard())
+    this._setDeleteButton()
   }
 
   /**
@@ -34,6 +38,12 @@ class Card {
   _handleDeleteCard() {
     this._element.remove()
     this._element = null
+  }
+
+  _setDeleteButton() {
+    if(this._userId !== this._ownerId) {
+      this._element.querySelector('.card__delete').style.display = 'none';
+    }
   }
 
   /**

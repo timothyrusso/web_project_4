@@ -5,7 +5,7 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import { selectors, elements, validationSettings, apiConfig } from "../utils/constants.js";
+import { selectors, elements, validationSettings, apiConfig, ownerId } from "../utils/constants.js";
 import Api from "../components/Api.js"
 
 
@@ -98,7 +98,7 @@ const createCard = (data) => {
     data, handleCardClick: (imageData) => {
       imagePreviewPopup.open(imageData);
     }
-  }, selectors.cardTemplate)
+  }, selectors.cardTemplate, ownerId)
   cardSection.addItem(cardElement.generateCard())
   return cardElement
 };
