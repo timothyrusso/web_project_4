@@ -4,13 +4,14 @@
  * @param  {} cardSelector - Card id template.
  */
 class Card {
-  constructor({ data, handleCardClick }, cardSelector, ownerId) {
+  constructor({ data, handleCardClick, handleDeleteCard }, cardSelector, ownerId) {
     this._name = data.name;
     this._link = data.link;
     this._userId = data.owner._id;
     this._cardId = data._id;
     this._ownerId = ownerId;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteCard = handleDeleteCard;
     this._cardSelector = cardSelector;
   }
 
@@ -20,7 +21,11 @@ class Card {
   _setEventListeners() {
     this._element.querySelector('.card__image').addEventListener('click', () => this._handleCardClick({ link: this._link, name: this._name }))
     this._element.querySelector('.card__like').addEventListener('click', (evt) => this._handleLikeIcon(evt))
-    this._element.querySelector('.card__delete').addEventListener('click', () => this._handleDeleteCard())
+    this._element.querySelector('.card__delete').addEventListener('click', () => {
+      this._element.remove()
+      this._element = null
+      this._handleDeleteCard(this)
+    })
     this._setDeleteButton()
   }
 
@@ -32,16 +37,8 @@ class Card {
     evt.target.classList.toggle('card__like_active')
   }
 
-  /**
-   * Handle the delete button.
-   */
-  _handleDeleteCard() {
-    this._element.remove()
-    this._element = null
-  }
-
   _setDeleteButton() {
-    if(this._userId !== this._ownerId) {
+    if (this._userId !== this._ownerId) {
       this._element.querySelector('.card__delete').style.display = 'none';
     }
   }

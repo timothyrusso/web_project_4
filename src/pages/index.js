@@ -7,6 +7,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import { selectors, elements, validationSettings, apiConfig, ownerId } from "../utils/constants.js";
 import Api from "../components/Api.js"
+import PopupWithConfirm from "../components/PopupWithConfirm";
 
 
 /*******
@@ -77,7 +78,7 @@ const editProfileImagePopup = new PopupWithForm({
   }
 });
 
-// const deleteCardPopup = new PopupWithForm({
+// const deleteCardPopup = new PopupWithConfirm({
 //   popupSelector: selectors.deleteCardPopup,
 //   handleFormSubmit: () => {
 //     handleDeleteCard();
@@ -97,6 +98,9 @@ const createCard = (data) => {
   const cardElement = new Card({
     data, handleCardClick: (imageData) => {
       imagePreviewPopup.open(imageData);
+    },
+    handleDeleteCard: (data) => {
+      api.deleteCards({ cardId: data._cardId })
     }
   }, selectors.cardTemplate, ownerId)
   cardSection.addItem(cardElement.generateCard())
@@ -143,9 +147,6 @@ profileImageButton.addEventListener('click', () => {
   editProfileImagePopup.open();
   editImageProfileFormValidator.toggleButton();
 })
-
-
-// ELIMINARE LE COSTANTI INUTILI
 
 // const deleteCardButton = document.querySelector(selectors.deleteCardButton);
 // deleteCardButton.addEventListener('click', () => {
