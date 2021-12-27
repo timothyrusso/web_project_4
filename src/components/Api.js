@@ -1,12 +1,16 @@
 class Api {
   constructor(config) {
     this.baseUrl = config.baseUrl;
-    this.headers = config.headers;
+    this.token = config.token;
+    this.groupId = config.groupId;
   }
 
   getProfileInfo() {
-    return fetch(`${this.baseUrl}/users/me`, {
-      headers: this.headers
+    return fetch(`${this.baseUrl}/${this.groupId}/users/me/`, {
+      headers: {
+        authorization: this.token,
+        "Content-Type": "application/json"
+      }
     })
       .then(res => {
         if (res.ok) {
@@ -22,9 +26,12 @@ class Api {
   }
 
   saveProfileInfo({ name, about }) {
-    return fetch(`${this.baseUrl}/users/me`, {
+    return fetch(`${this.baseUrl}/${this.groupId}/users/me`, {
       method: "PATCH",
-      headers: this.headers,
+      headers: {
+        authorization: this.token,
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         name: name,
         about: about
@@ -47,9 +54,12 @@ data saved correctly.`
   }
 
   saveProfileImage({ avatar }) {
-    return fetch(`${this.baseUrl}/users/me/avatar`, {
+    return fetch(`${this.baseUrl}/${this.groupId}/users/me/avatar`, {
       method: "PATCH",
-      headers: this.headers,
+      headers: {
+        authorization: this.token,
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         avatar: avatar
       })
@@ -71,8 +81,11 @@ image saved correctly.`
   }
 
   getCards() {
-    return fetch(`${this.baseUrl}/cards`, {
-      headers: this.headers
+    return fetch(`${this.baseUrl}/${this.groupId}/cards/`, {
+      headers: {
+        authorization: this.token,
+        "Content-Type": "application/json"
+      }
     })
       .then(res => {
         if (res.ok) {
@@ -88,9 +101,12 @@ image saved correctly.`
   }
 
   saveCards({ name, link }) {
-    return fetch(`${this.baseUrl}/cards`, {
+    return fetch(`${this.baseUrl}/${this.groupId}/cards`, {
       method: "POST",
-      headers: this.headers,
+      headers: {
+        authorization: this.token,
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         name: name,
         link: link
@@ -101,6 +117,54 @@ image saved correctly.`
           console.log(
             `Code status: ${res.status},
 card saved correctly.`
+          );
+          return res.json();
+        } else {
+          return Promise.reject(`Error: ${res.status}`);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  deleteCards({ cardId }) {
+    return fetch(`${this.baseUrl}/${this.groupId}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this.token,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => {
+        if (res.ok) {
+          console.log(
+            `Code status: ${res.status},
+card deleted correctly.`
+          );
+          return res.json();
+        } else {
+          return Promise.reject(`Error: ${res.status}`);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  likeCards({ cardId }) {
+    return fetch(`${this.baseUrl}/${this.groupId}/likes/${cardId}`, {
+      method: "PUT",
+      headers: {
+        authorization: this.token,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => {
+        if (res.ok) {
+          console.log(
+            `Code status: ${res.status},
+card liked correctly.`
           );
           return res.json();
         } else {

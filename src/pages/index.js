@@ -5,7 +5,7 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import { selectors, elements, validationSettings, userConfig, initialCards } from "../utils/constants.js";
+import { selectors, elements, validationSettings, apiConfig } from "../utils/constants.js";
 import Api from "../components/Api.js"
 
 
@@ -13,7 +13,7 @@ import Api from "../components/Api.js"
  * API *
  *******/
 
-const api = new Api(userConfig);
+const api = new Api(apiConfig);
 
 Promise.all([api.getCards(), api.getProfileInfo()])
   .then(([cards, info]) => {
