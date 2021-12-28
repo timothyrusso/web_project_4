@@ -1,0 +1,5 @@
+- Prendere l'userID dall' API
+- Elemento Like su html deve generarsi solo dopo il like dell'utente
+- Implementare logica separata per creare una card nella pagina e aggiungerla (append, prepend)
+- Sistemare grafica degli errori nei popups
+- Prevedere logica più elegante per inserire like e dislike

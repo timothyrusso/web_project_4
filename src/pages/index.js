@@ -103,10 +103,16 @@ const createCard = (data) => {
       });
       deleteCardPopup.open();
       deleteCardPopup.setEventListeners();
+    },
+    handleLikeIcon: (evt, data) => {
+      console.log(data)
+      console.log(data._likes.filter((item) => {
+        item._id !== ownerId
+      }))
+      evt.target.classList.toggle('card__like_active')
     }
   }, selectors.cardTemplate, ownerId)
   cardSection.addItem(cardElement.generateCard())
-  console.log(data.likes)
   return cardElement
 };
 

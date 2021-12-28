@@ -175,6 +175,30 @@ card liked correctly.`
         console.log(err);
       })
   }
+
+  dislikeCards({ cardId }) {
+    return fetch(`${this.baseUrl}/${this.groupId}/likes/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this.token,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => {
+        if (res.ok) {
+          console.log(
+            `Code status: ${res.status},
+card disliked correctly.`
+          );
+          return res.json();
+        } else {
+          return Promise.reject(`Error: ${res.status}`);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 }
 
 export default Api;
