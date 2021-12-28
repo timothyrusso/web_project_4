@@ -1,8 +1,9 @@
 class UserInfo {
-  constructor({ nameSelector, jobSelector, imageSelector }) {
+  constructor({ nameSelector, jobSelector, imageSelector, userId }) {
     this._nameElement = document.querySelector(`.${nameSelector}`);
     this._jobElement = document.querySelector(`.${jobSelector}`);
     this._imageElement = document.querySelector(`.${imageSelector}`);
+    this._userId = userId;
   }
 
   getUserInfo() {
@@ -12,14 +13,16 @@ class UserInfo {
     return {
       name: this._nameElement.textContent,
       job: this._jobElement.textContent,
-      image: this._imageElement.src
+      image: this._imageElement.src,
+      _id: this._userId
     };
   }
 
-  setUserInfo({ name, aboutMe }) {
+  setUserInfo({ name, aboutMe, _id }) {
     // Takes new user data and adds it on the page.
     this._nameElement.textContent = name;
     this._jobElement.textContent = aboutMe;
+    this._userId = _id;
   }
 
   setUserAvatar({ link }) {

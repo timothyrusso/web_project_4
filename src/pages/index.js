@@ -20,8 +20,8 @@ Promise.all([api.getCards(), api.getProfileInfo()])
   .then(([cards, info]) => {
     cardSection.items = cards;
     cardSection.renderItems();
-    const { name, about, avatar } = info;
-    userInfo.setUserInfo({ name, aboutMe: about })
+    const { name, about, avatar, _id } = info;
+    userInfo.setUserInfo({ name, aboutMe: about, _id })
     userInfo.setUserAvatar({ link: avatar })
   })
   .catch((err) => {
@@ -106,6 +106,7 @@ const createCard = (data) => {
     }
   }, selectors.cardTemplate, ownerId)
   cardSection.addItem(cardElement.generateCard())
+  console.log(data.likes)
   return cardElement
 };
 
@@ -148,5 +149,3 @@ profileImageButton.addEventListener('click', () => {
   editProfileImagePopup.open();
   editImageProfileFormValidator.toggleButton();
 })
-
-

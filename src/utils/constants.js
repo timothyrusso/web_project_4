@@ -74,4 +74,4 @@ export const apiConfig = {
   groupId: 'group-12'
 }
 
-export const ownerId = 'cbc21d4eeb636c558502f8d0';
+export const ownerId = 'cbc21d4eeb636c558502f8d0';  // DA SISTEMARE
