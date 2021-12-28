@@ -78,13 +78,6 @@ const editProfileImagePopup = new PopupWithForm({
   }
 });
 
-// const deleteCardPopup = new PopupWithConfirm({
-//   popupSelector: selectors.deleteCardPopup,
-//   handleFormSubmit: () => {
-//     handleDeleteCard();
-//   }
-// });
-
 const editFormValidator = new FormValidator(validationSettings, elements.editFormElement);
 const addFormValidator = new FormValidator(validationSettings, elements.addFormElement);
 const editImageProfileFormValidator = new FormValidator(validationSettings, elements.editImageProfileFormElement);
@@ -96,11 +89,20 @@ const editImageProfileFormValidator = new FormValidator(validationSettings, elem
 
 const createCard = (data) => {
   const cardElement = new Card({
-    data, handleCardClick: (imageData) => {
+    data,
+    handleCardClick: (imageData) => {
       imagePreviewPopup.open(imageData);
     },
     handleDeleteCard: (data) => {
-      api.deleteCards({ cardId: data._cardId })
+      const deleteCardPopup = new PopupWithConfirm({
+        popupSelector: selectors.deleteCardPopup,
+        handleFormSubmit: () => {
+          cardElement.removeCard()
+          api.deleteCards({ cardId: data._cardId })
+        }
+      });
+      deleteCardPopup.open();
+      deleteCardPopup.setEventListeners();
     }
   }, selectors.cardTemplate, ownerId)
   cardSection.addItem(cardElement.generateCard())
@@ -119,7 +121,6 @@ imagePreviewPopup.setEventListeners();
 userInfoPopup.setEventListeners();
 newCardPopup.setEventListeners();
 editProfileImagePopup.setEventListeners();
-// deleteCardPopup.setEventListeners();
 
 
 /************************
@@ -148,7 +149,4 @@ profileImageButton.addEventListener('click', () => {
   editImageProfileFormValidator.toggleButton();
 })
 
-// const deleteCardButton = document.querySelector(selectors.deleteCardButton);
-// deleteCardButton.addEventListener('click', () => {
-//   deleteCardPopup.open();
-// })
+

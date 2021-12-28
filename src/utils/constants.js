@@ -45,8 +45,7 @@ export const selectors = {
   image: 'profile__image',
   editButton: '.edit-button',
   addButton: '.add-button',
-  profileImageButton: '.profile__image-wrapper',
-  deleteCardButton: '.card__delete'
+  profileImageButton: '.profile__image-wrapper'
 };
 
 export const elements = {

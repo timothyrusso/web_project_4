@@ -21,11 +21,7 @@ class Card {
   _setEventListeners() {
     this._element.querySelector('.card__image').addEventListener('click', () => this._handleCardClick({ link: this._link, name: this._name }))
     this._element.querySelector('.card__like').addEventListener('click', (evt) => this._handleLikeIcon(evt))
-    this._element.querySelector('.card__delete').addEventListener('click', () => {
-      this._element.remove()
-      this._element = null
-      this._handleDeleteCard(this)
-    })
+    this._element.querySelector('.card__delete').addEventListener('click', () => this._handleDeleteCard(this))
     this._setDeleteButton()
   }
 
@@ -59,6 +55,11 @@ class Card {
     this._element.querySelector('.card__image').style.backgroundImage = `url(${this._link})`
     this._element.querySelector('.card__title').textContent = this._name
     return this._element
+  }
+
+  removeCard() {
+    this._element.remove()
+    this._element = null
   }
 }
 
