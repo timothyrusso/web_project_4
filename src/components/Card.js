@@ -46,6 +46,9 @@ class Card {
     if (this._likes.length > 0) {
       this._element.querySelector('.card__like-counter').textContent = this._likes.length;
     }
+    if (this._likes.filter(item => item._id === this._ownerId).length > 0) {
+      this._element.querySelector('.card__like').classList.add('card__like_active')
+    }
   }
 
   /**

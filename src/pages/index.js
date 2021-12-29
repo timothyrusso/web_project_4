@@ -92,8 +92,10 @@ const createCard = (data) => {
     data,
     handleCardClick: (imageData) => {
       imagePreviewPopup.open(imageData);
+      console.log(data)
     },
     handleDeleteCard: (data) => {
+      console.log()
       const deleteCardPopup = new PopupWithConfirm({
         popupSelector: selectors.deleteCardPopup,
         handleFormSubmit: () => {
@@ -105,10 +107,21 @@ const createCard = (data) => {
       deleteCardPopup.setEventListeners();
     },
     handleLikeIcon: (evt, data) => {
-      console.log(data)
-      console.log(data._likes.filter((item) => {
-        item._id !== ownerId
-      }))
+      if (data._likes.filter(item => item._id === ownerId).length > 0) {
+        api.dislikeCards({ cardId: data._cardId })
+          .then((res) => {
+            if (res.likes.length > 0) {
+              cardElement._element.querySelector('.card__like-counter').textContent = res.likes.length;
+            } else {
+              cardElement._element.querySelector('.card__like-counter').textContent = '';
+            }
+          })
+      } else {
+        api.likeCards({ cardId: data._cardId })
+          .then((res) => {
+            cardElement._element.querySelector('.card__like-counter').textContent = res.likes.length;
+          })
+      }
       evt.target.classList.toggle('card__like_active')
     }
   }, selectors.cardTemplate, ownerId)

@@ -153,7 +153,7 @@ card deleted correctly.`
   }
 
   likeCards({ cardId }) {
-    return fetch(`${this.baseUrl}/${this.groupId}/likes/${cardId}`, {
+    return fetch(`${this.baseUrl}/${this.groupId}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: {
         authorization: this.token,
@@ -177,7 +177,7 @@ card liked correctly.`
   }
 
   dislikeCards({ cardId }) {
-    return fetch(`${this.baseUrl}/${this.groupId}/likes/${cardId}`, {
+    return fetch(`${this.baseUrl}/${this.groupId}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: {
         authorization: this.token,
