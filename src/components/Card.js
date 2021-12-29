@@ -25,7 +25,7 @@ class Card {
     this._element.querySelector('.card__like').addEventListener('click', (evt) => this._handleLikeIcon(evt, this))
     this._element.querySelector('.card__delete').addEventListener('click', () => this._handleDeleteCard(this))
     this._setDeleteButton()
-    this._setLikes()
+    this._updateLikes()
   }
 
   /**
@@ -42,9 +42,11 @@ class Card {
     }
   }
 
-  _setLikes() {
+  _updateLikes() {
     if (this._likes.length > 0) {
       this._element.querySelector('.card__like-counter').textContent = this._likes.length;
+    } else {
+      this._element.querySelector('.card__like-counter').textContent = '';
     }
     if (this._likes.filter(item => item._id === this._ownerId).length > 0) {
       this._element.querySelector('.card__like').classList.add('card__like_active')
@@ -72,6 +74,11 @@ class Card {
   removeCard() {
     this._element.remove()
     this._element = null
+  }
+
+  setLikesInfo(data) {
+    this._likes = data.likes;
+    this._updateLikes();
   }
 }
 

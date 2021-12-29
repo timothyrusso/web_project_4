@@ -1,7 +1,8 @@
-- Prendere l'userID dall' API
-- Elemento Like su html deve generarsi solo dopo il like dell'utente
-- Prevedere logica più elegante per inserire like e dislike
-- Sistemare bug like button (non mostra correttamente il numero di like)
-- Implementare logica separata per creare una card nella pagina e aggiungerla (append, prepend)
-- Sistemare grafica degli errori nei popups
+1 Prendere l'userID dall' API
+2 Elemento Like su html deve generarsi solo dopo il like dell'utente
+3 Prevedere logica più elegante per inserire like e dislike
+4 Implementare logica separata per creare una card nella pagina e aggiungerla (append, prepend)
+5 Sistemare grafica degli errori nei popups
+6 Sistemare i commenti con jsDoc
+7 Eliminare codice superfluo
 

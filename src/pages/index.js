@@ -110,19 +110,12 @@ const createCard = (data) => {
       if (data._likes.filter(item => item._id === ownerId).length > 0) {
         api.dislikeCards({ cardId: data._cardId })
           .then((res) => {
-            if (res.likes.length > 0) {
-              cardElement._element.querySelector('.card__like-counter').textContent = res.likes.length;
-              cardElement._likes = res.likes;
-            } else {
-              cardElement._element.querySelector('.card__like-counter').textContent = '';
-              cardElement._likes = res.likes;
-            }
+            cardElement.setLikesInfo(res)
           })
       } else {
         api.likeCards({ cardId: data._cardId })
           .then((res) => {
-            cardElement._element.querySelector('.card__like-counter').textContent = res.likes.length;
-            cardElement._likes = res.likes;
+            cardElement.setLikesInfo(res)
           })
       }
       evt.target.classList.toggle('card__like_active')
