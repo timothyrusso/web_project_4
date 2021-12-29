@@ -112,14 +112,17 @@ const createCard = (data) => {
           .then((res) => {
             if (res.likes.length > 0) {
               cardElement._element.querySelector('.card__like-counter').textContent = res.likes.length;
+              cardElement._likes = res.likes;
             } else {
               cardElement._element.querySelector('.card__like-counter').textContent = '';
+              cardElement._likes = res.likes;
             }
           })
       } else {
         api.likeCards({ cardId: data._cardId })
           .then((res) => {
             cardElement._element.querySelector('.card__like-counter').textContent = res.likes.length;
+            cardElement._likes = res.likes;
           })
       }
       evt.target.classList.toggle('card__like_active')
