@@ -1,36 +1,36 @@
-import palouseFalls from "../images/palouse-falls.png";
-import ghostTown from "../images/ghost-town-of-bodie.png";
-import carForest from "../images/car-forest.png";
-import byodoTemple from "../images/byodo-in-temple.png";
-import fortJefferson from "../images/fort-jefferson.png";
-import garderGods from "../images/garden-of-the-gods.png";
+// import palouseFalls from "../images/palouse-falls.png";
+// import ghostTown from "../images/ghost-town-of-bodie.png";
+// import carForest from "../images/car-forest.png";
+// import byodoTemple from "../images/byodo-in-temple.png";
+// import fortJefferson from "../images/fort-jefferson.png";
+// import garderGods from "../images/garden-of-the-gods.png";
 
-export const initialCards = [
-  {
-    name: "Palouse Falls",
-    link: palouseFalls
-  },
-  {
-    name: "Ghost town of Bodie",
-    link: ghostTown
-  },
-  {
-    name: "Car Forest",
-    link: carForest
-  },
-  {
-    name: "Byodo-In Temple",
-    link: byodoTemple
-  },
-  {
-    name: "Fort Jefferson",
-    link: fortJefferson
-  },
-  {
-    name: "Garden of the Gods",
-    link: garderGods
-  }
-];
+// export const initialCards = [
+//   {
+//     name: "Palouse Falls",
+//     link: palouseFalls
+//   },
+//   {
+//     name: "Ghost town of Bodie",
+//     link: ghostTown
+//   },
+//   {
+//     name: "Car Forest",
+//     link: carForest
+//   },
+//   {
+//     name: "Byodo-In Temple",
+//     link: byodoTemple
+//   },
+//   {
+//     name: "Fort Jefferson",
+//     link: fortJefferson
+//   },
+//   {
+//     name: "Garden of the Gods",
+//     link: garderGods
+//   }
+// ];
 
 export const selectors = {
   cardList: '.cards-grid',

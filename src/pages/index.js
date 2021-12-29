@@ -7,7 +7,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import { selectors, elements, validationSettings, apiConfig, ownerId } from "../utils/constants.js";
 import Api from "../components/Api.js"
-import PopupWithConfirm from "../components/PopupWithConfirm";
+import PopupWithConfirmation from "../components/PopupWithConfirmation";
 
 
 /*******
@@ -103,7 +103,7 @@ const createCard = (data) => {
       imagePreviewPopup.open(imageData);
     },
     handleDeleteCard: (data) => {
-      const deleteCardPopup = new PopupWithConfirm({
+      const deleteCardPopup = new PopupWithConfirmation({
         popupSelector: selectors.deleteCardPopup,
         handleFormSubmit: () => {
           cardElement.removeCard()
