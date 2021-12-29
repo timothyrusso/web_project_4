@@ -3,6 +3,7 @@
 3 Prevedere logica più elegante per inserire like e dislike
 4 Implementare logica separata per creare una card nella pagina e aggiungerla (append, prepend)
 5 Sistemare grafica degli errori nei popups
-6 Sistemare i commenti con jsDoc
-7 Eliminare codice superfluo
+6 La logica che gestisce il testo di caricamento nei popop è migliorabile?
+7 Sistemare i commenti con jsDoc
+8 Eliminare codice superfluo
 

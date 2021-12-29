@@ -53,6 +53,9 @@ const userInfoPopup = new PopupWithForm({
     api.saveProfileInfo({ name: data.name, about: data.aboutMe }).then((res) => {
       userInfo.setUserInfo({ name: res.name, aboutMe: res.about })
     })
+      .then(() => {
+        userInfoPopup.close();
+      })
   }
 });
 
@@ -66,6 +69,9 @@ const newCardPopup = new PopupWithForm({
     api.saveCards({ name: data.name, link: data.link }).then((res) => {
       createCard(res);
     })
+      .then(() => {
+        newCardPopup.close();
+      })
   }
 });
 
@@ -75,6 +81,9 @@ const editProfileImagePopup = new PopupWithForm({
     api.saveProfileImage({ avatar: data.link }).then((res) => {
       userInfo.setUserAvatar({ link: res.avatar })
     })
+      .then(() => {
+        editProfileImagePopup.close();
+      })
   }
 });
 
@@ -92,15 +101,17 @@ const createCard = (data) => {
     data,
     handleCardClick: (imageData) => {
       imagePreviewPopup.open(imageData);
-      console.log(data)
     },
     handleDeleteCard: (data) => {
-      console.log()
       const deleteCardPopup = new PopupWithConfirm({
         popupSelector: selectors.deleteCardPopup,
         handleFormSubmit: () => {
           cardElement.removeCard()
           api.deleteCards({ cardId: data._cardId })
+            .finally(() => {
+              deleteCardPopup.renderLoading(false);
+            })
+          deleteCardPopup.close();
         }
       });
       deleteCardPopup.open();
@@ -148,11 +159,13 @@ editButton.addEventListener('click', () => {
   const { name, job } = userInfo.getUserInfo();
   elements.profileNamePopupElement.value = name;
   elements.profileJobPopupElement.value = job;
+  userInfoPopup.renderLoading(false);
   userInfoPopup.open();
 })
 
 const addModalBtn = document.querySelector(selectors.addButton);
 addModalBtn.addEventListener('click', () => {
+  newCardPopup.renderLoading(false);
   newCardPopup.open();
   addFormValidator.toggleButton();
 })
@@ -161,6 +174,7 @@ const profileImageButton = document.querySelector(selectors.profileImageButton);
 profileImageButton.addEventListener('click', () => {
   const { image } = userInfo.getUserInfo();
   elements.profileImagePopupElement.value = image;
+  editProfileImagePopup.renderLoading(false);
   editProfileImagePopup.open();
   editImageProfileFormValidator.toggleButton();
 })
