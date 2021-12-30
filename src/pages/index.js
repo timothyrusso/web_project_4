@@ -5,7 +5,7 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import { selectors, elements, validationSettings, apiConfig, ownerId } from "../utils/constants.js";
+import { selectors, elements, validationSettings, apiConfig } from "../utils/constants.js";
 import Api from "../components/Api.js"
 import PopupWithConfirmation from "../components/PopupWithConfirmation";
 
@@ -43,8 +43,6 @@ const userInfoPopup = new PopupWithForm({
 const newCardPopup = new PopupWithForm({
   popupSelector: selectors.cardPopup,
   handleFormSubmit: (rawData) => {
-    // const test = userInfo._userId
-    // console.log(test)
     const data = {
       name: rawData.title,
       link: rawData.link
@@ -99,7 +97,6 @@ const createCard = (data, type) => {
       deleteCardPopup.setEventListeners();
     },
     handleLikeIcon: (evt, data) => {
-      console.log(data._likes)
       if (data._likes.some(item => item._id === userInfo._userId)) {
         api.dislikeCards({ cardId: data._cardId })
           .then((res) => {

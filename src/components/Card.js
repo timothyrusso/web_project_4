@@ -28,14 +28,6 @@ class Card {
     this._updateLikes()
   }
 
-  /**
-   * Handle the like button.
-   * @param  {} evt
-   */
-  // _handleLikeIcon(evt) {
-  //   evt.target.classList.toggle('card__like_active')
-  // }
-
   _setDeleteButton() {
     if (this._userId !== this._ownerId) {
       this._element.querySelector('.card__delete').style.display = 'none';
@@ -43,11 +35,7 @@ class Card {
   }
 
   _updateLikes() {
-    if (this._likes.length > 0) {
-      this._element.querySelector('.card__like-counter').textContent = this._likes.length;
-    } else {
-      this._element.querySelector('.card__like-counter').textContent = '';
-    }
+    this._element.querySelector('.card__like-counter').textContent = this._likes.length;
     if (this._likes.filter(item => item._id === this._ownerId).length > 0) {
       this._element.querySelector('.card__like').classList.add('card__like_active')
     }

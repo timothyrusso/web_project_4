@@ -1,37 +1,3 @@
-// import palouseFalls from "../images/palouse-falls.png";
-// import ghostTown from "../images/ghost-town-of-bodie.png";
-// import carForest from "../images/car-forest.png";
-// import byodoTemple from "../images/byodo-in-temple.png";
-// import fortJefferson from "../images/fort-jefferson.png";
-// import garderGods from "../images/garden-of-the-gods.png";
-
-// export const initialCards = [
-//   {
-//     name: "Palouse Falls",
-//     link: palouseFalls
-//   },
-//   {
-//     name: "Ghost town of Bodie",
-//     link: ghostTown
-//   },
-//   {
-//     name: "Car Forest",
-//     link: carForest
-//   },
-//   {
-//     name: "Byodo-In Temple",
-//     link: byodoTemple
-//   },
-//   {
-//     name: "Fort Jefferson",
-//     link: fortJefferson
-//   },
-//   {
-//     name: "Garden of the Gods",
-//     link: garderGods
-//   }
-// ];
-
 export const selectors = {
   cardList: '.cards-grid',
   cardTemplate: '#card-template',
@@ -73,5 +39,3 @@ export const apiConfig = {
   token: 'd32f6df6-a478-44c7-98e2-39f20efb7fb4',
   groupId: 'group-12'
 }
-
-export const ownerId = 'cbc21d4eeb636c558502f8d0';  // DA SISTEMARE
