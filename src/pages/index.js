@@ -9,7 +9,6 @@ import { selectors, elements, validationSettings, apiConfig, ownerId } from "../
 import Api from "../components/Api.js"
 import PopupWithConfirmation from "../components/PopupWithConfirmation";
 
-let userId = null
 
 /*******
  * API *
