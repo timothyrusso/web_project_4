@@ -9,6 +9,7 @@ import { selectors, elements, validationSettings, apiConfig, ownerId } from "../
 import Api from "../components/Api.js"
 import PopupWithConfirmation from "../components/PopupWithConfirmation";
 
+let userId = null
 
 /*******
  * API *
@@ -21,8 +22,10 @@ Promise.all([api.getCards(), api.getProfileInfo()])
     cardSection.items = cards;
     cardSection.renderItems();
     const { name, about, avatar, _id } = info;
-    userInfo.setUserInfo({ name, aboutMe: about, _id })
-    userInfo.setUserAvatar({ link: avatar })
+    userInfo.setUserInfo({ name, aboutMe: about, _id });
+    userInfo.setUserAvatar({ link: avatar });
+    // userInfo.getUserInfo();
+    console.log(userInfo)
   })
   .catch((err) => {
     console.log(err);
@@ -62,12 +65,16 @@ const userInfoPopup = new PopupWithForm({
 const newCardPopup = new PopupWithForm({
   popupSelector: selectors.cardPopup,
   handleFormSubmit: (rawData) => {
+    // const test = userInfo._userId
+    // console.log(test)
     const data = {
       name: rawData.title,
       link: rawData.link
     };
     api.saveCards({ name: data.name, link: data.link }).then((res) => {
-      createCard(res);
+      const test = userInfo._userId
+      console.log(test)
+      createCard(res, test);
     })
       .then(() => {
         newCardPopup.close();
@@ -96,7 +103,7 @@ const editImageProfileFormValidator = new FormValidator(validationSettings, elem
  * CREATE CARD FUNCTION *
  ************************/
 
-const createCard = (data) => {
+const createCard = (data, test) => {
   const cardElement = new Card({
     data,
     handleCardClick: (imageData) => {
@@ -131,7 +138,7 @@ const createCard = (data) => {
       }
       evt.target.classList.toggle('card__like_active')
     }
-  }, selectors.cardTemplate, ownerId)
+  }, selectors.cardTemplate, test)
   cardSection.addItem(cardElement.generateCard())
   return cardElement
 };
