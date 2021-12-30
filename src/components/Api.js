@@ -20,9 +20,6 @@ class Api {
           return Promise.reject(`Error: ${res.status}`);
         }
       })
-      .catch((err) => {
-        console.log(err);
-      })
   }
 
   saveProfileInfo({ name, about }) {
@@ -48,9 +45,6 @@ data saved correctly.`
           return Promise.reject(`Error: ${res.status}`);
         }
       })
-      .catch((err) => {
-        console.log(err);
-      })
   }
 
   saveProfileImage({ avatar }) {
@@ -75,9 +69,6 @@ image saved correctly.`
           return Promise.reject(`Error: ${res.status}`);
         }
       })
-      .catch((err) => {
-        console.log(err);
-      })
   }
 
   getCards() {
@@ -94,9 +85,6 @@ image saved correctly.`
         } else {
           return Promise.reject(`Error: ${res.status}`);
         }
-      })
-      .catch((err) => {
-        console.log(err);
       })
   }
 
@@ -123,9 +111,6 @@ card saved correctly.`
           return Promise.reject(`Error: ${res.status}`);
         }
       })
-      .catch((err) => {
-        console.log(err);
-      })
   }
 
   deleteCards({ cardId }) {
@@ -146,9 +131,6 @@ card deleted correctly.`
         } else {
           return Promise.reject(`Error: ${res.status}`);
         }
-      })
-      .catch((err) => {
-        console.log(err);
       })
   }
 
@@ -171,9 +153,6 @@ card liked correctly.`
           return Promise.reject(`Error: ${res.status}`);
         }
       })
-      .catch((err) => {
-        console.log(err);
-      })
   }
 
   dislikeCards({ cardId }) {
@@ -194,9 +173,6 @@ card disliked correctly.`
         } else {
           return Promise.reject(`Error: ${res.status}`);
         }
-      })
-      .catch((err) => {
-        console.log(err);
       })
   }
 }

@@ -31,11 +31,15 @@ const userInfo = new UserInfo({
 const userInfoPopup = new PopupWithForm({
   popupSelector: selectors.profilePopup,
   handleFormSubmit: (data) => {
-    api.saveProfileInfo({ name: data.name, about: data.aboutMe }).then((res) => {
-      userInfo.setUserInfo({ name: res.name, aboutMe: res.about })
-    })
+    api.saveProfileInfo({ name: data.name, about: data.aboutMe })
+      .then((res) => {
+        userInfo.setUserInfo({ name: res.name, aboutMe: res.about })
+      })
       .then(() => {
         userInfoPopup.close();
+      })
+      .catch((err) => {
+        console.log(err);
       })
   }
 });
@@ -47,21 +51,27 @@ const newCardPopup = new PopupWithForm({
       name: rawData.title,
       link: rawData.link
     };
-    api.saveCards({ name: data.name, link: data.link }).then((res) => {
-      createCard(res, 'new');
-      newCardPopup.close();
-    })
+    api.saveCards({ name: data.name, link: data.link })
+      .then((res) => {
+        createCard(res, 'newCard');
+        newCardPopup.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 });
 
 const editProfileImagePopup = new PopupWithForm({
   popupSelector: selectors.editImagePopup,
   handleFormSubmit: (data) => {
-    api.saveProfileImage({ avatar: data.link }).then((res) => {
-      userInfo.setUserAvatar({ link: res.avatar })
-    })
-      .then(() => {
+    api.saveProfileImage({ avatar: data.link })
+      .then((res) => {
+        userInfo.setUserAvatar({ link: res.avatar })
         editProfileImagePopup.close();
+      })
+      .catch((err) => {
+        console.log(err);
       })
   }
 });
@@ -87,6 +97,9 @@ const createCard = (data, type) => {
         handleFormSubmit: () => {
           cardElement.removeCard()
           api.deleteCards({ cardId: data._cardId })
+            .catch((err) => {
+              console.log(err);
+            })
             .finally(() => {
               deleteCardPopup.renderLoading(false);
             })
@@ -99,19 +112,25 @@ const createCard = (data, type) => {
     handleLikeIcon: (evt, data) => {
       if (data._likes.some(item => item._id === userInfo._userId)) {
         api.dislikeCards({ cardId: data._cardId })
-          .then((res) => {
-            cardElement.setLikesInfo(res)
+          .then((likes) => {
+            cardElement.setLikesInfo(likes)
+          })
+          .catch((err) => {
+            console.log(err);
           })
       } else {
         api.likeCards({ cardId: data._cardId })
-          .then((res) => {
-            cardElement.setLikesInfo(res)
+          .then((likes) => {
+            cardElement.setLikesInfo(likes)
+          })
+          .catch((err) => {
+            console.log(err);
           })
       }
       evt.target.classList.toggle('card__like_active')
     }
   }, selectors.cardTemplate, userInfo._userId)
-  if(type === 'new') {
+  if (type === 'newCard') {
     cardSection.prependItem(cardElement.generateCard())
   } else {
     cardSection.appendItem(cardElement.generateCard())
@@ -169,16 +188,16 @@ profileImageButton.addEventListener('click', () => {
  * API *
  *******/
 
- const api = new Api(apiConfig);
+const api = new Api(apiConfig);
 
- Promise.all([api.getCards(), api.getProfileInfo()])
-   .then(([cards, info]) => {
-     const { name, about, avatar, _id } = info;
-     userInfo.setUserInfo({ name, aboutMe: about, _id });
-     userInfo.setUserAvatar({ link: avatar });
-     cardSection.items = cards;
-     cardSection.renderItems();
-   })
-   .catch((err) => {
-     console.log(err);
-   })
+Promise.all([api.getCards(), api.getProfileInfo()])
+  .then(([cards, info]) => {
+    const { name, about, avatar, _id } = info;
+    userInfo.setUserInfo({ name, aboutMe: about, _id });
+    userInfo.setUserAvatar({ link: avatar });
+    cardSection.items = cards;
+    cardSection.renderItems();
+  })
+  .catch((err) => {
+    console.log(err);
+  })
