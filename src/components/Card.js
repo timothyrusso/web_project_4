@@ -11,7 +11,6 @@ class Card {
     this._cardId = data._id;
     this._likes = data.likes;
     this._ownerId = ownerId;
-    console.log(this._ownerId)
     this._handleCardClick = handleCardClick;
     this._handleDeleteCard = handleDeleteCard;
     this._handleLikeIcon = handleLikeIcon;

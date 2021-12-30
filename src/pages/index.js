@@ -24,8 +24,6 @@ Promise.all([api.getCards(), api.getProfileInfo()])
     const { name, about, avatar, _id } = info;
     userInfo.setUserInfo({ name, aboutMe: about, _id });
     userInfo.setUserAvatar({ link: avatar });
-    // userInfo.getUserInfo();
-    console.log(userInfo)
   })
   .catch((err) => {
     console.log(err);
@@ -72,9 +70,7 @@ const newCardPopup = new PopupWithForm({
       link: rawData.link
     };
     api.saveCards({ name: data.name, link: data.link }).then((res) => {
-      const test = userInfo._userId
-      console.log(test)
-      createCard(res, test);
+      createCard(res);
     })
       .then(() => {
         newCardPopup.close();
@@ -103,7 +99,7 @@ const editImageProfileFormValidator = new FormValidator(validationSettings, elem
  * CREATE CARD FUNCTION *
  ************************/
 
-const createCard = (data, test) => {
+const createCard = (data) => {
   const cardElement = new Card({
     data,
     handleCardClick: (imageData) => {
@@ -138,7 +134,7 @@ const createCard = (data, test) => {
       }
       evt.target.classList.toggle('card__like_active')
     }
-  }, selectors.cardTemplate, test)
+  }, selectors.cardTemplate, userInfo._userId)
   cardSection.addItem(cardElement.generateCard())
   return cardElement
 };
