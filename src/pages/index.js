@@ -10,25 +10,6 @@ import Api from "../components/Api.js"
 import PopupWithConfirmation from "../components/PopupWithConfirmation";
 
 
-/*******
- * API *
- *******/
-
-const api = new Api(apiConfig);
-
-Promise.all([api.getCards(), api.getProfileInfo()])
-  .then(([cards, info]) => {
-    cardSection.items = cards;
-    cardSection.renderItems();
-    const { name, about, avatar, _id } = info;
-    userInfo.setUserInfo({ name, aboutMe: about, _id });
-    userInfo.setUserAvatar({ link: avatar });
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-
-
 /**********************
  * INSTANCES CREATION *
  **********************/
@@ -69,11 +50,9 @@ const newCardPopup = new PopupWithForm({
       link: rawData.link
     };
     api.saveCards({ name: data.name, link: data.link }).then((res) => {
-      createCard(res);
+      createCard(res, 'new');
+      newCardPopup.close();
     })
-      .then(() => {
-        newCardPopup.close();
-      })
   }
 });
 
@@ -98,7 +77,7 @@ const editImageProfileFormValidator = new FormValidator(validationSettings, elem
  * CREATE CARD FUNCTION *
  ************************/
 
-const createCard = (data) => {
+const createCard = (data, type) => {
   const cardElement = new Card({
     data,
     handleCardClick: (imageData) => {
@@ -120,7 +99,8 @@ const createCard = (data) => {
       deleteCardPopup.setEventListeners();
     },
     handleLikeIcon: (evt, data) => {
-      if (data._likes.filter(item => item._id === ownerId).length > 0) {
+      console.log(data._likes)
+      if (data._likes.some(item => item._id === userInfo._userId)) {
         api.dislikeCards({ cardId: data._cardId })
           .then((res) => {
             cardElement.setLikesInfo(res)
@@ -134,7 +114,11 @@ const createCard = (data) => {
       evt.target.classList.toggle('card__like_active')
     }
   }, selectors.cardTemplate, userInfo._userId)
-  cardSection.addItem(cardElement.generateCard())
+  if(type === 'new') {
+    cardSection.prependItem(cardElement.generateCard())
+  } else {
+    cardSection.appendItem(cardElement.generateCard())
+  }
   return cardElement
 };
 
@@ -162,6 +146,7 @@ editButton.addEventListener('click', () => {
   elements.profileNamePopupElement.value = name;
   elements.profileJobPopupElement.value = job;
   userInfoPopup.renderLoading(false);
+  editFormValidator.validateOnOpen();
   userInfoPopup.open();
 })
 
@@ -177,6 +162,26 @@ profileImageButton.addEventListener('click', () => {
   const { image } = userInfo.getUserInfo();
   elements.profileImagePopupElement.value = image;
   editProfileImagePopup.renderLoading(false);
+  editImageProfileFormValidator.validateOnOpen();
   editProfileImagePopup.open();
   editImageProfileFormValidator.toggleButton();
 })
+
+
+/*******
+ * API *
+ *******/
+
+ const api = new Api(apiConfig);
+
+ Promise.all([api.getCards(), api.getProfileInfo()])
+   .then(([cards, info]) => {
+     const { name, about, avatar, _id } = info;
+     userInfo.setUserInfo({ name, aboutMe: about, _id });
+     userInfo.setUserAvatar({ link: avatar });
+     cardSection.items = cards;
+     cardSection.renderItems();
+   })
+   .catch((err) => {
+     console.log(err);
+   })
