@@ -32,10 +32,9 @@ const userInfoPopup = new PopupWithForm({
   popupSelector: selectors.profilePopup,
   handleFormSubmit: (data) => {
     api.saveProfileInfo({ name: data.name, about: data.aboutMe })
-      .then((res) => {
-        userInfo.setUserInfo({ name: res.name, aboutMe: res.about })
-      })
-      .then(() => {
+      .then((user) => {
+        console.log(user)
+        userInfo.setUserInfo({ name: user.name, aboutMe: user.about })
         userInfoPopup.close();
       })
       .catch((err) => {
@@ -52,8 +51,8 @@ const newCardPopup = new PopupWithForm({
       link: rawData.link
     };
     api.saveCards({ name: data.name, link: data.link })
-      .then((res) => {
-        createCard(res, 'newCard');
+      .then((card) => {
+        createCard(card, 'newCard');
         newCardPopup.close();
       })
       .catch((err) => {
@@ -66,8 +65,8 @@ const editProfileImagePopup = new PopupWithForm({
   popupSelector: selectors.editImagePopup,
   handleFormSubmit: (data) => {
     api.saveProfileImage({ avatar: data.link })
-      .then((res) => {
-        userInfo.setUserAvatar({ link: res.avatar })
+      .then((user) => {
+        userInfo.setUserAvatar({ link: user.avatar })
         editProfileImagePopup.close();
       })
       .catch((err) => {
