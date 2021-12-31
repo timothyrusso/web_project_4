@@ -33,7 +33,6 @@ const userInfoPopup = new PopupWithForm({
   handleFormSubmit: (data) => {
     api.saveProfileInfo({ name: data.name, about: data.aboutMe })
       .then((user) => {
-        console.log(user)
         userInfo.setUserInfo({ name: user.name, aboutMe: user.about })
         userInfoPopup.close();
       })
@@ -50,7 +49,7 @@ const newCardPopup = new PopupWithForm({
       name: rawData.title,
       link: rawData.link
     };
-    api.saveCards({ name: data.name, link: data.link })
+    api.saveCards({ name: data.name, imageLink: data.link })
       .then((card) => {
         createCard(card, 'newCard');
         newCardPopup.close();

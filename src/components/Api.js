@@ -114,10 +114,10 @@ image saved correctly.`
   /**
    * Function that save the new card on the API
    * @param {String} name - Name of the new card
-   * @param {String} link - Image link of the new card
+   * @param {String} imageLink - Image link of the new card
    * @returns {Object} Promise object containing all the information of the new card
    */
-  saveCards({ name, link }) {
+  saveCards({ name, imageLink }) {
     return fetch(`${this.baseUrl}/${this.groupId}/cards`, {
       method: "POST",
       headers: {
@@ -126,7 +126,7 @@ image saved correctly.`
       },
       body: JSON.stringify({
         name: name,
-        link: link
+        link: imageLink
       })
     })
       .then(res => {
