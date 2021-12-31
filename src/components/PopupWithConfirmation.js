@@ -7,6 +7,10 @@ class PopupWithConfirmation extends Popup {
     this._handleFormSubmit = handleFormSubmit;
   }
 
+  setSubmitAction(action) {
+    this._handleFormSubmit = action;
+  }
+
   renderLoading(isLoading) {
     if (isLoading) {
       this._popupForm.querySelector('.submit-button').textContent = 'Deleting...';
@@ -21,12 +25,8 @@ class PopupWithConfirmation extends Popup {
       event.preventDefault();
       this.renderLoading(true);
       this._handleFormSubmit();
-      this.close();
+      // this.close();
     })
-  }
-
-  close() {
-    super.close();
   }
 }
 

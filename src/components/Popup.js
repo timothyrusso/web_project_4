@@ -5,7 +5,6 @@ class Popup {
   }
 
   _handleEscUp(evt) {
-    // Prevent default and if event was on ESC button -> call "close" method
     if (evt.key == 'Escape') {
       this.close()
     }

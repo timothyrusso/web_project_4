@@ -76,6 +76,10 @@ const editProfileImagePopup = new PopupWithForm({
   }
 });
 
+const deleteCardPopup = new PopupWithConfirmation({
+  popupSelector: selectors.deleteCardPopup
+});
+
 const editFormValidator = new FormValidator(validationSettings, elements.editFormElement);
 const addFormValidator = new FormValidator(validationSettings, elements.addFormElement);
 const editImageProfileFormValidator = new FormValidator(validationSettings, elements.editImageProfileFormElement);
@@ -91,23 +95,21 @@ const createCard = (data, type) => {
     handleCardClick: (imageData) => {
       imagePreviewPopup.open(imageData);
     },
-    handleDeleteCard: (data) => {
-      const deleteCardPopup = new PopupWithConfirmation({
-        popupSelector: selectors.deleteCardPopup,
-        handleFormSubmit: () => {
-          cardElement.removeCard()
-          api.deleteCards({ cardId: data._cardId })
-            .catch((err) => {
-              console.log(err);
-            })
-            .finally(() => {
-              deleteCardPopup.renderLoading(false);
-            })
-          deleteCardPopup.close();
-        }
-      });
+    handleDeleteCard: ({ _cardId }) => {
       deleteCardPopup.open();
-      deleteCardPopup.setEventListeners();
+      deleteCardPopup.setSubmitAction(() => {
+        api.deleteCards({ cardId: _cardId })
+          .then(() => {
+            cardElement.removeCard();
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => {
+            deleteCardPopup.renderLoading(false);
+            deleteCardPopup.close();
+          })
+      })
     },
     handleLikeIcon: (evt, data) => {
       if (data._likes.some(item => item._id === userInfo._userId)) {
@@ -150,6 +152,7 @@ imagePreviewPopup.setEventListeners();
 userInfoPopup.setEventListeners();
 newCardPopup.setEventListeners();
 editProfileImagePopup.setEventListeners();
+deleteCardPopup.setEventListeners();
 
 
 /************************

@@ -1,3 +1,0 @@
-2 Sistemare bug quando si elimina una card
-9 Sistemare i commenti con jsDoc
-
