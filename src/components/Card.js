@@ -26,7 +26,7 @@ class Card {
    */
   _setEventListeners() {
     this._element.querySelector('.card__image').addEventListener('click', () => this._handleCardClick({ link: this._link, name: this._name }))
-    this._element.querySelector('.card__like').addEventListener('click', (evt) => this._handleLikeIcon(evt, this))
+    this._element.querySelector('.card__like').addEventListener('click', () => this._handleLikeIcon(this))
     this._element.querySelector('.card__delete').addEventListener('click', () => this._handleDeleteCard(this))
   }
 
@@ -84,6 +84,7 @@ class Card {
    * @param {Object} data - Object containing the array with the likes object
    */
   setLikesInfo(data) {
+    this._element.querySelector('.card__like').classList.toggle('card__like_active');
     this._likes = data.likes;
     this._updateLikes();
   }

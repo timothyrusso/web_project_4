@@ -39,6 +39,9 @@ const userInfoPopup = new PopupWithForm({
       .catch((err) => {
         console.log(err);
       })
+      .finally(() => {
+        userInfoPopup.renderLoading(false);
+      })
   }
 });
 
@@ -57,6 +60,9 @@ const newCardPopup = new PopupWithForm({
       .catch((err) => {
         console.log(err);
       })
+      .finally(() => {
+        newCardPopup.renderLoading(false);
+      })
   }
 });
 
@@ -70,6 +76,9 @@ const editProfileImagePopup = new PopupWithForm({
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        editProfileImagePopup.renderLoading(false);
       })
   }
 });
@@ -99,17 +108,17 @@ const createCard = (data, type) => {
         api.deleteCards({ cardId: _cardId })
           .then(() => {
             cardElement.removeCard();
+            deleteCardPopup.close();
           })
           .catch((err) => {
             console.log(err);
           })
           .finally(() => {
             deleteCardPopup.renderLoading(false);
-            deleteCardPopup.close();
           })
       })
     },
-    handleLikeIcon: (evt, data) => {
+    handleLikeIcon: (data) => {
       if (data._likes.some(item => item._id === userInfo._userId)) {
         api.dislikeCards({ cardId: data._cardId })
           .then((likes) => {
@@ -127,7 +136,6 @@ const createCard = (data, type) => {
             console.log(err);
           })
       }
-      evt.target.classList.toggle('card__like_active')
     }
   }, selectors.cardTemplate, userInfo._userId)
   if (type === 'newCard') {
@@ -162,14 +170,12 @@ editButton.addEventListener('click', () => {
   const { name, job } = userInfo.getUserInfo();
   elements.profileNamePopupElement.value = name;
   elements.profileJobPopupElement.value = job;
-  userInfoPopup.renderLoading(false);
   editFormValidator.validateOnOpen();
   userInfoPopup.open();
 })
 
 const addModalBtn = document.querySelector(selectors.addButton);
 addModalBtn.addEventListener('click', () => {
-  newCardPopup.renderLoading(false);
   newCardPopup.open();
   addFormValidator.toggleButton();
 })
@@ -178,7 +184,6 @@ const profileImageButton = document.querySelector(selectors.profileImageButton);
 profileImageButton.addEventListener('click', () => {
   const { image } = userInfo.getUserInfo();
   elements.profileImagePopupElement.value = image;
-  editProfileImagePopup.renderLoading(false);
   editImageProfileFormValidator.validateOnOpen();
   editProfileImagePopup.open();
   editImageProfileFormValidator.toggleButton();

@@ -4,9 +4,26 @@
  */
 class Api {
   constructor(config) {
-    this.baseUrl = config.baseUrl;
-    this.token = config.token;
-    this.groupId = config.groupId;
+    this._baseUrl = config.baseUrl;
+    this._groupId = config.groupId;
+    this._header = config.header;
+  }
+
+  /**
+   * Private method that handle the status of the response and show a status message on the console
+   * @param {Object} res - Object response
+   * @returns {Object} Returns a promise that resolves with the result of parsing the response body text as JSON
+   */
+  _checkResponse(res) {
+    if (res.ok) {
+      console.log(
+        `URL: ${res.url}
+Status: ${res.statusText}
+Status code: ${res.status}`);
+      return res.json();
+    } else {
+      return Promise.reject(`Error: ${res.status}`);
+    }
   }
 
   /**
@@ -14,20 +31,10 @@ class Api {
    * @returns {Object} Promise object containing all the information of the user
    */
   getProfileInfo() {
-    return fetch(`${this.baseUrl}/${this.groupId}/users/me/`, {
-      headers: {
-        authorization: this.token,
-        "Content-Type": "application/json"
-      }
+    return fetch(`${this._baseUrl}/${this._groupId}/users/me/`, {
+      headers: this._header
     })
-      .then(res => {
-        if (res.ok) {
-          console.log(`Profile data load correctly, code status: ${res.status}`);
-          return res.json();
-        } else {
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      .then(this._checkResponse)
   }
 
   /**
@@ -37,28 +44,15 @@ class Api {
    * @returns {Object} Promise object containing all the new information of the user
    */
   saveProfileInfo({ name, about }) {
-    return fetch(`${this.baseUrl}/${this.groupId}/users/me`, {
+    return fetch(`${this._baseUrl}/${this._groupId}/users/me`, {
       method: "PATCH",
-      headers: {
-        authorization: this.token,
-        "Content-Type": "application/json"
-      },
+      headers: this._header,
       body: JSON.stringify({
         name: name,
         about: about
       })
     })
-      .then(res => {
-        if (res.ok) {
-          console.log(
-            `Code status: ${res.status},
-data saved correctly.`
-          );
-          return res.json();
-        } else {
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      .then(this._checkResponse)
   }
 
   /**
@@ -67,27 +61,14 @@ data saved correctly.`
    * @returns {Object} Promise object containing all the new information of the user
    */
   saveProfileImage({ avatar }) {
-    return fetch(`${this.baseUrl}/${this.groupId}/users/me/avatar`, {
+    return fetch(`${this._baseUrl}/${this._groupId}/users/me/avatar`, {
       method: "PATCH",
-      headers: {
-        authorization: this.token,
-        "Content-Type": "application/json"
-      },
+      headers: this._header,
       body: JSON.stringify({
         avatar: avatar
       })
     })
-      .then(res => {
-        if (res.ok) {
-          console.log(
-            `Code status: ${res.status},
-image saved correctly.`
-          );
-          return res.json();
-        } else {
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      .then(this._checkResponse)
   }
 
   /**
@@ -95,20 +76,10 @@ image saved correctly.`
    * @returns {Object} Promise object containing all the cards
    */
   getCards() {
-    return fetch(`${this.baseUrl}/${this.groupId}/cards/`, {
-      headers: {
-        authorization: this.token,
-        "Content-Type": "application/json"
-      }
+    return fetch(`${this._baseUrl}/${this._groupId}/cards/`, {
+      headers: this._header
     })
-      .then(res => {
-        if (res.ok) {
-          console.log(`Cards data load correctly, code status: ${res.status}`);
-          return res.json();
-        } else {
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      .then(this._checkResponse)
   }
 
   /**
@@ -118,28 +89,15 @@ image saved correctly.`
    * @returns {Object} Promise object containing all the information of the new card
    */
   saveCards({ name, imageLink }) {
-    return fetch(`${this.baseUrl}/${this.groupId}/cards`, {
+    return fetch(`${this._baseUrl}/${this._groupId}/cards`, {
       method: "POST",
-      headers: {
-        authorization: this.token,
-        "Content-Type": "application/json"
-      },
+      headers: this._header,
       body: JSON.stringify({
         name: name,
         link: imageLink
       })
     })
-      .then(res => {
-        if (res.ok) {
-          console.log(
-            `Code status: ${res.status},
-card saved correctly.`
-          );
-          return res.json();
-        } else {
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      .then(this._checkResponse)
   }
 
   /**
@@ -148,24 +106,11 @@ card saved correctly.`
    * @returns {Object} Promise object containing the confirmation message of the cancellation
    */
   deleteCards({ cardId }) {
-    return fetch(`${this.baseUrl}/${this.groupId}/cards/${cardId}`, {
+    return fetch(`${this._baseUrl}/${this._groupId}/cards/${cardId}`, {
       method: "DELETE",
-      headers: {
-        authorization: this.token,
-        "Content-Type": "application/json"
-      }
+      headers: this._header
     })
-      .then(res => {
-        if (res.ok) {
-          console.log(
-            `Code status: ${res.status},
-card deleted correctly.`
-          );
-          return res.json();
-        } else {
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      .then(this._checkResponse)
   }
 
   /**
@@ -174,24 +119,11 @@ card deleted correctly.`
    * @returns {Object} Promise object containing all the information of the liked card
    */
   likeCards({ cardId }) {
-    return fetch(`${this.baseUrl}/${this.groupId}/cards/likes/${cardId}`, {
+    return fetch(`${this._baseUrl}/${this._groupId}/cards/likes/${cardId}`, {
       method: "PUT",
-      headers: {
-        authorization: this.token,
-        "Content-Type": "application/json"
-      }
+      headers: this._header
     })
-      .then(res => {
-        if (res.ok) {
-          console.log(
-            `Code status: ${res.status},
-card liked correctly.`
-          );
-          return res.json();
-        } else {
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      .then(this._checkResponse)
   }
 
   /**
@@ -200,24 +132,11 @@ card liked correctly.`
    * @returns {Object} Promise object containing all the information of the disliked card
    */
   dislikeCards({ cardId }) {
-    return fetch(`${this.baseUrl}/${this.groupId}/cards/likes/${cardId}`, {
+    return fetch(`${this._baseUrl}/${this._groupId}/cards/likes/${cardId}`, {
       method: "DELETE",
-      headers: {
-        authorization: this.token,
-        "Content-Type": "application/json"
-      }
+      headers: this._header
     })
-      .then(res => {
-        if (res.ok) {
-          console.log(
-            `Code status: ${res.status},
-card disliked correctly.`
-          );
-          return res.json();
-        } else {
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      .then(this._checkResponse)
   }
 }
 

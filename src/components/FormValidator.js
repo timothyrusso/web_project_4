@@ -100,8 +100,6 @@ class FormValidator {
    * Public method that handle the validation of the inputs when a popup is opened
    */
   validateOnOpen() {
-    this._inputList = [...this._form.querySelectorAll(this._inputSelector)]
-    // Toggle the button before we start listening to the input even, otherwise the button will be active when we load the page even if the input fields are invalid
     this._inputList.forEach((input) => {
       this._checkInputValidity(input)
     })

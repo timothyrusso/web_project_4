@@ -25,7 +25,6 @@ class PopupWithConfirmation extends Popup {
       event.preventDefault();
       this.renderLoading(true);
       this._handleFormSubmit();
-      // this.close();
     })
   }
 }
