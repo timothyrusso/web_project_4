@@ -33,7 +33,7 @@ const userInfoPopup = new PopupWithForm({
   handleFormSubmit: (data) => {
     api.saveProfileInfo({ name: data.name, about: data.aboutMe })
       .then((user) => {
-        userInfo.setUserInfo({ name: user.name, aboutMe: user.about })
+        userInfo.setUserInfo({ name: user.name, aboutMe: user.about, avatar: user.avatar })
         userInfoPopup.close();
       })
       .catch((err) => {
@@ -87,9 +87,27 @@ const deleteCardPopup = new PopupWithConfirmation({
   popupSelector: selectors.deleteCardPopup
 });
 
-const editFormValidator = new FormValidator(validationSettings, elements.editFormElement);
-const addFormValidator = new FormValidator(validationSettings, elements.addFormElement);
-const editImageProfileFormValidator = new FormValidator(validationSettings, elements.editImageProfileFormElement);
+
+/*******************
+ * FORM VALIDATION *
+ *******************/
+
+const formValidators = {}
+
+// enable validation
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement)
+    // here you get the name of the form
+    const formName = formElement.getAttribute('name')
+    // here you store a validator by the `name` of the form
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(validationSettings);
 
 
 /************************
@@ -147,13 +165,10 @@ const createCard = (data, type) => {
 };
 
 
-/****************************
- * INSTANCES INIZIALIZATION *
- ****************************/
+/***********************
+ * SET EVENT LISTENERS *
+ ***********************/
 
-editFormValidator.enableValidation();
-addFormValidator.enableValidation();
-editImageProfileFormValidator.enableValidation();
 imagePreviewPopup.setEventListeners();
 userInfoPopup.setEventListeners();
 newCardPopup.setEventListeners();
@@ -170,23 +185,23 @@ editButton.addEventListener('click', () => {
   const { name, job } = userInfo.getUserInfo();
   elements.profileNamePopupElement.value = name;
   elements.profileJobPopupElement.value = job;
-  editFormValidator.validateOnOpen();
+  formValidators[ elements.editFormElement.getAttribute('name') ].resetValidation();
   userInfoPopup.open();
 })
 
 const addModalBtn = document.querySelector(selectors.addButton);
 addModalBtn.addEventListener('click', () => {
+  formValidators[ elements.addFormElement.getAttribute('name') ].resetValidation();
   newCardPopup.open();
-  addFormValidator.toggleButton();
+  formValidators[ elements.addFormElement.getAttribute('name') ].toggleButton();
 })
 
 const profileImageButton = document.querySelector(selectors.profileImageButton);
 profileImageButton.addEventListener('click', () => {
   const { image } = userInfo.getUserInfo();
   elements.profileImagePopupElement.value = image;
-  editImageProfileFormValidator.validateOnOpen();
+  formValidators[ elements.editImageProfileFormElement.getAttribute('name') ].resetValidation();
   editProfileImagePopup.open();
-  editImageProfileFormValidator.toggleButton();
 })
 
 
@@ -199,7 +214,7 @@ const api = new Api(apiConfig);
 Promise.all([api.getCards(), api.getProfileInfo()])
   .then(([cards, info]) => {
     const { name, about, avatar, _id } = info;
-    userInfo.setUserInfo({ name, aboutMe: about, _id });
+    userInfo.setUserInfo({ name, aboutMe: about, avatar, _id });
     userInfo.setUserAvatar({ link: avatar });
     cardSection.items = cards;
     cardSection.renderItems();

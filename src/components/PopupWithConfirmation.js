@@ -4,6 +4,7 @@ class PopupWithConfirmation extends Popup {
   constructor({ popupSelector, handleFormSubmit }) {
     super(popupSelector);
     this._popupForm = this._popupElement.querySelector('.popup__form');
+    this._submitButton = this._popupForm.querySelector('.submit-button');
     this._handleFormSubmit = handleFormSubmit;
   }
 
@@ -13,9 +14,9 @@ class PopupWithConfirmation extends Popup {
 
   renderLoading(isLoading) {
     if (isLoading) {
-      this._popupForm.querySelector('.submit-button').textContent = 'Deleting...';
+      this._submitButton.textContent = 'Deleting...';
     } else {
-      this._popupForm.querySelector('.submit-button').textContent = 'Yes';
+      this._submitButton.textContent = 'Yes';
     }
   }
 

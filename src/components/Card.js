@@ -26,7 +26,7 @@ class Card {
    */
   _setEventListeners() {
     this._element.querySelector('.card__image').addEventListener('click', () => this._handleCardClick({ link: this._link, name: this._name }))
-    this._element.querySelector('.card__like').addEventListener('click', () => this._handleLikeIcon(this))
+    this._likeElement.addEventListener('click', () => this._handleLikeIcon(this))
     this._element.querySelector('.card__delete').addEventListener('click', () => this._handleDeleteCard(this))
   }
 
@@ -45,7 +45,7 @@ class Card {
   _updateLikes() {
     this._element.querySelector('.card__like-counter').textContent = this._likes.length;
     if (this._likes.filter(item => item._id === this._ownerId).length > 0) {
-      this._element.querySelector('.card__like').classList.add('card__like_active')
+      this._likeElement.classList.add('card__like_active')
     }
   }
 
@@ -63,6 +63,7 @@ class Card {
    */
   generateCard() {
     this._element = this._getTemplate()
+    this._likeElement = this._element.querySelector('.card__like')
     this._setEventListeners()
     this._setDeleteButton()
     this._updateLikes()
@@ -84,7 +85,7 @@ class Card {
    * @param {Object} data - Object containing the array with the likes object
    */
   setLikesInfo(data) {
-    this._element.querySelector('.card__like').classList.toggle('card__like_active');
+    this._likeElement.classList.toggle('card__like_active');
     this._likes = data.likes;
     this._updateLikes();
   }

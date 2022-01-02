@@ -99,9 +99,10 @@ class FormValidator {
   /**
    * Public method that handle the validation of the inputs when a popup is opened
    */
-  validateOnOpen() {
-    this._inputList.forEach((input) => {
-      this._checkInputValidity(input)
+  resetValidation() {
+    this.toggleButton();
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement)
     })
   }
 }
