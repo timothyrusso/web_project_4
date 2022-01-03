@@ -193,7 +193,6 @@ const addModalBtn = document.querySelector(selectors.addButton);
 addModalBtn.addEventListener('click', () => {
   formValidators[ elements.addFormElement.getAttribute('name') ].resetValidation();
   newCardPopup.open();
-  formValidators[ elements.addFormElement.getAttribute('name') ].toggleButton();
 })
 
 const profileImageButton = document.querySelector(selectors.profileImageButton);
@@ -215,7 +214,6 @@ Promise.all([api.getCards(), api.getProfileInfo()])
   .then(([cards, info]) => {
     const { name, about, avatar, _id } = info;
     userInfo.setUserInfo({ name, aboutMe: about, avatar, _id });
-    userInfo.setUserAvatar({ link: avatar });
     cardSection.items = cards;
     cardSection.renderItems();
   })
