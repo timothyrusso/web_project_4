@@ -16,7 +16,8 @@ import PopupWithConfirmation from "../components/PopupWithConfirmation";
 
 const cardSection = new Section({
   renderer: (data) => {
-    createCard(data)
+    const card = createCard(data).generateCard();
+    cardSection.appendItem(card);
   }
 }, selectors.cardList)
 
@@ -54,7 +55,8 @@ const newCardPopup = new PopupWithForm({
     };
     api.saveCards({ name: data.name, imageLink: data.link })
       .then((card) => {
-        createCard(card, 'newCard');
+        const cardElement = createCard(card).generateCard();
+        cardSection.prependItem(cardElement);
         newCardPopup.close();
       })
       .catch((err) => {
@@ -114,7 +116,7 @@ enableValidation(validationSettings);
  * CREATE CARD FUNCTION *
  ************************/
 
-const createCard = (data, type) => {
+const createCard = (data) => {
   const cardElement = new Card({
     data,
     handleCardClick: (imageData) => {
@@ -155,12 +157,7 @@ const createCard = (data, type) => {
           })
       }
     }
-  }, selectors.cardTemplate, userInfo._userId)
-  if (type === 'newCard') {
-    cardSection.prependItem(cardElement.generateCard())
-  } else {
-    cardSection.appendItem(cardElement.generateCard())
-  }
+  }, selectors.cardTemplate, userInfo._userId);
   return cardElement
 };
 
