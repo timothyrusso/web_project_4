@@ -1,5 +1,10 @@
 import Popup from './Popup.js';
 
+/**
+ * Class for the confirmation popup, which appears when you try to delete a card
+ * @param {String} popupSelector - Class selector for the popup
+ * @param {Function} handleFormSubmit - Submit handler function
+ */
 class PopupWithConfirmation extends Popup {
   constructor({ popupSelector, handleFormSubmit }) {
     super(popupSelector);
