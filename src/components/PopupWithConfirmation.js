@@ -13,6 +13,10 @@ class PopupWithConfirmation extends Popup {
     this._handleFormSubmit = handleFormSubmit;
   }
 
+/**
+ * Function that handle the submit action for the confirmation popup
+ * @param {Function} action - Function that execute an action after the submit
+ */
   setSubmitAction(action) {
     this._handleFormSubmit = action;
   }
